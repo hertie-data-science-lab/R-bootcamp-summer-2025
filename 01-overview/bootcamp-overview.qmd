@@ -1,0 +1,16 @@
+---
+title: "Overview of Hertie's Summer 2025 R and Math Bootcamp"
+author: "Jackson M Luckey"
+format: revealjs
+theme: simple
+transition: fade
+slide-number: true
+---
+
+## Welcome
+
+I'm [Jackson Luckey](https://www.jacksonmluckey.com). I graduated from Hertie's MDS program this summer and am starting a PhD in quantitative social science with [Asya Magazinnik]() and [Drew Dimmery]().
+
+## Bootcamp Overview
+
+## R and RStudio

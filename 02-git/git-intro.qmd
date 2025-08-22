@@ -1,0 +1,56 @@
+---
+title: "Brief Intro to Git"
+format: revealjs
+---
+
+## What is Git?
+
+Git is a version control system.
+
+You're probably already familiar with version control systems like "track changes" in Microsoft Office or history in Google Docs.
+
+Git lets you track changes made to code (and other forms of text) over time, go back to previous versions, document when and why you changed something, and many other things.
+
+Furthermore, Git is decentralized and enables collaboration with others.
+
+## Why use Git?
+
+Git makes it easy to
+
+- revert changes to code
+- compare different versions of code
+- review the hustory of code
+- experiment with code without breaking the working version
+- submit changes to someone else's code
+
+`Credit:` [si618/Stackoverflow](https://stackoverflow.com/questions/1408450/why-should-i-use-version-control) and [Simon Munzert](https://raw.githubusercontent.com/intro-to-data-science-24/lectures/refs/heads/main/02-version-control/02-version-control.Rmd)
+
+## What is GitHub?
+
+[GitHub](www.Github.com) is an online platform for storing and sharing code built on Git.
+
+You can think of GitHub as the Dropbox / Google Drive / OneDrive / iCloud complement to Git's version control.
+
+It allows you to publically share your code, coordinate projects with others, et cetera.
+
+It's the default platform for collaboration for software engineers and data scientists and increasingly for quantitative academics and researchers.
+
+## Making a GitHub Account
+
+You can make a GitHub account [here](https://github.com/signup).
+
+I would recommend choosing a professional username (I'm [jacksonmluckey](https://github.com/jacksonmluckey)) because GitHub is often used as a portfolio and potential future employers and collaborators will look there. Think LinkedIn and not Instagram.
+
+## Git Basics
+
+Simon Munzert's Intro to Data Science course will cover Git in more detail, but for the bootcamp we will need:
+
+- `git clone`: Copy an existing repository (collection of files version controlled by Git) to your computer.
+- `git add`: Track new files or changes made to existing files.
+- `git commit`: Add a set of changes to the history with a message describing the changes (preferrably including "why").
+
+## How to use Git
+
+Git can be used from the command line (e.g. `git add example.txt` and `git commit -m "added new examples for 2025"`) or using a graphical user interface (e.g. from inside RStudio or [GitHub Desktop](https://github.com/apps/desktop)).
+
+I would strongly recommend learning how to use Git from the command line eventually, but in this bootcamp I will 

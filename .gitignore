@@ -1,0 +1,2 @@
+# ignore the libraries downloaded/stored by Quarto
+**/*_files/libs/
