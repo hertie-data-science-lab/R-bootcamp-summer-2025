@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="git-intro_files/libs/clipboard/clipboard.min.js"></script>
-<script src="git-intro_files/libs/quarto-html/tabby.min.js"></script>
-<script src="git-intro_files/libs/quarto-html/popper.min.js"></script>
-<script src="git-intro_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="git-intro_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="git-intro_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="git-intro_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="intro-to-R_files/libs/clipboard/clipboard.min.js"></script>
+<script src="intro-to-R_files/libs/quarto-html/tabby.min.js"></script>
+<script src="intro-to-R_files/libs/quarto-html/popper.min.js"></script>
+<script src="intro-to-R_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="intro-to-R_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="intro-to-R_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="intro-to-R_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Jackson M Luckey">
-  <title>Brief Intro to Git</title>
+  <title>Introduction to R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="git-intro_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="git-intro_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="intro-to-R_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="intro-to-R_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,11 +29,11 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="git-intro_files/libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
-  <link href="git-intro_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="git-intro_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="git-intro_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="git-intro_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="intro-to-R_files/libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link href="intro-to-R_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="intro-to-R_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="intro-to-R_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="intro-to-R_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -127,7 +127,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Brief Intro to Git</h1>
+  <h1 class="title">Introduction to R</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -138,71 +138,8 @@ Jackson M Luckey
 </div>
 
 </section>
-<section>
-<section id="overview-of-git-and-github" class="title-slide slide level1 center">
-<h1>Overview of Git and GitHub</h1>
-
-</section>
-<section id="what-is-git" class="slide level2">
-<h2>What is Git?</h2>
-<p>Git is a version control system.</p>
-<p>You’re probably already familiar with version control systems like “track changes” in Microsoft Office or history in Google Docs.</p>
-<p>Git lets you track changes made to code (and other forms of text) over time, go back to previous versions, document when and why you changed something, and many other things.</p>
-<p>Furthermore, Git is decentralized and enables collaboration with others.</p>
-</section>
-<section id="why-use-git" class="slide level2">
-<h2>Why use Git?</h2>
-<p>Git makes it easy to</p>
-<ul>
-<li>revert changes to code</li>
-<li>compare different versions of code</li>
-<li>review the hustory of code</li>
-<li>experiment with code without breaking the working version</li>
-<li>submit changes to someone else’s code</li>
-</ul>
-<p><code>Credit:</code> <a href="https://stackoverflow.com/questions/1408450/why-should-i-use-version-control">si618/Stackoverflow</a> and <a href="https://raw.githubusercontent.com/intro-to-data-science-24/lectures/refs/heads/main/02-version-control/02-version-control.Rmd">Simon Munzert</a></p>
-</section>
-<section id="what-is-github" class="slide level2">
-<h2>What is GitHub?</h2>
-<p><a href="www.Github.com">GitHub</a> is an online platform for storing and sharing code built on Git.</p>
-<p>You can think of GitHub as the Dropbox / Google Drive / OneDrive / iCloud complement to Git’s version control.</p>
-<p>It allows you to publically share your code, coordinate projects with others, et cetera.</p>
-<p>It’s the default platform for collaboration for software engineers and data scientists and increasingly for quantitative academics and researchers.</p>
-</section>
-<section id="making-a-github-account" class="slide level2">
-<h2>Making a GitHub Account</h2>
-<p>You can make a GitHub account <a href="https://github.com/signup">here</a>.</p>
-<p>I would recommend choosing a professional username (I’m <a href="https://github.com/jacksonmluckey">jacksonmluckey</a>) because GitHub is often used as a portfolio and potential future employers and collaborators will look there. Think LinkedIn and not Instagram.</p>
-</section>
-<section id="git-basics" class="slide level2">
-<h2>Git Basics</h2>
-<p>Simon Munzert’s Intro to Data Science course will cover Git in more detail, but for the bootcamp we will need:</p>
-<ul>
-<li><code>git clone</code>: Copy an existing repository (collection of files version controlled by Git) to your computer.</li>
-<li><code>git add</code>: Track new files or changes made to existing files.</li>
-<li><code>git commit</code>: Add a set of changes to the history with a message describing the changes (preferrably including “why”).</li>
-</ul>
-</section>
-<section id="how-to-use-git" class="slide level2">
-<h2>How to use Git</h2>
-<p>Git can be used from the command line (e.g.&nbsp;<code>git add example.txt</code> and <code>git commit -m "added new examples for 2025"</code>) or using a graphical user interface (e.g.&nbsp;from inside RStudio or <a href="https://github.com/apps/desktop">GitHub Desktop</a>).</p>
-<p>I would strongly recommend learning how to use Git from the command line eventually, but in this bootcamp we will use the RStudio graphical user interface (GUI).</p>
-<p>The simplest workflow is making changes, adding them (<code>git add</code>), and then saving them to the repository (<code>git commit</code>).</p>
-</section></section>
-<section id="getting-a-copy-of-the-bootcamp-slides-from-github" class="title-slide slide level1 center">
-<h1>Getting a Copy of the Bootcamp Slides from GitHub</h1>
-<p>TODO: update to use final URL and have screenshots. Will require</p>
-<ol type="1">
-<li>Open the <a href="TODO%20add%20URL">bootcamp’s GitHub repo</a>.</li>
-<li>Fork the repository (TODO add screenshot)</li>
-<li>Clone the forked repository (TODO add screenshot)</li>
-<li>Open in RStudio</li>
-</ol>
-</section>
-
-<section id="using-git-inside-rstudio" class="title-slide slide level1 center">
-<h1>Using Git inside RStudio</h1>
-<p>TODO using screenshots, have student’s add “Student’s Version” to the README, add the changed README, and commit.</p>
+<section id="using-r-as-a-calculator" class="title-slide slide level1 center">
+<h1>Using R as a Calculator</h1>
 
 </section>
     </div>
@@ -213,19 +150,19 @@ Jackson M Luckey
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="git-intro_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="intro-to-R_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="git-intro_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="git-intro_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="git-intro_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="git-intro_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="git-intro_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="intro-to-R_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="intro-to-R_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="intro-to-R_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="intro-to-R_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="intro-to-R_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="git-intro_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="git-intro_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="git-intro_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="git-intro_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="intro-to-R_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="intro-to-R_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="intro-to-R_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="intro-to-R_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
