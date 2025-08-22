@@ -1,7 +1,9 @@
 ---
-title: "Introduction to R"
+title: "Introduction to R and RStudio"
 format: revealjs
 ---
+
+
 
 # Using R as a Calculator
 

@@ -9,4 +9,38 @@ I'm [Jackson Luckey](https://www.jacksonmluckey.com). I graduated from Hertie's 
 
 ## Bootcamp Overview
 
+TODO update this section once everything else is finished.
+
+Over the next three days, we'll cover the basics of R + RStudio, Git, and make some fun data visualizations
+
 ## R and RStudio
+
+[R](https://www.r-project.org) is a programming language designed for statistical computing (data analysis, statistics, machine learning, and data visualization).
+
+[RStudio](https://posit.co/products/open-source/rstudio) is an integrated development environment (IDE) designed for using R.
+
+## Installing R
+
+On MacOS:
+
+- [Newer Macs (ARM M-series from 2020 onwards)](https://cran.uni-muenster.de/bin/macosx/big-sur-arm64/base/R-4.5.1-arm64.pkg)
+- [Older Intel Macs](https://cran.uni-muenster.de/bin/macosx/big-sur-x86_64/base/R-4.5.1-x86_64.pkg)
+
+On Windows:
+
+- [R](https://cran.uni-muenster.de/bin/windows/base/R-4.5.1-win.exe)
+- [Rtools -- needed on Windows](https://cran.uni-muenster.de/bin/windows/Rtools/rtools45/files/rtools45-6608-6492.exe)
+
+If you use a package manager (e.g. Homebrew, Macports, Winget, Apt, or Pacman), download R there.
+
+## Installing RStudio
+
+[Windows](https://download1.rstudio.org/electron/windows/RStudio-2025.05.1-513.exe)
+
+[MacOS](https://download1.rstudio.org/electron/macos/RStudio-2025.05.1-513.dmg)
+
+Or use a package manager.
+
+## Opening RStudio
+
+![What RStudio looks like when you first open it.](images/new-rstudio-window.png)
