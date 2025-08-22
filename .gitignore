@@ -1,2 +1,4 @@
 # ignore the libraries downloaded/stored by Quarto
 **/*_files/libs/
+
+.Rproj.user

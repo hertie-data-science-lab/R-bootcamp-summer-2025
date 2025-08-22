@@ -3,6 +3,8 @@ title: "Brief Intro to Git"
 format: revealjs
 ---
 
+# Overview of Git and GitHub
+
 ## What is Git?
 
 Git is a version control system.
@@ -53,4 +55,19 @@ Simon Munzert's Intro to Data Science course will cover Git in more detail, but 
 
 Git can be used from the command line (e.g. `git add example.txt` and `git commit -m "added new examples for 2025"`) or using a graphical user interface (e.g. from inside RStudio or [GitHub Desktop](https://github.com/apps/desktop)).
 
-I would strongly recommend learning how to use Git from the command line eventually, but in this bootcamp I will 
+I would strongly recommend learning how to use Git from the command line eventually, but in this bootcamp we will use the RStudio graphical user interface (GUI).
+
+The simplest workflow is making changes, adding them (`git add`), and then saving them to the repository (`git commit`).
+
+# Getting a Copy of the Bootcamp Slides from GitHub
+
+TODO: update to use final URL and have screenshots. Will require
+
+1. Open the [bootcamp's GitHub repo](TODO add URL).
+2. Fork the repository (TODO add screenshot)
+3. Clone the forked repository (TODO add screenshot)
+4. Open in RStudio
+
+# Using Git inside RStudio
+
+TODO using screenshots, have student's add "Student's Version" to the README, add the changed README, and commit.
