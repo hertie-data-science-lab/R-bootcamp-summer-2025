@@ -3,7 +3,108 @@ title: "Introduction to R and RStudio"
 format: revealjs
 ---
 
-
-
 # Using R as a Calculator
 
+## The Console in RStudio
+
+![The red box is the console where you can freely run R code. I included a few examples of using R + RStudio as a calculator. `==` means equal to.](images/r-as-calculator-01.png)
+
+## R Operators
+
+R includes many operators, including:
+
+::: {.columns}
+
+::: {.column width="40%"}
+### Arithmetic
+- `+` : Addition
+- `-` : Subtraction
+- `*` : Multiplication
+- `/` : Division
+- `^` : Exponentiation
+:::
+
+::: {.column width="40%"}
+### Relational
+- `==` : Equal to
+- `!=` : Not equal to
+- `<` : Less than
+- `>` : Greater than
+- `<=` : Less than or equal to
+- `>=` : Greater than or equal to
+:::
+
+::: {.column width="20%"}
+### Logical
+- `&`: AND
+- `|`: OR
+- `!`: NOT
+::: 
+
+:::
+
+## Exercises
+
+1. Calculate the number of hours in a year.
+2. Calculate the population density of Berlin (Let's say 3897145 persons in 891.3 $km^2$)
+
+## Solution
+
+```{r}
+#| echo: true
+365 * 24
+```
+
+```{r}
+#| echo: true
+3897145 / 891.3
+```
+
+# Objects
+
+## What is an object in R?
+
+An object in R is a named container that stores data, results, or functions. Objects are assigned to names using the assignment operator `<-`. For example:
+
+```{r}
+#| echo: true
+name <- "Jackson M Luckey"
+year <- 2025
+two_plus_two <- 2 + 2
+two_times_two <- 2 * 2
+```
+
+We can then use these objects:
+
+```{r}
+#| echo: true
+two_plus_two == two_times_two
+```
+
+## The Environment Pane in RStudio
+
+![The red box is the environment pane, which shows all the objects in your current R session](images/r-objects-01.png).
+
+## Exercises
+
+Using objects, calculate the population density of Berlin (3897145 persons in 891.3 $km^2$) along the lines of
+
+```{r}
+#| echo: true
+days_in_year <- 365
+hours_in_day <- 24
+hours_in_year <- days_in_year * hours_in_day
+
+hours_in_year
+```
+
+## Solution
+
+```{r}
+#| echo: true
+berlin_pop <- 3897145
+berlin_area <- 891.3
+berlin_pop_density <- berlin_pop / berlin_area
+
+berlin_pop_density
+```
