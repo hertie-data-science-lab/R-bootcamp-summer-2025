@@ -490,7 +490,7 @@ Jackson M Luckey
 <img data-src="images/r-viewing-penguins.png" class="r-stretch quarto-figure-center"><p class="caption"><code>View(penguins)</code> opens a new pane that shows the penguins dataset.</p></section>
 <section id="dataframe-columns-as-vectors" class="slide level2">
 <h2>Dataframe Columns as Vectors</h2>
-<p>Dataframe columns can be accessed as vectors using <code>[[]]</code> (you’ll learn when and why to use <code>[]</code> versus <code>[[]]</code> later).</p>
+<p>Dataframe columns can be accessed as vectors using <code>[[]]</code> (you’ll learn when and why to use <code>[]</code> versus <code>[[]]</code> later) or <code>$</code>.</p>
 <p>For example, we can get the penguin species column with</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>penguins[[<span class="st">"species"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -548,9 +548,74 @@ Jackson M Luckey
 Levels: Adelie Chinstrap Gentoo</code></pre>
 </div>
 </div>
+<p>or</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>penguins<span class="sc">$</span>species</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+  [8] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [15] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [22] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [29] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [36] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [43] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [50] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [57] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [64] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [71] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [78] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [85] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [92] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [99] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[106] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[113] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[120] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[127] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[134] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[141] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[148] Adelie    Adelie    Adelie    Adelie    Adelie    Gentoo    Gentoo   
+[155] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[162] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[169] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[176] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[183] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[190] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[197] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[204] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[211] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[218] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[225] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[232] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[239] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[246] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[253] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[260] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[267] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[274] Gentoo    Gentoo    Gentoo    Chinstrap Chinstrap Chinstrap Chinstrap
+[281] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[288] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[295] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[302] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[309] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[316] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[323] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[330] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[337] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[344] Chinstrap
+Levels: Adelie Chinstrap Gentoo</code></pre>
+</div>
+</div>
 <p>and the unique penguin species with</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">unique</span>(penguins[[<span class="st">"species"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">unique</span>(penguins[[<span class="st">"species"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Adelie    Gentoo    Chinstrap
+Levels: Adelie Chinstrap Gentoo</code></pre>
+</div>
+</div>
+<p>or</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">unique</span>(penguins<span class="sc">$</span>species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Adelie    Gentoo    Chinstrap
 Levels: Adelie Chinstrap Gentoo</code></pre>
@@ -567,18 +632,35 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 <section id="solutions" class="slide level2">
 <h2>Solutions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">unique</span>(penguins[[<span class="st">"island"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">unique</span>(penguins[[<span class="st">"island"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Torgersen Biscoe    Dream    
 Levels: Biscoe Dream Torgersen</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">min</span>(penguins[[<span class="st">"year"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a><span class="fu">unique</span>(penguins<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Torgersen Biscoe    Dream    
+Levels: Biscoe Dream Torgersen</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">min</span>(penguins[[<span class="st">"year"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2007</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">max</span>(penguins[[<span class="st">"year"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a><span class="fu">max</span>(penguins[[<span class="st">"year"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2009</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="fu">min</span>(penguins<span class="sc">$</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2007</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">max</span>(penguins<span class="sc">$</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2009</code></pre>
 </div>
@@ -586,9 +668,13 @@ Levels: Biscoe Dream Torgersen</code></pre>
 </section>
 <section id="creating-new-columns-with-vector-operations" class="slide level2">
 <h2>Creating New Columns with Vector Operations</h2>
-<p>You can also create new columns using <code>[[]]</code></p>
+<p>You can also create new columns using <code>[[]]</code> or <code>$</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>penguins[[<span class="st">"body_mass_kg"</span>]] <span class="ot">&lt;-</span> penguins[[<span class="st">"body_mass"</span>]] <span class="sc">/</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a>penguins[[<span class="st">"body_mass_kg"</span>]] <span class="ot">&lt;-</span> penguins[[<span class="st">"body_mass"</span>]] <span class="sc">/</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>or</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a>penguins<span class="sc">$</span>body_mass_kg <span class="ot">&lt;-</span> penguins<span class="sc">$</span>body_mass <span class="sc">/</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section></section>

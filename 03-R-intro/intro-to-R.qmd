@@ -255,7 +255,7 @@ view(Penguins)
 
 ## Dataframe Columns as Vectors
 
-Dataframe columns can be accessed as vectors using `[[]]` (you'll learn when and why to use `[]` versus `[[]]` later).
+Dataframe columns can be accessed as vectors using `[[]]` (you'll learn when and why to use `[]` versus `[[]]` later) or `$`.
 
 For example, we can get the penguin species column with
 
@@ -263,10 +263,22 @@ For example, we can get the penguin species column with
 penguins[["species"]]
 ```
 
+or
+
+```{r}
+penguins$species
+```
+
 and the unique penguin species with
 
 ```{r}
 unique(penguins[["species"]])
+```
+
+or
+
+```{r}
+unique(penguins$species)
 ```
 
 ## Exercises
@@ -281,14 +293,29 @@ unique(penguins[["island"]])
 ```
 
 ```{r}
+unique(penguins$island)
+```
+
+```{r}
 min(penguins[["year"]])
 max(penguins[["year"]])
 ```
 
+```{r}
+min(penguins$year)
+max(penguins$year)
+```
+
 ## Creating New Columns with Vector Operations
 
-You can also create new columns using `[[]]`
+You can also create new columns using `[[]]` or `$`
 
 ```{r}
 penguins[["body_mass_kg"]] <- penguins[["body_mass"]] / 1000
+```
+
+or
+
+```{r}
+penguins$body_mass_kg <- penguins$body_mass / 1000
 ```
