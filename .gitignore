@@ -3,5 +3,8 @@
 # ignore Quarto's dotfile directory
 /.quarto/
 
-
+# user-specific RStudio files
 .Rproj.user
+
+# Mac dotfiles
+**.DS_Store
