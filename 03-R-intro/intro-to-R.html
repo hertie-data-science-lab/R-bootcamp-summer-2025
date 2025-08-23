@@ -209,13 +209,13 @@ Jackson M Luckey
 <h1>Using R as a Calculator</h1>
 
 </section>
-<section id="examples-in-console" class="slide level2">
-<h2>Examples in Console</h2>
+<section id="the-console-in-rstudio" class="slide level2">
+<h2>The Console in RStudio</h2>
 
 <img data-src="images/r-as-calculator-01.png" class="r-stretch quarto-figure-center"><p class="caption">The red box is the console where you can freely run R code. I included a few examples of using R + RStudio as a calculator. <code>==</code> means equal to.</p></section>
 <section id="r-operators" class="slide level2">
 <h2>R Operators</h2>
-<p>R includes many operators, including:</p>
+<p>R includes many operators, including</p>
 <div class="columns">
 <div class="column" style="width:40%;">
 <h3 id="arithmetic">Arithmetic</h3>
@@ -251,6 +251,21 @@ Jackson M Luckey
 <li>Calculate the number of hours in a year.</li>
 <li>Calculate the population density of Berlin (Let’s say 3897145 persons in 891.3 <span class="math inline">\(km^2\)</span>)</li>
 </ol>
+</section>
+<section id="solution" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="dv">365</span> <span class="sc">*</span> <span class="dv">24</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8760</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="dv">3897145</span> <span class="sc">/</span> <span class="fl">891.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4372.428</code></pre>
+</div>
+</div>
 </section></section>
 <section>
 <section id="objects" class="title-slide slide level1 center">
@@ -259,16 +274,16 @@ Jackson M Luckey
 </section>
 <section id="what-is-an-object-in-r" class="slide level2">
 <h2>What is an object in R?</h2>
-<p>An object in R is a named container that stores data, results, or functions. Objects are assigned to names using the assignment operator <code>&lt;-</code>. For example:</p>
+<p>An object in R is a named container that stores data, results, or functions. Objects are assigned to names using the assignment operator <code>&lt;-</code>. For example</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>name <span class="ot">&lt;-</span> <span class="st">"Jackson M Luckey"</span></span>
-<span id="cb1-2"><a href=""></a>year <span class="ot">&lt;-</span> <span class="dv">2025</span></span>
-<span id="cb1-3"><a href=""></a>two_plus_two <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span>
-<span id="cb1-4"><a href=""></a>two_times_two <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>name <span class="ot">&lt;-</span> <span class="st">"Jackson M Luckey"</span></span>
+<span id="cb5-2"><a href=""></a>year <span class="ot">&lt;-</span> <span class="dv">2025</span></span>
+<span id="cb5-3"><a href=""></a>two_plus_two <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb5-4"><a href=""></a>two_times_two <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can then use these objects:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>two_plus_two <span class="sc">==</span> two_times_two</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>two_plus_two <span class="sc">==</span> two_times_two</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -278,17 +293,92 @@ Jackson M Luckey
 <h2>The Environment Pane in RStudio</h2>
 <p><img data-src="images/r-objects-01.png" alt="The red box is the environment pane, which shows all the objects in your current R session">.</p>
 </section>
-<section id="exercises-1" class="slide level2">
-<h2>Exercises</h2>
+<section id="exercise" class="slide level2">
+<h2>Exercise</h2>
 <p>Using objects, calculate the population density of Berlin (3897145 persons in 891.3 <span class="math inline">\(km^2\)</span>) along the lines of</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>days_in_year <span class="ot">&lt;-</span> <span class="dv">365</span></span>
-<span id="cb4-2"><a href=""></a>hours_in_day <span class="ot">&lt;-</span> <span class="dv">24</span></span>
-<span id="cb4-3"><a href=""></a>hours_in_year <span class="ot">&lt;-</span> days_in_year <span class="sc">*</span> hours_in_day</span>
-<span id="cb4-4"><a href=""></a></span>
-<span id="cb4-5"><a href=""></a>hours_in_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>days_in_year <span class="ot">&lt;-</span> <span class="dv">365</span></span>
+<span id="cb8-2"><a href=""></a>hours_in_day <span class="ot">&lt;-</span> <span class="dv">24</span></span>
+<span id="cb8-3"><a href=""></a>hours_in_year <span class="ot">&lt;-</span> days_in_year <span class="sc">*</span> hours_in_day</span>
+<span id="cb8-4"><a href=""></a></span>
+<span id="cb8-5"><a href=""></a>hours_in_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8760</code></pre>
+</div>
+</div>
+</section>
+<section id="solution-1" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>berlin_pop <span class="ot">&lt;-</span> <span class="dv">3897145</span></span>
+<span id="cb10-2"><a href=""></a>berlin_area <span class="ot">&lt;-</span> <span class="fl">891.3</span></span>
+<span id="cb10-3"><a href=""></a>berlin_pop_density <span class="ot">&lt;-</span> berlin_pop <span class="sc">/</span> berlin_area</span>
+<span id="cb10-4"><a href=""></a></span>
+<span id="cb10-5"><a href=""></a>berlin_pop_density</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4372.428</code></pre>
+</div>
+</div>
+</section>
+<section id="what-kinds-of-objects-are-there" class="slide level2">
+<h2>What kinds of objects are there?</h2>
+<p>Objects can represent different things, like text (“character”), numbers (“numeric”), and functions (“function”). Throughout the bootcamp and the upcoming semester you’ll learn about many other kinds of objects.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">class</span>(<span class="st">"Hello"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">class</span>(berlin_pop_density)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">class</span>(sqrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "function"</code></pre>
+</div>
+</div>
+</section>
+<section id="vectors" class="slide level2">
+<h2>Vectors</h2>
+<p>Vectors are objects that represent an ordered collection of information. You can create a vector using <code>c()</code> as shown below</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>, <span class="dv">2023</span>, <span class="dv">2024</span>, <span class="dv">2025</span>)</span>
+<span id="cb18-2"><a href=""></a>cities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Berlin"</span>, <span class="st">"Paris"</span>, <span class="st">"London"</span>, <span class="st">"Beijing"</span>, <span class="st">"Tokyo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="vectors-1" class="slide level2">
+<h2>Vectors</h2>
+<p>You can also combine vectors using <code>c()</code> like</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>north_american_cities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Mexico City"</span>, <span class="st">"New York City"</span>, <span class="st">"San Francisco"</span>, <span class="st">"Vancouver"</span>)</span>
+<span id="cb19-2"><a href=""></a>south_american_cities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Rio de Janeiro"</span>, <span class="st">"Lima"</span>, <span class="st">"Buenos Aires"</span>, <span class="st">"Medellin"</span>)</span>
+<span id="cb19-3"><a href=""></a>american_cities <span class="ot">&lt;-</span> <span class="fu">c</span>(north_american_cities, south_american_cities)</span>
+<span id="cb19-4"><a href=""></a>american_cities</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Mexico City"    "New York City"  "San Francisco"  "Vancouver"     
+[5] "Rio de Janeiro" "Lima"           "Buenos Aires"   "Medellin"      </code></pre>
+</div>
+</div>
+<p>Vectors are always one dimensional.</p>
+</section>
+<section id="vectors-2" class="slide level2">
+<h2>Vectors</h2>
+<p>You can manipulate vectors just like individual numbers. For example, we can get the number of seconds since 1970 (a common way of storing dates/time in computers) with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>seconds_in_hour <span class="ot">&lt;-</span> <span class="dv">60</span> <span class="sc">*</span> <span class="dv">60</span></span>
+<span id="cb21-2"><a href=""></a>(years <span class="sc">-</span> <span class="dv">1970</span>) <span class="sc">*</span> hours_in_year <span class="sc">*</span> seconds_in_hour</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1576800000 1608336000 1639872000 1671408000 1702944000 1734480000</code></pre>
+</div>
+</div>
+</section>
+<section id="indexing-vectors" class="slide level2">
+<h2>Indexing Vectors</h2>
+<p>You can access elements inside a vector using <code>[]</code>. For example, to get the first element in <code>cities</code> (“Berlin”)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>cities[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Berlin"</code></pre>
 </div>
 </div>
 

@@ -11,7 +11,7 @@ format: revealjs
 
 ## R Operators
 
-R includes many operators, including:
+R includes many operators, including
 
 ::: {.columns}
 
@@ -64,7 +64,15 @@ R includes many operators, including:
 
 ## What is an object in R?
 
-An object in R is a named container that stores data, results, or functions. Objects are assigned to names using the assignment operator `<-`. For example:
+An object in R is a named container that stores data, results, or functions.
+
+![You can think of an object as a box with a name.](images/r-objects-contents-name-illustration.png)
+
+`Source` Data Analysis for Social Science by Elena Llaudet and Kosuke Imai
+
+## How to create an object
+
+Objects are assigned to names using the assignment operator `<-`. For example
 
 ```{r}
 #| echo: true
@@ -85,7 +93,7 @@ two_plus_two == two_times_two
 
 ![The red box is the environment pane, which shows all the objects in your current R session](images/r-objects-01.png).
 
-## Exercises
+## Exercise
 
 Using objects, calculate the population density of Berlin (3897145 persons in 891.3 $km^2$) along the lines of
 
@@ -107,4 +115,127 @@ berlin_area <- 891.3
 berlin_pop_density <- berlin_pop / berlin_area
 
 berlin_pop_density
+```
+
+## What kinds of objects are there?
+
+Objects can represent different things, like text ("character"), numbers ("numeric"), and functions ("function"). Throughout the bootcamp and the upcoming semester you'll learn about many other kinds of objects.
+
+```{r}
+#| echo: true
+class("Hello")
+class(berlin_pop_density)
+class(sqrt)
+```
+
+## Vectors
+
+Vectors are objects that represent an ordered collection of information. You can create a vector using `c()` as shown below
+
+```{r}
+#| echo: true
+years <- c(2020, 2021, 2022, 2023, 2024, 2025)
+cities <- c("Berlin", "Paris", "London", "Beijing", "Tokyo")
+```
+
+## Vectors
+
+You can also combine vectors using `c()` like
+
+```{r}
+#| echo: true
+north_american_cities <- c("Mexico City", "New York City", "San Francisco", "Vancouver")
+south_american_cities <- c("Rio de Janeiro", "Lima", "Buenos Aires", "Medellin")
+american_cities <- c(north_american_cities, south_american_cities)
+american_cities
+```
+
+Vectors are always one dimensional.
+
+## Vectors
+
+You can manipulate vectors just like individual numbers. For example, we can get the number of seconds since 1970 (a common way of storing dates/time in computers) with
+
+```{r}
+#| echo: true
+seconds_in_hour <- 60 * 60
+(years - 1970) * hours_in_year * seconds_in_hour
+```
+
+## Exercise
+
+Calculate the population density of Berlin for every year represented in `berlin_pop`.
+
+```{r}
+#| echo: true
+# Population of Berlin in 1980, 1990, 2000, 2010, 2020
+years      <- c(1980,    1990,    2000,    2010,    2020)
+berlin_pop <- c(3048759, 3433695, 3382169, 3460725, 3664088)
+```
+
+## Solution
+
+```{r}
+berlin_pop / berlin_area
+```
+
+## Indexing Vectors
+
+You can access elements inside a vector using `[]`. For example, to get the first element in `cities` ("Berlin"), do
+
+```{r}
+#| echo: true
+cities[1]
+```
+
+In R, counting and indexing start from 1, unlike many other programming languages like Python.
+
+## Exercise
+
+Get the population of Berlin in 2020 from `berlin_pop`.
+
+## Solution
+
+```{r}
+berlin_pop[5]
+```
+
+## Functions
+
+Functions are another kind of object in R. Many functions take objects as arguments and return an object. For example, `c()` is a function.
+
+Other simple and common functions that work on vectors include:
+
+- `length()`: Returns the number of elements inside an object.
+- `min()`: Returns the smallest value in an object.
+- `max()`: Returns the largest value in an object.
+- `sum()`: Returns the sum of all elements in an object.
+- `mean()`: Returns the average (mean) of all elements in an object.
+
+## Functions
+
+For example, we can find the average population of Berlin between 1980 and 2020 by either doing
+
+```{r}
+mean(berlin_pop)
+```
+
+or
+
+```{r}
+sum(berlin_pop) / length(berlin_pop)
+```
+
+## Exercise
+
+Using `min()` and `max()`, find the lowest and highest population density in Berlin between 1980 and 2020.
+
+## Solution
+
+```{r}
+min(berlin_pop) / berlin_area
+```
+
+```{r}
+max(berlin_pop) / berlin_area
 ```
