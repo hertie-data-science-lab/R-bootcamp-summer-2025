@@ -255,30 +255,28 @@ view(Penguins)
 
 ## Dataframe Columns as Vectors
 
-Dataframe columns can be accessed as vectors using `[[]]` (you'll learn when and why to use `[]` versus `[[]]` later) or `$`.
+Dataframe columns can be accessed as vectors using `[[]]`, `$`, or `[,]` (the leading comma tells R you are selecting columns and not rows--dataframes use `[row,column]`).
+
+With `[[]]` and `[,]`, you need to quote the column name. You do not need to with `$`, although you can.
+
+## Dataframe Columns as Vectors
 
 For example, we can get the penguin species column with
 
 ```{r}
+#| eval: false
 penguins[["species"]]
-```
-
-or
-
-```{r}
 penguins$species
+penguins[,"species"]
 ```
 
 and the unique penguin species with
 
 ```{r}
+#| eval: false
 unique(penguins[["species"]])
-```
-
-or
-
-```{r}
 unique(penguins$species)
+unique(penguins[,"species"])
 ```
 
 ## Exercises
@@ -289,33 +287,79 @@ unique(penguins$species)
 ## Solutions
 
 ```{r}
+#| eval: false
 unique(penguins[["island"]])
-```
-
-```{r}
 unique(penguins$island)
+unique(penguins[,"island"])
 ```
 
 ```{r}
+#| eval: false
 min(penguins[["year"]])
 max(penguins[["year"]])
-```
 
-```{r}
 min(penguins$year)
 max(penguins$year)
+
+min(penguins[,"year"])
+max(penguins[,"year"])
+```
+
+## `[[]]` vs `[]`
+
+![Source: [R for Data Science](https://r4ds.hadley.nz/base-R.html#fig-pepper)](images/salt-and-pepper-%5B%5B%5D%5D-%5B%5D.png)
+
+## `[[]]` vs `[]`
+
+In order words, `[[]]` always returns a vector and can therefore only be used on a single column. `[,]` returns a vector if a single column is selected and a dataframe if multiple columns are selected.
+
+You can subset columns with a vector and `[,]` like
+
+```{r}
+penguins[,c("species", "island", "year")]
 ```
 
 ## Creating New Columns with Vector Operations
 
-You can also create new columns using `[[]]` or `$`
+You can also create new columns using `[[]]` or `$` or `[,]`
 
 ```{r}
 penguins[["body_mass_kg"]] <- penguins[["body_mass"]] / 1000
+penguins$body_mass_kg <- penguins$body_mass / 1000
+penguins[,"body_mass_kg"] <- penguins[,"body_mass"] / 1000
 ```
 
-or
+## Exercise
+
+Calculate the ratio between the penguin's body mass and its flipper length (grams per mm). Assign it to a new column named "grams_per_mm" (or something better).
+
+## Solution
 
 ```{r}
-penguins$body_mass_kg <- penguins$body_mass / 1000
+penguins[["grams_per_mm"]] <- penguins[["body_mass"]] / penguins[["flipper_len"]]
+penguins$grams_per_mm <- penguins$body_mass / penguins$flipper_len
+penguins[,"grams_per_mm"] <- penguins[,"body_mass"] / penguins[,"flipper_len"]
+```
+
+## Subsetting Dataframes with Vectors
+
+You can also subset dataframes with vectors. For example, let's say we're only interested in Adelie penguins on Dream Island.
+
+We can first get a vector that identifies which rows match these conditions with
+
+```{r}
+adelie_on_dream_island <- (penguins[["species"]] == "Adelie") & (penguins[["island"]] == "Dream")
+penguins[adelie_on_dream_island,]
+```
+
+In this case the comma goes last because we are selecting rows and not columns.
+
+## Exercise
+
+Subset to penguins with a body mass of 4kg or greater found on Dream Island.
+
+## Solution
+
+```{r}
+penguins[((penguins[["body_mass_kg"]] >= 4) & (penguins[["island"]] == "Dream")),]
 ```
