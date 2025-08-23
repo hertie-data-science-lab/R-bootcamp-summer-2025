@@ -274,7 +274,13 @@ Jackson M Luckey
 </section>
 <section id="what-is-an-object-in-r" class="slide level2">
 <h2>What is an object in R?</h2>
-<p>An object in R is a named container that stores data, results, or functions. Objects are assigned to names using the assignment operator <code>&lt;-</code>. For example</p>
+<p>An object in R is a named container that stores data, results, or functions.</p>
+
+<img data-src="images/r-objects-contents-name-illustration.png" class="r-stretch quarto-figure-center"><p class="caption">You can think of an object as a box with a name.</p><p>Image Source: Data Analysis for Social Science by Elena Llaudet and Kosuke Imai</p>
+</section>
+<section id="how-to-create-an-object" class="slide level2">
+<h2>How to create an object</h2>
+<p>Objects are assigned to names using the assignment operator <code>&lt;-</code>. For example</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>name <span class="ot">&lt;-</span> <span class="st">"Jackson M Luckey"</span></span>
 <span id="cb5-2"><a href=""></a>year <span class="ot">&lt;-</span> <span class="dv">2025</span></span>
@@ -372,13 +378,209 @@ Jackson M Luckey
 </div>
 </div>
 </section>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise</h2>
+<p>Calculate the population density of Berlin for every year represented in <code>berlin_pop</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="co"># Population of Berlin in 1980, 1990, 2000, 2010, 2020</span></span>
+<span id="cb23-2"><a href=""></a>years      <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1980</span>,    <span class="dv">1990</span>,    <span class="dv">2000</span>,    <span class="dv">2010</span>,    <span class="dv">2020</span>)</span>
+<span id="cb23-3"><a href=""></a>berlin_pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3048759</span>, <span class="dv">3433695</span>, <span class="dv">3382169</span>, <span class="dv">3460725</span>, <span class="dv">3664088</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solution-2" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a>berlin_pop <span class="sc">/</span> berlin_area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3420.576 3852.457 3794.647 3882.784 4110.948</code></pre>
+</div>
+</div>
+</section>
 <section id="indexing-vectors" class="slide level2">
 <h2>Indexing Vectors</h2>
-<p>You can access elements inside a vector using <code>[]</code>. For example, to get the first element in <code>cities</code> (“Berlin”)</p>
+<p>You can access elements inside a vector using <code>[]</code>. For example, to get the first element in <code>cities</code> (“Berlin”), do</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>cities[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>cities[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Berlin"</code></pre>
+</div>
+</div>
+<p>In R, counting and indexing start from 1, unlike many other programming languages like Python.</p>
+</section>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise</h2>
+<p>Get the population of Berlin in 2020 from <code>berlin_pop</code>.</p>
+</section>
+<section id="solution-3" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>berlin_pop[<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3664088</code></pre>
+</div>
+</div>
+</section>
+<section id="functions" class="slide level2">
+<h2>Functions</h2>
+<p>Functions are another kind of object in R. Many functions take objects as arguments and return an object. For example, <code>c()</code> is a function.</p>
+<p>Other simple and common functions that work on vectors include:</p>
+<ul>
+<li><code>length()</code>: Returns the number of elements inside an object.</li>
+<li><code>min()</code>: Returns the smallest value in an object.</li>
+<li><code>max()</code>: Returns the largest value in an object.</li>
+<li><code>sum()</code>: Returns the sum of all elements in an object.</li>
+<li><code>mean()</code>: Returns the average (mean) of all elements in an object.</li>
+</ul>
+</section>
+<section id="functions-1" class="slide level2">
+<h2>Functions</h2>
+<p>For example, we can find the average population of Berlin between 1980 and 2020 by either doing</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">mean</span>(berlin_pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3397887</code></pre>
+</div>
+</div>
+<p>or</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">sum</span>(berlin_pop) <span class="sc">/</span> <span class="fu">length</span>(berlin_pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3397887</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-3" class="slide level2">
+<h2>Exercise</h2>
+<p>Using <code>min()</code> and <code>max()</code>, find the lowest and highest population density in Berlin between 1980 and 2020.</p>
+</section>
+<section id="solution-4" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">min</span>(berlin_pop) <span class="sc">/</span> berlin_area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3420.576</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="fu">max</span>(berlin_pop) <span class="sc">/</span> berlin_area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4110.948</code></pre>
+</div>
+</div>
+</section>
+<section id="dataframes" class="slide level2">
+<h2>Dataframes</h2>
+<p>Dataframes are objects that have columns (conventionally variables) and rows (conventionally observations). Think of a spreadsheet like Excel or Google Sheets.</p>
+<p>R has several dataframes, including <code>penguins</code>, built in. We can load penguins into R with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>penguins <span class="ot">&lt;-</span> penguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and view the dataframe with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">view</span>(Penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="loading-penguins" class="slide level2">
+<h2>Loading Penguins</h2>
+
+<img data-src="images/r-loading-penguins.png" class="r-stretch quarto-figure-center"><p class="caption"><code>penguins &lt;- penguins</code> loads the penguin dataset into R, so it appears in the environment pane.</p></section>
+<section id="viewing-penguins" class="slide level2">
+<h2>Viewing Penguins</h2>
+
+<img data-src="images/r-viewing-penguins.png" class="r-stretch quarto-figure-center"><p class="caption"><code>View(penguins)</code> opens a new pane that shows the penguins dataset.</p></section>
+<section id="dataframe-columns-as-vectors" class="slide level2">
+<h2>Dataframe Columns as Vectors</h2>
+<p>Dataframe columns can be accessed as vectors using <code>[[]]</code> (you’ll learn when and why to use <code>[]</code> versus <code>[[]]</code> later).</p>
+<p>For example, we can get the penguin species column with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>penguins[[<span class="st">"species"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+  [8] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [15] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [22] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [29] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [36] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [43] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [50] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [57] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [64] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [71] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [78] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [85] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [92] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+ [99] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[106] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[113] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[120] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[127] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[134] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[141] Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie   
+[148] Adelie    Adelie    Adelie    Adelie    Adelie    Gentoo    Gentoo   
+[155] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[162] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[169] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[176] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[183] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[190] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[197] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[204] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[211] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[218] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[225] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[232] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[239] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[246] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[253] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[260] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[267] Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo   
+[274] Gentoo    Gentoo    Gentoo    Chinstrap Chinstrap Chinstrap Chinstrap
+[281] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[288] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[295] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[302] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[309] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[316] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[323] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[330] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[337] Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap
+[344] Chinstrap
+Levels: Adelie Chinstrap Gentoo</code></pre>
+</div>
+</div>
+<p>and the unique penguin species with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">unique</span>(penguins[[<span class="st">"species"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Adelie    Gentoo    Chinstrap
+Levels: Adelie Chinstrap Gentoo</code></pre>
+</div>
+</div>
+</section>
+<section id="exercises-1" class="slide level2">
+<h2>Exercises</h2>
+<ol type="1">
+<li>How many islands are represented in the dataset?</li>
+<li>What are the earliest and latest years represented in the dataset?</li>
+</ol>
+</section>
+<section id="solutions" class="slide level2">
+<h2>Solutions</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">unique</span>(penguins[[<span class="st">"island"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Torgersen Biscoe    Dream    
+Levels: Biscoe Dream Torgersen</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">min</span>(penguins[[<span class="st">"year"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2007</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">max</span>(penguins[[<span class="st">"year"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2009</code></pre>
 </div>
 </div>
 

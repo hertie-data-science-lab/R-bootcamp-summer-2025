@@ -4,5 +4,5 @@ project:
 author:
   name: Jackson M Luckey
 
-
-
+execute:
+  echo: true

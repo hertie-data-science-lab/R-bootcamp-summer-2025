@@ -51,12 +51,10 @@ R includes many operators, including
 ## Solution
 
 ```{r}
-#| echo: true
 365 * 24
 ```
 
 ```{r}
-#| echo: true
 3897145 / 891.3
 ```
 
@@ -68,14 +66,13 @@ An object in R is a named container that stores data, results, or functions.
 
 ![You can think of an object as a box with a name.](images/r-objects-contents-name-illustration.png)
 
-`Source` Data Analysis for Social Science by Elena Llaudet and Kosuke Imai
+Image Source: Data Analysis for Social Science by Elena Llaudet and Kosuke Imai
 
 ## How to create an object
 
 Objects are assigned to names using the assignment operator `<-`. For example
 
 ```{r}
-#| echo: true
 name <- "Jackson M Luckey"
 year <- 2025
 two_plus_two <- 2 + 2
@@ -85,7 +82,6 @@ two_times_two <- 2 * 2
 We can then use these objects:
 
 ```{r}
-#| echo: true
 two_plus_two == two_times_two
 ```
 
@@ -98,7 +94,6 @@ two_plus_two == two_times_two
 Using objects, calculate the population density of Berlin (3897145 persons in 891.3 $km^2$) along the lines of
 
 ```{r}
-#| echo: true
 days_in_year <- 365
 hours_in_day <- 24
 hours_in_year <- days_in_year * hours_in_day
@@ -109,7 +104,6 @@ hours_in_year
 ## Solution
 
 ```{r}
-#| echo: true
 berlin_pop <- 3897145
 berlin_area <- 891.3
 berlin_pop_density <- berlin_pop / berlin_area
@@ -122,7 +116,6 @@ berlin_pop_density
 Objects can represent different things, like text ("character"), numbers ("numeric"), and functions ("function"). Throughout the bootcamp and the upcoming semester you'll learn about many other kinds of objects.
 
 ```{r}
-#| echo: true
 class("Hello")
 class(berlin_pop_density)
 class(sqrt)
@@ -133,7 +126,6 @@ class(sqrt)
 Vectors are objects that represent an ordered collection of information. You can create a vector using `c()` as shown below
 
 ```{r}
-#| echo: true
 years <- c(2020, 2021, 2022, 2023, 2024, 2025)
 cities <- c("Berlin", "Paris", "London", "Beijing", "Tokyo")
 ```
@@ -143,7 +135,6 @@ cities <- c("Berlin", "Paris", "London", "Beijing", "Tokyo")
 You can also combine vectors using `c()` like
 
 ```{r}
-#| echo: true
 north_american_cities <- c("Mexico City", "New York City", "San Francisco", "Vancouver")
 south_american_cities <- c("Rio de Janeiro", "Lima", "Buenos Aires", "Medellin")
 american_cities <- c(north_american_cities, south_american_cities)
@@ -157,7 +148,6 @@ Vectors are always one dimensional.
 You can manipulate vectors just like individual numbers. For example, we can get the number of seconds since 1970 (a common way of storing dates/time in computers) with
 
 ```{r}
-#| echo: true
 seconds_in_hour <- 60 * 60
 (years - 1970) * hours_in_year * seconds_in_hour
 ```
@@ -167,7 +157,6 @@ seconds_in_hour <- 60 * 60
 Calculate the population density of Berlin for every year represented in `berlin_pop`.
 
 ```{r}
-#| echo: true
 # Population of Berlin in 1980, 1990, 2000, 2010, 2020
 years      <- c(1980,    1990,    2000,    2010,    2020)
 berlin_pop <- c(3048759, 3433695, 3382169, 3460725, 3664088)
@@ -184,7 +173,6 @@ berlin_pop / berlin_area
 You can access elements inside a vector using `[]`. For example, to get the first element in `cities` ("Berlin"), do
 
 ```{r}
-#| echo: true
 cities[1]
 ```
 
@@ -238,4 +226,61 @@ min(berlin_pop) / berlin_area
 
 ```{r}
 max(berlin_pop) / berlin_area
+```
+
+## Dataframes
+
+Dataframes are objects that have columns (conventionally variables) and rows (conventionally observations). Think of a spreadsheet like Excel or Google Sheets.
+
+R has several dataframes, including `penguins`, built in. We can load penguins into R with
+
+```{r}
+penguins <- penguins
+```
+
+and view the dataframe with
+
+```{r}
+#| eval: false
+view(Penguins)
+```
+
+## Loading Penguins
+
+![`penguins <- penguins` loads the penguin dataset into R, so it appears in the environment pane.](images/r-loading-penguins.png)
+
+## Viewing Penguins
+
+![`View(penguins)` opens a new pane that shows the penguins dataset.](images/r-viewing-penguins.png)
+
+## Dataframe Columns as Vectors
+
+Dataframe columns can be accessed as vectors using `[[]]` (you'll learn when and why to use `[]` versus `[[]]` later).
+
+For example, we can get the penguin species column with
+
+```{r}
+penguins[["species"]]
+```
+
+and the unique penguin species with
+
+```{r}
+unique(penguins[["species"]])
+```
+
+## Exercises
+
+1. How many islands are represented in the dataset?
+2. What are the earliest and latest years represented in the dataset?
+
+## Solutions
+
+```{r}
+unique(penguins[["island"]])
+```
+
+```{r}
+min(penguins[["year"]])
+max(penguins[["year"]])
 ```
