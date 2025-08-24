@@ -44,3 +44,7 @@ Or use a package manager.
 ## Opening RStudio
 
 ![What RStudio looks like when you first open it.](images/new-rstudio-window.png)
+
+## Installing Tidyverse
+
+![Next, type `install.packages("tidyverse")` into the pane ("Console") on the left side of RStudio](images/installing-tidyverse.png)
