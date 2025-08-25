@@ -1,0 +1,86 @@
+---
+title: "Introduction to Data Visualization with R"
+format: revealjs
+---
+
+```{r}
+#| echo: false
+library(ggplot2)
+```
+
+## ggplot
+
+[ggplot](https://ggplot2.tidyverse.org) is the most common approach for creating data visualizations with R.
+
+Source: Large parts of this section are adapted from the [first chapter of _R for Data Science_](https://r4ds.hadley.nz/data-visualize).
+
+## ggplot Syntax
+
+Making a data visualization with ggplot starts with
+
+```{r}
+#| eval: false
+ggplot(data, aes())
+```
+
+where `data` is a dataframe and `aes()` describes how columns in the dataframe will be used in the visualization.
+
+## ggplot Aesthetics
+
+For example
+
+```{r}
+ggplot(penguins, aes(x = flipper_len, y = body_mass))
+```
+
+will use the x-axis for `flipper_len` and the y-axis for `body_mass`.
+
+## Aesthetics Options
+
+Common aesthetics include:
+
+::: {.columns}
+
+::: {.column width="50%"}
+- `x`
+- `y`
+- `color`
+:::
+
+::: {.column width="50%"}
+- `fill`
+- `shape`
+- `size`
+:::
+
+:::
+
+You can read more about aesthetics in the ggplot documentation [here](https://ggplot2.tidyverse.org/reference/index.html#aesthetics).
+
+## Geometries
+
+The next step in making a plot with ggplot is choosing how to visualize the data. We'll start with a scatter plot.
+
+With ggplot, these choices always start with "`geom_`".
+
+## Geometries
+
+```{r}
+ggplot(penguins, aes(x = body_mass, y = flipper_len)) +
+  geom_point()
+```
+
+## Geometries
+
+```{r}
+ggplot(penguins, aes(x = body_mass, y = flipper_len, color = species)) +
+  geom_point()
+```
+
+## Geometries
+
+```{r}
+ggplot(penguins, aes(x = body_mass, y = flipper_len, color = island)) +
+  geom_point()
+```
+

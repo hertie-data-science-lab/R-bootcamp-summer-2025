@@ -228,6 +228,8 @@ min(berlin_pop) / berlin_area
 max(berlin_pop) / berlin_area
 ```
 
+# Dataframes
+
 ## Dataframes
 
 Dataframes are objects that have columns (conventionally variables) and rows (conventionally observations). Think of a spreadsheet like Excel or Google Sheets.
@@ -242,7 +244,7 @@ and view the dataframe with
 
 ```{r}
 #| eval: false
-view(Penguins)
+View(penguins)
 ```
 
 ## Loading Penguins

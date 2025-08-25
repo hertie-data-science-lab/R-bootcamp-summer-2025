@@ -10,16 +10,17 @@ Before the first day, please go through TODO add links to the two slides in boot
 2. [Git](02-git/git-intro.html): Introduces Git to get everyone to the point that they can use this repo throughout the bootcamp.
 TODO consider splitting Intro to R into two sections to do some fun and easy data viz before we fiddle with `[[]]` vs `[]` vs `$`
 3. [Intro to R](03-R-intro/intro-to-R.html): Introduces the basics of base R (objects, vectors, functions, and dataframes).
+4. [Intro to Data Visualization](04-intro-to-data-viz/intro-to-data-viz.html): Introduces the basics of data visualization with R using ggplot2.
 
 ### Exercises
 
 ## Sources
 
-This course borrows liberally from Simon Munzert's [Introduction to Data Science (IDS) course](https://github.com/intro-to-data-science-24/) as it primarily serves as preparation for the course.
+This course borrows liberally from Simon Munzert's [Introduction to Data Science (IDS) course](https://github.com/intro-to-data-science-24/) as the bootcamp primarily serves as preparation for the course.
 
-I also took inspiration, examples, and small chunks of materials from:
+I also took inspiration, examples, and exercises from:
 
 - [R for Data Science](https://r4ds.hadley.nz/)
 - [Quantiative Social Science: An Introduction](https://press.princeton.edu/books/paperback/9780691175461/quantitative-social-science)
-- [Quantiative Social Science: An Introduction with Tidyverse]()
+- [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science)
 - [Data Analysis for Social Science: A Friendly and Practical Introduction](https://press.princeton.edu/books/paperback/9780691199436/data-analysis-for-social-science)
