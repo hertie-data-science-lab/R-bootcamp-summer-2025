@@ -59,17 +59,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="row-exercises_files/libs/clipboard/clipboard.min.js"></script>
-<script src="row-exercises_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="row-exercises_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="row-exercises_files/libs/quarto-html/popper.min.js"></script>
-<script src="row-exercises_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="row-exercises_files/libs/quarto-html/anchor.min.js"></script>
-<link href="row-exercises_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="row-exercises_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="row-exercises_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="row-exercises_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="row-exercises_files/libs/bootstrap/bootstrap-fcf4727c278a1c5809809d896be41fa8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="exercises_files/libs/clipboard/clipboard.min.js"></script>
+<script src="exercises_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="exercises_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="exercises_files/libs/quarto-html/popper.min.js"></script>
+<script src="exercises_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="exercises_files/libs/quarto-html/anchor.min.js"></script>
+<link href="exercises_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="exercises_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="exercises_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="exercises_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="exercises_files/libs/bootstrap/bootstrap-fcf4727c278a1c5809809d896be41fa8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -106,13 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"nycflights13"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>())) {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"nycflights13"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> flights</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -126,6 +120,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
+<section id="row-level-exercises-filter-distinct-and-count" class="level2">
+<h2 class="anchored" data-anchor-id="row-level-exercises-filter-distinct-and-count">Row Level Exercises (<code>filter()</code>, <code>distinct()</code>, and <code>count()</code>)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"nycflights13"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>())) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"nycflights13"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> flights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>For these exercises, we will use the dataframe <code>flights</code> from the <code>nycflights13</code> package, which has one row per flight that departed from New York City in 2013 (336776 rows).</p>
 <p>These exercises come from (or were adapted from) <a href="https://r4ds.hadley.nz/data-transform.html#exercises">R for Data Science</a>.</p>
 <ol type="1">
@@ -134,6 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Find all destinations that had at least one flight with a flight time of 12 hours or more.</p></li>
 <li><p>Find all flights in the summer (June, July, August) that arrived on time. (Hint: you can combine filters or use <code>%in%</code> to see if a value is in a vector like <code>value %in% c(values)</code>).</p></li>
 </ol>
+</section>
 
 </main>
 <!-- /main column -->

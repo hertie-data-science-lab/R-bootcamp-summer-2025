@@ -3,13 +3,17 @@ title: dplyr Row Exercises
 ---
 
 ```{r}
+library(tidyverse)
+```
+
+## Row Level Exercises (`filter()`, `distinct()`, and `count()`)
+
+```{r}
 if (!("nycflights13" %in% installed.packages())) {
   install.packages("nycflights13")
 }
 library(nycflights13)
 flights <- flights
-
-library(tidyverse)
 ```
 
 For these exercises, we will use the dataframe `flights` from the `nycflights13` package, which has one row per flight that departed from New York City in 2013 (336776 rows).
