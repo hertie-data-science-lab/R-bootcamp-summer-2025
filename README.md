@@ -8,12 +8,11 @@ Before the first day, please install [R](01-overview/bootcamp-overview.html#inst
 
 1. [Overview](01-overview/bootcamp-overview.html): Overview of what we will cover during the bootcamp.
 2. [Git](02-git/git-intro.html): Introduces Git to get everyone to the point that they can use this repo throughout the bootcamp.
-TODO consider splitting Intro to R into two sections to do some fun and easy data viz before we fiddle with `[[]]` vs `[]` vs `$`
 3. [Intro to R](03-R-intro/intro-to-R.html): Introduces the basics of base R (objects, vectors, functions, and dataframes).
 4. [Intro to Data Visualization](04-intro-to-data-viz/intro-to-data-viz.html): Introduces the basics of data visualization with R using ggplot2.
 5. [Working with Dataframes with `dplyr`](05-dplyr/working-with-dataframes-with-dplyr.html): 
 6. [Vectors and Matrices](06-vectors-matrices/vectors-and-matrices.html)
-7. [Working with Dataframes in Base R](07-dataframes-base-R/working-with-dataframes-in-base-R.html): TODO move material from 3 here
+7. [Working with Dataframes in Base R](07-dataframes-base-R/working-with-dataframes-in-base-R.html):
 8. [Pushing and Pulling with Git](08-git-push-pull/pushing-and-pulling-git.html)
 
 ## Sources
