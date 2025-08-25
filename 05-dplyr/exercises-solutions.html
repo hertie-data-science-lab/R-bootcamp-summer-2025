@@ -248,7 +248,7 @@ dbl (8): year, age, politybefore, polityafter, interwarbefore, interwarafter...
 #   civilwarafter &lt;dbl&gt;, result &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>Source: Chapter 2 of <a href="https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science">Quantiative Social Science: An Introduction with Tidyverse</a> with modifications by <a href="www.jacksonmluckey.com">Jackson Luckey</a> to shift the emphasis towards data science and away from causal inference.</p>
+<p>Source: Chapter 2 of <a href="https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science">Quantiative Social Science: An Introduction with Tidyverse</a> with modifications by <a href="www.jacksonmluckey.com">Jackson Luckey</a> to shift the emphasis towards data science and away from causal inference and to include more opportunities to make plots and summary tables.</p>
 <p>One longstanding debate in the study of international relations concerns the question of whether individual political leaders can make a difference. Some emphasize that leaders with different ideologies and personalities can significantly affect the course of a nation. Others argue that political leaders are severely constrained by historical and institutional forces. Did individuals like Hitler, Mao, Roosevelt, and Churchill make a big difference? The difficulty of empirically testing these arguments stems from the fact that the change of leadership is not random and there are many confounding factors to be adjusted.</p>
 <table class="caption-top table">
 <colgroup>
@@ -475,11 +475,11 @@ dbl (8): year, age, politybefore, polityafter, interwarbefore, interwarafter...
 </div>
 <p>Optional causal inference: Does the data support the assumption that the success of assassination attempts is randomly determined?</p>
 <ol start="7" type="1">
-<li>Does the average polity score over three years prior to an assassination attempt differs on average between successful and failed attempts?</li>
+<li>Does the average polity score over three years prior to an assassination attempt differ on average between successful and failed attempts?</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(success) <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(success) <span class="sc">|&gt;</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_politybefore =</span> <span class="fu">min</span>(politybefore),</span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_politybefore =</span> <span class="fu">mean</span>(politybefore),</span>
@@ -519,10 +519,66 @@ dbl (8): year, age, politybefore, polityafter, interwarbefore, interwarafter...
 </div>
 </div>
 </div>
+<p>Optional causal inference: Do you find it plausible that this is a causal effect? Why?</p>
 <ol start="8" type="1">
-<li><p>Create a new variable called <code>warbefore</code> that is 1 if a country is in civil or international war in the three years before the assassination attempt and 0 otherwise.</p></li>
-<li></li>
+<li>Create a new variable called <code>warbefore</code> that is 1 if a country is in civil or international war in the three years before the assassination attempt and 0 otherwise.</li>
 </ol>
+<p>Hint: You can use the OR operator (<code>|</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="ot">&lt;-</span> leaders <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">warbefore =</span> interwarbefore <span class="sc">|</span> civilwarbefore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="ot">&lt;-</span> leaders <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">warbefore =</span> (interwarbefore <span class="sc">+</span> civilwarbefore) <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="9" type="1">
+<li>Compare the success rate of assassinations between cases where the country is in civil or international war in the three years before the assassination attempt and cases where it is not.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(warbefore) <span class="sc">|&gt;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">successes =</span> <span class="fu">sum</span>(success)) <span class="sc">%&gt;%</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">success_rate =</span> successes <span class="sc">/</span> n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  warbefore     n successes success_rate
+  &lt;lgl&gt;     &lt;int&gt;     &lt;int&gt;        &lt;dbl&gt;
+1 FALSE       158        35        0.222
+2 TRUE         92        19        0.207</code></pre>
+</div>
+</div>
+<p>Optional causal inference: Reconsider whether the data supports the assumption that the success of assassination attempts is randomly determined.</p>
+<ol start="10" type="1">
+<li>Create a new variable called <code>warafter</code> that is 1 if a country is in civil or international war in the three years after the assassination attempt and 0 otherwise.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="ot">&lt;-</span> leaders <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">warafter =</span> interwarafter <span class="sc">|</span> civilwarafter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="ot">&lt;-</span> leaders <span class="sc">|&gt;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">warafter =</span> (interwarafter <span class="sc">+</span> civilwarafter) <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="11" type="1">
+<li>Calculate the rate of civil war, international war, and any kind of war after the assassination attempt between cases with and without successful assassinations.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(success) <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">civil_war =</span> <span class="fu">sum</span>(civilwarafter) <span class="sc">/</span> n,</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">international_war =</span> <span class="fu">sum</span>(interwarafter) <span class="sc">/</span> n,</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">any_war =</span> <span class="fu">sum</span>(warafter) <span class="sc">/</span> n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  success     n civil_war international_war any_war
+  &lt;lgl&gt;   &lt;int&gt;     &lt;dbl&gt;             &lt;dbl&gt;   &lt;dbl&gt;
+1 FALSE     196     0.194            0.168    0.296
+2 TRUE       54     0.148            0.0741   0.204</code></pre>
+</div>
+</div>
 </section>
 
 </main>

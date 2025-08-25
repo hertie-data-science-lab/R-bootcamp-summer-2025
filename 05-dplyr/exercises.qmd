@@ -30,7 +30,13 @@ These exercises come from (or were adapted from) [R for Data Science](https://r4
 
 ## Success of Leader Assassination as a Natural Experiment
 
-Source: Chapter 2 of [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science) with modifications by [Jackson Luckey](www.jacksonmluckey.com) to shift the emphasis towards data science and away from causal inference.
+```{r}
+leaders <- read_csv("data/leaders.csv")
+
+leaders
+```
+
+Source: Chapter 2 of [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science) with modifications by [Jackson Luckey](www.jacksonmluckey.com) to shift the emphasis towards data science and away from causal inference and to include more opportunities to make plots and summary tables.
 
 One longstanding debate in the study of international relations concerns the question of whether individual political leaders can make a difference. Some emphasize that leaders with different ideologies and personalities can significantly affect the course of a nation. Others argue that political leaders are severely constrained by historical and institutional forces. Did individuals like Hitler, Mao, Roosevelt, and Churchill make a big difference? The difficulty of empirically testing these arguments stems from the fact that the change of leadership is not random and there are many confounding factors to be adjusted.
 
@@ -48,12 +54,6 @@ One longstanding debate in the study of international relations concerns the que
 | `interwarafter`  | 1 if the country was in international war during the three-year period after the attempt, 0 otherwise  |
 | `result`         | Result of the assassination attempt                                         |
 
-```{r}
-leaders <- read_csv("data/leaders.csv")
-
-leaders
-```
-
 In this exercise we consider a natural experiment in which the success or failure of assassination attempts is assumed to be essentially random. Each observation of the CSV data set `leaders.csv` contains information about an assassination attempt. The table above presents the names and descriptions of variables in this leader assassination data set.
 
 The polity variable represents the so-called polity score from the Polity Project. The Polity Project systematically documents and quantifies the regime types of all countries in the world from the year 1800. The polity score is a 21-point scale ranging from - 10 (hereditary nonarchy) to 10 (consolidated democracy). The `result` variable is a 10-category factor variable describing the result of each assassination attempt.
@@ -66,14 +66,26 @@ The polity variable represents the so-called polity score from the Polity Projec
 
 4. Create a new variable called `success` that is equal to 1 if a leader dies from the attack at any point and 0 if the leader survives (you'll need to look at the possible values for the `result` variable).
 
+Hint: You can use `%in%` to see if a value is in a vector. For example,
+
 5. What is the overall success rate of leader assassination?
 
-6. Is there any difference in the age of targeted leaders between successful and failed attempts?  You can use `summarise()`, make plot(s) with `ggplot()`, or both.
+6. Is there any difference in the age of targeted leaders between successful and failed attempts? You can use `summarise()`, make plot(s) with `ggplot()`, or both.
 
 Optional causal inference: Does the data support the assumption that the success of assassination attempts is randomly determined?
 
-7. Does the average polity score over three years prior to an assassination attempt differs on average between successful and failed attempts?
+7. Does the average polity score over three years prior to an assassination attempt differ on average between successful and failed attempts?
+
+Optional causal inference: Do you find it plausible that this is a causal effect? Why?
 
 8. Create a new variable called `warbefore` that is 1 if a country is in civil or international war in the three years before the assassination attempt and 0 otherwise.
 
-9. 
+Hint: You can use the OR operator (`|`).
+
+9. Compare the success rate of assassinations between cases where the country is in civil or international war in the three years before the assassination attempt and cases where it is not.
+
+Optional causal inference: Reconsider whether the data supports the assumption that the success of assassination attempts is randomly determined.
+
+10. Create a new variable called `warafter` that is 1 if a country is in civil or international war in the three years after the assassination attempt and 0 otherwise.
+
+11. Calculate the rate of civil war, international war, and any kind of war after the assassination attempt between cases with and without successful assassinations.

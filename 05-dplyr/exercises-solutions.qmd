@@ -61,7 +61,7 @@ leaders <- read_csv("data/leaders.csv")
 leaders
 ```
 
-Source: Chapter 2 of [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science) with modifications by [Jackson Luckey](www.jacksonmluckey.com) to shift the emphasis towards data science and away from causal inference.
+Source: Chapter 2 of [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science) with modifications by [Jackson Luckey](www.jacksonmluckey.com) to shift the emphasis towards data science and away from causal inference and to include more opportunities to make plots and summary tables.
 
 One longstanding debate in the study of international relations concerns the question of whether individual political leaders can make a difference. Some emphasize that leaders with different ideologies and personalities can significantly affect the course of a nation. Others argue that political leaders are severely constrained by historical and institutional forces. Did individuals like Hitler, Mao, Roosevelt, and Churchill make a big difference? The difficulty of empirically testing these arguments stems from the fact that the change of leadership is not random and there are many confounding factors to be adjusted.
 
@@ -165,11 +165,11 @@ ggplot(leaders, aes(x = age, fill = success)) +
 
 Optional causal inference: Does the data support the assumption that the success of assassination attempts is randomly determined?
 
-7. Does the average polity score over three years prior to an assassination attempt differs on average between successful and failed attempts?
+7. Does the average polity score over three years prior to an assassination attempt differ on average between successful and failed attempts?
 
 ```{r}
 leaders |>
-  group_by(success) %>%
+  group_by(success) |>
   summarise(n = n(),
             min_politybefore = min(politybefore),
             mean_politybefore = mean(politybefore),
@@ -187,6 +187,53 @@ ggplot(leaders, aes(x = politybefore, fill = success)) +
   geom_histogram(alpha = 0.5)
 ```
 
+Optional causal inference: Do you find it plausible that this is a causal effect? Why?
+
 8. Create a new variable called `warbefore` that is 1 if a country is in civil or international war in the three years before the assassination attempt and 0 otherwise.
 
-9. 
+Hint: You can use the OR operator (`|`).
+
+```{r}
+leaders <- leaders |>
+  mutate(warbefore = interwarbefore | civilwarbefore)
+```
+
+```{r}
+leaders <- leaders |>
+  mutate(warbefore = (interwarbefore + civilwarbefore) > 0)
+```
+
+9. Compare the success rate of assassinations between cases where the country is in civil or international war in the three years before the assassination attempt and cases where it is not.
+
+```{r}
+leaders |>
+  group_by(warbefore) |>
+  summarise(n = n(),
+            successes = sum(success)) %>%
+  mutate(success_rate = successes / n)
+```
+
+Optional causal inference: Reconsider whether the data supports the assumption that the success of assassination attempts is randomly determined.
+
+10. Create a new variable called `warafter` that is 1 if a country is in civil or international war in the three years after the assassination attempt and 0 otherwise.
+
+```{r}
+leaders <- leaders |>
+  mutate(warafter = interwarafter | civilwarafter)
+```
+
+```{r}
+leaders <- leaders |>
+  mutate(warafter = (interwarafter + civilwarafter) > 0)
+```
+
+11. Calculate the rate of civil war, international war, and any kind of war after the assassination attempt between cases with and without successful assassinations.
+
+```{r}
+leaders |>
+  group_by(success) |>
+  summarise(n = n(),
+            civil_war = sum(civilwarafter) / n,
+            international_war = sum(interwarafter) / n,
+            any_war = sum(warafter) / n)
+```
