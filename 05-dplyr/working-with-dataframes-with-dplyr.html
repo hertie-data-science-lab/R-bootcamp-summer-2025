@@ -452,6 +452,163 @@ Jackson M Luckey
 <section id="dplyr-row-exercises" class="slide level2">
 <h2>dplyr Row Exercises</h2>
 <p>Let’s take a break to work through the exercises in <a href="row-exercises.qmd">row-exercises.qmd</a>.</p>
+</section>
+<section id="select" class="slide level2">
+<h2><code>select()</code></h2>
+<p><code>select()</code> subsets columns in a dataframe. For example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href=""></a>  <span class="fu">select</span>(period, age, births, deaths)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 4
+   period    age    births  deaths
+   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 1950-1955 0-4        0  101090.
+ 2 1950-1955 5-9        0    7961.
+ 3 1950-1955 10-14      0    5550.
+ 4 1950-1955 15-19  54238.   5831.
+ 5 1950-1955 20-24 131939.   6649.
+ 6 1950-1955 25-29 128063.   6425.
+ 7 1950-1955 30-34  89247.   6209.
+ 8 1950-1955 35-39  56006.   6877.
+ 9 1950-1955 40-44  24327.   7995.
+10 1950-1955 45-49   5072.   8886.
+# ℹ 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="rename" class="slide level2">
+<h2><code>rename()</code></h2>
+<p><code>rename()</code> renames columns in a dataframe. For example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href=""></a>  <span class="fu">select</span>(period, age, births, deaths) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href=""></a>  <span class="fu">rename</span>(<span class="at">time_period =</span> period, <span class="at">age_range =</span> age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 4
+   time_period age_range  births  deaths
+   &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+ 1 1950-1955   0-4            0  101090.
+ 2 1950-1955   5-9            0    7961.
+ 3 1950-1955   10-14          0    5550.
+ 4 1950-1955   15-19      54238.   5831.
+ 5 1950-1955   20-24     131939.   6649.
+ 6 1950-1955   25-29     128063.   6425.
+ 7 1950-1955   30-34      89247.   6209.
+ 8 1950-1955   35-39      56006.   6877.
+ 9 1950-1955   40-44      24327.   7995.
+10 1950-1955   45-49       5072.   8886.
+# ℹ 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="relocate" class="slide level2">
+<h2><code>relocate()</code></h2>
+<p><code>relocate()</code> changes the order of columns. By default, it moves the named columns to the front. For example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href=""></a>  <span class="fu">select</span>(period, age, births, deaths) <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href=""></a>  <span class="fu">relocate</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 4
+   age   period     births  deaths
+   &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+ 1 0-4   1950-1955      0  101090.
+ 2 5-9   1950-1955      0    7961.
+ 3 10-14 1950-1955      0    5550.
+ 4 15-19 1950-1955  54238.   5831.
+ 5 20-24 1950-1955 131939.   6649.
+ 6 25-29 1950-1955 128063.   6425.
+ 7 30-34 1950-1955  89247.   6209.
+ 8 35-39 1950-1955  56006.   6877.
+ 9 40-44 1950-1955  24327.   7995.
+10 45-49 1950-1955   5072.   8886.
+# ℹ 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="mutate" class="slide level2">
+<h2><code>mutate()</code></h2>
+<p><code>mutate()</code> is used to create new columns. For example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href=""></a>  <span class="fu">select</span>(period, age, births, deaths) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">births_deaths_ratio =</span> births <span class="sc">/</span> deaths)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 5
+   period    age    births  deaths births_deaths_ratio
+   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;               &lt;dbl&gt;
+ 1 1950-1955 0-4        0  101090.               0    
+ 2 1950-1955 5-9        0    7961.               0    
+ 3 1950-1955 10-14      0    5550.               0    
+ 4 1950-1955 15-19  54238.   5831.               9.30 
+ 5 1950-1955 20-24 131939.   6649.              19.8  
+ 6 1950-1955 25-29 128063.   6425.              19.9  
+ 7 1950-1955 30-34  89247.   6209.              14.4  
+ 8 1950-1955 35-39  56006.   6877.               8.14 
+ 9 1950-1955 40-44  24327.   7995.               3.04 
+10 1950-1955 45-49   5072.   8886.               0.571
+# ℹ 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-3" class="slide level2">
+<h2>Exercise</h2>
+<p>Calculate the <em>crude birth rate</em> (CDR) for each row, where</p>
+<p><span class="math display">\[
+CDR = \frac{\text{number of births}}{\text{number of person-years}}
+\]</span></p>
+</section>
+<section id="solution-3" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">cdr =</span> births <span class="sc">/</span> (py.men <span class="sc">+</span> py.women))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 8
+   country period    age    births  deaths  py.men py.women     cdr
+   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+ 1 WORLD   1950-1955 0-4        0  101090. 946911.  904909. 0      
+ 2 WORLD   1950-1955 5-9        0    7961. 726903.  694575. 0      
+ 3 WORLD   1950-1955 10-14      0    5550. 666795.  635492. 0      
+ 4 WORLD   1950-1955 15-19  54238.   5831. 626191.  600678. 0.0442 
+ 5 WORLD   1950-1955 20-24 131939.   6649. 573518.  555221. 0.117  
+ 6 WORLD   1950-1955 25-29 128063.   6425. 508500.  507277. 0.126  
+ 7 WORLD   1950-1955 30-34  89247.   6209. 433338.  437132. 0.103  
+ 8 WORLD   1950-1955 35-39  56006.   6877. 400279.  405528. 0.0695 
+ 9 WORLD   1950-1955 40-44  24327.   7995. 373771.  382444. 0.0322 
+10 WORLD   1950-1955 45-49   5072.   8886. 326278.  333889. 0.00768
+# ℹ 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-4" class="slide level2">
+<h2>Exercise</h2>
+<p>What row has the highest crude birth rate?</p>
+</section>
+<section id="solution-4" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">cdr =</span> births <span class="sc">/</span> (py.men <span class="sc">+</span> py.women)) <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(cdr))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 8
+   country period    age    births deaths   py.men py.women    cdr
+   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+ 1 WORLD   1950-1955 25-29 128063.  6425.  508500.  507277. 0.126 
+ 2 WORLD   1950-1955 20-24 131939.  6649.  573518.  555221. 0.117 
+ 3 WORLD   1950-1955 30-34  89247.  6209.  433338.  437132. 0.103 
+ 4 WORLD   2005-2010 20-24 219277.  5399. 1503388. 1442885. 0.0744
+ 5 WORLD   2005-2010 25-29 190319.  5997. 1337034. 1294853. 0.0723
+ 6 WORLD   1950-1955 35-39  56006.  6877.  400279.  405528. 0.0695
+ 7 WORLD   2005-2010 30-34 114931.  6519. 1259434. 1225102. 0.0463
+ 8 WORLD   1950-1955 15-19  54238.  5831.  626191.  600678. 0.0442
+ 9 WORLD   1950-1955 40-44  24327.  7995.  373771.  382444. 0.0322
+10 WORLD   2005-2010 15-19  73195.  4043. 1593938. 1509489. 0.0236
+# ℹ 20 more rows</code></pre>
+</div>
+</div>
 
 </section>
     </div>

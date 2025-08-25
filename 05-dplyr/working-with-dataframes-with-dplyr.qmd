@@ -169,3 +169,69 @@ pop |>
 ## dplyr Row Exercises
 
 Let's take a break to work through the exercises in [row-exercises.qmd](row-exercises.qmd).
+
+## `select()`
+
+`select()` subsets columns in a dataframe. For example
+
+```{r}
+pop |>
+  select(period, age, births, deaths)
+```
+
+## `rename()`
+
+`rename()` renames columns in a dataframe. For example
+
+```{r}
+pop |>
+  select(period, age, births, deaths) |>
+  rename(time_period = period, age_range = age)
+```
+
+## `relocate()`
+
+`relocate()` changes the order of columns. By default, it moves the named columns to the front. For example
+
+```{r}
+pop |>
+  select(period, age, births, deaths) |>
+  relocate(age)
+```
+
+## `mutate()`
+
+`mutate()` is used to create new columns. For example
+
+```{r}
+pop |>
+  select(period, age, births, deaths) |>
+  mutate(births_deaths_ratio = births / deaths)
+```
+
+## Exercise
+
+Calculate the _crude birth rate_ (CDR) for each row, where
+
+$$
+CDR = \frac{\text{number of births}}{\text{number of person-years}}
+$$
+
+## Solution
+
+```{r}
+pop |>
+  mutate(cdr = births / (py.men + py.women))
+```
+
+## Exercise
+
+What row has the highest crude birth rate?
+
+## Solution
+
+```{r}
+pop |>
+  mutate(cdr = births / (py.men + py.women)) |>
+  arrange(desc(cdr))
+```
