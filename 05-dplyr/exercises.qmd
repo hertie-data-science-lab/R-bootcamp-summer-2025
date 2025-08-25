@@ -27,3 +27,26 @@ These exercises come from (or were adapted from) [R for Data Science](https://r4
 3. Find all destinations that had at least one flight with a flight time of 12 hours or more.
 
 4. Find all flights in the summer (June, July, August) that arrived on time. (Hint: you can combine filters or use `%in%` to see if a value is in a vector like `value %in% c(values)`).
+
+## Success of Leader Assassination as a Natural Experiment
+
+Source: Chapter 2 of [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science)
+
+One longstanding debate in the study of international relations concerns the question of whether individual political leaders can make a difference. Some emphasize that leaders with different ideologies and personalities can significantly affect the course of a nation. Others argue that political leaders are severely constrained by historical and institutional forces. Did individuals like Hitler, Mao, Roosevelt, and Churchill make a big difference? The difficulty of empirically testing these arguments stems from the fact that the change of leadership is not random and there are many confounding factors to be adjusted.
+
+Variable | Description
+country | Country
+year | Year
+leadername | Name of leader who was targeted
+age | Age of the targeted leader
+politybefore | Average polity score during the three-year period prior to the attempt
+polityafter | Average polity score during the three-year period after the attempt
+civilwarbefore | 1 if the country was in civil war during the three-year period prior to th tempt, 0 otherwise
+civilwarafter | 1 if the country was in civil war during the three-year period after the attempt, O otherwise
+interwarbefore | 1 if the country was in international war during the three-year period prior to the attempt, 0 otherwise
+interwarafter | 1 if the country was in international war during the three-year period after the attempt, 0 otherwise
+result | Result of the assassination attempt
+
+In this exercise we consider a natural experiment in which the success or failure of assassination attempts is assumed to be essentially random. Each observation of the CSV data set `leaders.csv` contains information about an assassination attempt. The table above presents the names and descriptions of variables in this leader assassination data set.
+The polity variable represents the so-called polity score from the Polity Project. The Polity Project systematically documents and quantifies the regime types of all countries in the world from the year 1800. The polity score is a 21-point scale ranging from - 10 (hereditary nonarchy) to 10 (consolidated democracy). The `result` variable is a 10-category factor variable describing the result of each assassination attempt.
+
