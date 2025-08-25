@@ -200,22 +200,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/leaders.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 250 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (3): country, leadername, result
+dbl (8): year, age, politybefore, polityafter, interwarbefore, interwarafter...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>leaders</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 250 × 11
+    year country     leadername      age politybefore polityafter interwarbefore
+   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
+ 1  1929 Afghanistan Habibullah G…    39           -6       -6                 0
+ 2  1933 Afghanistan Nadir Shah       53           -6       -7.33              0
+ 3  1934 Afghanistan Hashim Khan      50           -6       -8                 0
+ 4  1924 Albania     Zogu             29            0       -9                 0
+ 5  1931 Albania     Zogu             36           -9       -9                 0
+ 6  1968 Algeria     Boumedienne      41           -9       -9                 0
+ 7  1992 Algeria     Boudiaf          73           -2       -5.67              0
+ 8  1908 Argentina   Alcorta          48            1        1                 0
+ 9  1916 Argentina   de la Plaza      76            2        2                 0
+10  1929 Argentina   Irigoyen         77            2       -8                 0
+# ℹ 240 more rows
+# ℹ 4 more variables: interwarafter &lt;dbl&gt;, civilwarbefore &lt;dbl&gt;,
+#   civilwarafter &lt;dbl&gt;, result &lt;chr&gt;</code></pre>
+</div>
+</div>
 <p>In this exercise we consider a natural experiment in which the success or failure of assassination attempts is assumed to be essentially random. Each observation of the CSV data set <code>leaders.csv</code> contains information about an assassination attempt. The table above presents the names and descriptions of variables in this leader assassination data set.</p>
 <p>The polity variable represents the so-called polity score from the Polity Project. The Polity Project systematically documents and quantifies the regime types of all countries in the world from the year 1800. The polity score is a 21-point scale ranging from - 10 (hereditary nonarchy) to 10 (consolidated democracy). The <code>result</code> variable is a 10-category factor variable describing the result of each assassination attempt.</p>
 <ol type="1">
 <li><p>How many assassination attempts are recorded in the data?</p></li>
 <li><p>How many countries experienced at least one leader assassination attempt?</p></li>
 <li><p>Among countries with at least one leader assassination attempt, what is the average number of attempts per year?</p></li>
-<li><p>Create a new variable called <code>success</code> that is equal to 1 if a leader dies from the attack at any point and 0 if the leader survives (you’ll need to look at the possible values for the result variable).</p></li>
+<li><p>Create a new variable called <code>success</code> that is equal to 1 if a leader dies from the attack at any point and 0 if the leader survives (you’ll need to look at the possible values for the <code>result</code> variable).</p></li>
 <li><p>What is the overall success rate of leader assassination?</p></li>
-<li><p>Is there any difference in the age of targeted leaders between successful and failed attempts?</p></li>
+<li><p>Is there any difference in the age of targeted leaders between successful and failed attempts? You can use <code>summarise()</code>, make plot(s) with <code>ggplot()</code>, or both.</p></li>
 </ol>
 <p>Optional causal inference: Does the data support the assumption that the success of assassination attempts is randomly determined?</p>
 <ol start="7" type="1">
-<li>Does the average polity score over three years prior to an assassination attempt differs on average between successful and failed attempts?</li>
-</ol>
-<p>Optional causal inference: Do successful assassination attempts cause democratization?</p>
-<ol start="8" type="1">
+<li><p>Does the average polity score over three years prior to an assassination attempt differs on average between successful and failed attempts?</p></li>
 <li><p>Create a new variable called <code>warbefore</code> that is 1 if a country is in civil or international war in the three years before the assassination attempt and 0 otherwise.</p></li>
 <li></li>
 </ol>

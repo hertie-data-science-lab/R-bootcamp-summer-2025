@@ -216,6 +216,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="success-of-leader-assassination-as-a-natural-experiment" class="level2">
 <h2 class="anchored" data-anchor-id="success-of-leader-assassination-as-a-natural-experiment">Success of Leader Assassination as a Natural Experiment</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/leaders.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 250 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (3): country, leadername, result
+dbl (8): year, age, politybefore, polityafter, interwarbefore, interwarafter...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>leaders</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 250 × 11
+    year country     leadername      age politybefore polityafter interwarbefore
+   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
+ 1  1929 Afghanistan Habibullah G…    39           -6       -6                 0
+ 2  1933 Afghanistan Nadir Shah       53           -6       -7.33              0
+ 3  1934 Afghanistan Hashim Khan      50           -6       -8                 0
+ 4  1924 Albania     Zogu             29            0       -9                 0
+ 5  1931 Albania     Zogu             36           -9       -9                 0
+ 6  1968 Algeria     Boumedienne      41           -9       -9                 0
+ 7  1992 Algeria     Boudiaf          73           -2       -5.67              0
+ 8  1908 Argentina   Alcorta          48            1        1                 0
+ 9  1916 Argentina   de la Plaza      76            2        2                 0
+10  1929 Argentina   Irigoyen         77            2       -8                 0
+# ℹ 240 more rows
+# ℹ 4 more variables: interwarafter &lt;dbl&gt;, civilwarbefore &lt;dbl&gt;,
+#   civilwarafter &lt;dbl&gt;, result &lt;chr&gt;</code></pre>
+</div>
+</div>
 <p>Source: Chapter 2 of <a href="https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science">Quantiative Social Science: An Introduction with Tidyverse</a> with modifications by <a href="www.jacksonmluckey.com">Jackson Luckey</a> to shift the emphasis towards data science and away from causal inference.</p>
 <p>One longstanding debate in the study of international relations concerns the question of whether individual political leaders can make a difference. Some emphasize that leaders with different ideologies and personalities can significantly affect the course of a nation. Others argue that political leaders are severely constrained by historical and institutional forces. Did individuals like Hitler, Mao, Roosevelt, and Churchill make a big difference? The difficulty of empirically testing these arguments stems from the fact that the change of leadership is not random and there are many confounding factors to be adjusted.</p>
 <table class="caption-top table">
@@ -279,18 +311,214 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this exercise we consider a natural experiment in which the success or failure of assassination attempts is assumed to be essentially random. Each observation of the CSV data set <code>leaders.csv</code> contains information about an assassination attempt. The table above presents the names and descriptions of variables in this leader assassination data set.</p>
 <p>The polity variable represents the so-called polity score from the Polity Project. The Polity Project systematically documents and quantifies the regime types of all countries in the world from the year 1800. The polity score is a 21-point scale ranging from - 10 (hereditary nonarchy) to 10 (consolidated democracy). The <code>result</code> variable is a 10-category factor variable describing the result of each assassination attempt.</p>
 <ol type="1">
-<li><p>How many assassination attempts are recorded in the data?</p></li>
-<li><p>How many countries experienced at least one leader assassination attempt?</p></li>
-<li><p>Among countries with at least one leader assassination attempt, what is the average number of attempts per year?</p></li>
-<li><p>Create a new variable called <code>success</code> that is equal to 1 if a leader dies from the attack at any point and 0 if the leader survives (you’ll need to look at the possible values for the result variable).</p></li>
-<li><p>What is the overall success rate of leader assassination?</p></li>
-<li><p>Is there any difference in the age of targeted leaders between successful and failed attempts?</p></li>
+<li>How many assassination attempts are recorded in the data?</li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1   250</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>How many countries experienced at least one leader assassination attempt?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 88 × 2
+   country         n
+   &lt;chr&gt;       &lt;int&gt;
+ 1 Afghanistan     3
+ 2 Albania         2
+ 3 Algeria         2
+ 4 Argentina       5
+ 5 Australia       2
+ 6 Austria         4
+ 7 Belgium         1
+ 8 Bhutan          1
+ 9 Bolivia         4
+10 Brazil          1
+# ℹ 78 more rows</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Among countries with at least one leader assassination attempt, what is the average number of attempts per year?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_countries =</span> <span class="fu">n_distinct</span>(country),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_attempts =</span> <span class="fu">n</span>(),</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">first_year =</span> <span class="fu">min</span>(year),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">last_year =</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_years_in_data =</span> last_year <span class="sc">-</span> first_year) <span class="sc">|&gt;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">attempts_per_year =</span> n_attempts <span class="sc">/</span> n_years_in_data) <span class="sc">|&gt;</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">attempts_per_year_per_country =</span> attempts_per_year <span class="sc">/</span> n_countries) <span class="sc">|&gt;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(attempts_per_year_per_country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  attempts_per_year_per_country
+                          &lt;dbl&gt;
+1                        0.0231</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Create a new variable called <code>success</code> that is equal to 1 if a leader dies from the attack at any point and 0 if the leader survives (you’ll need to look at the possible values for the <code>result</code> variable).</li>
+</ol>
+<p>Hint: You can use <code>%in%</code> to see if a value is in a vector. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country_starts_with_A =</span> country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Afghanistan"</span>, <span class="st">"Albania"</span>, <span class="st">"Algeria"</span>, <span class="st">"Argentina"</span>, <span class="st">"Australia"</span>, <span class="st">"Austria"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(country, country_starts_with_A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 88 × 2
+   country     country_starts_with_A
+   &lt;chr&gt;       &lt;lgl&gt;                
+ 1 Afghanistan TRUE                 
+ 2 Albania     TRUE                 
+ 3 Algeria     TRUE                 
+ 4 Argentina   TRUE                 
+ 5 Australia   TRUE                 
+ 6 Austria     TRUE                 
+ 7 Belgium     FALSE                
+ 8 Bhutan      FALSE                
+ 9 Bolivia     FALSE                
+10 Brazil      FALSE                
+# ℹ 78 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 1
+   result                                     
+   &lt;chr&gt;                                      
+ 1 not wounded                                
+ 2 dies within a day after the attack         
+ 3 survives, whether wounded unknown          
+ 4 wounded lightly                            
+ 5 plot stopped                               
+ 6 hospitalization but no permanent disability
+ 7 dies between a day and a week              
+ 8 dies, timing unknown                       
+ 9 survives but wounded severely              
+10 dies between a week and a month            </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="ot">&lt;-</span> leaders <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">success =</span> result <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"dies within a day after the attack"</span>, <span class="st">"dies between a day and a week"</span>, <span class="st">"dies, timing unknown"</span>, <span class="st">"dies between a week and a month"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="5" type="1">
+<li>What is the overall success rate of leader assassination?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">attempts =</span> <span class="fu">n</span>(),</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">successes =</span> <span class="fu">sum</span>(success)) <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">success_rate =</span> successes <span class="sc">/</span> attempts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  attempts successes success_rate
+     &lt;int&gt;     &lt;int&gt;        &lt;dbl&gt;
+1      250        54        0.216</code></pre>
+</div>
+</div>
+<ol start="6" type="1">
+<li>Is there any difference in the age of targeted leaders between successful and failed attempts? You can use <code>summarise()</code>, make plot(s) with <code>ggplot()</code>, or both.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(success) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_age =</span> <span class="fu">min</span>(age),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_age =</span> <span class="fu">median</span>(age),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_age =</span> <span class="fu">max</span>(age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  success     n min_age mean_age median_age max_age
+  &lt;lgl&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+1 FALSE     196      18     52.7       51.5      81
+2 TRUE       54      34     56.5       58        77</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(leaders, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">fill =</span> success)) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercises-solutions_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(leaders, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">fill =</span> success)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercises-solutions_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Optional causal inference: Does the data support the assumption that the success of assassination attempts is randomly determined?</p>
 <ol start="7" type="1">
 <li>Does the average polity score over three years prior to an assassination attempt differs on average between successful and failed attempts?</li>
 </ol>
-<p>Optional causal inference: Do successful assassination attempts cause democratization?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>leaders <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(success) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_politybefore =</span> <span class="fu">min</span>(politybefore),</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_politybefore =</span> <span class="fu">mean</span>(politybefore),</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_politybefore =</span> <span class="fu">median</span>(politybefore),</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_politybefore =</span> <span class="fu">max</span>(politybefore))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  success     n min_politybefore mean_politybefore median_politybefore
+  &lt;lgl&gt;   &lt;int&gt;            &lt;dbl&gt;             &lt;dbl&gt;               &lt;dbl&gt;
+1 FALSE     196              -10            -1.74                   -3
+2 TRUE       54              -10            -0.704                  -3
+# ℹ 1 more variable: max_politybefore &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(leaders, <span class="fu">aes</span>(<span class="at">x =</span> politybefore, <span class="at">fill =</span> success)) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercises-solutions_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(leaders, <span class="fu">aes</span>(<span class="at">x =</span> politybefore, <span class="at">fill =</span> success)) <span class="sc">+</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercises-solutions_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <ol start="8" type="1">
 <li><p>Create a new variable called <code>warbefore</code> that is 1 if a country is in civil or international war in the three years before the assassination attempt and 0 otherwise.</p></li>
 <li></li>

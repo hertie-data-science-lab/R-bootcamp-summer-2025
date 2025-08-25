@@ -55,6 +55,12 @@ flights |>
 
 ## Success of Leader Assassination as a Natural Experiment
 
+```{r}
+leaders <- read_csv("data/leaders.csv")
+
+leaders
+```
+
 Source: Chapter 2 of [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science) with modifications by [Jackson Luckey](www.jacksonmluckey.com) to shift the emphasis towards data science and away from causal inference.
 
 One longstanding debate in the study of international relations concerns the question of whether individual political leaders can make a difference. Some emphasize that leaders with different ideologies and personalities can significantly affect the course of a nation. Others argue that political leaders are severely constrained by historical and institutional forces. Did individuals like Hitler, Mao, Roosevelt, and Churchill make a big difference? The difficulty of empirically testing these arguments stems from the fact that the change of leadership is not random and there are many confounding factors to be adjusted.
@@ -79,21 +85,107 @@ The polity variable represents the so-called polity score from the Polity Projec
 
 1. How many assassination attempts are recorded in the data?
 
+```{r}
+leaders |>
+  count()
+```
+
+
 2. How many countries experienced at least one leader assassination attempt?
+
+```{r}
+leaders |>
+  count(country)
+```
 
 3. Among countries with at least one leader assassination attempt, what is the average number of attempts per year?
 
-4. Create a new variable called `success` that is equal to 1 if a leader dies from the attack at any point and 0 if the leader survives (you'll need to look at the possible values for the result variable).
+```{r}
+leaders |>
+  summarise(n_countries = n_distinct(country),
+            n_attempts = n(),
+            first_year = min(year),
+            last_year = max(year)) |>
+  mutate(n_years_in_data = last_year - first_year) |>
+  mutate(attempts_per_year = n_attempts / n_years_in_data) |>
+  mutate(attempts_per_year_per_country = attempts_per_year / n_countries) |>
+  select(attempts_per_year_per_country)
+```
+
+4. Create a new variable called `success` that is equal to 1 if a leader dies from the attack at any point and 0 if the leader survives (you'll need to look at the possible values for the `result` variable).
+
+Hint: You can use `%in%` to see if a value is in a vector. For example,
+
+```{r}
+leaders |>
+  mutate(country_starts_with_A = country %in% c("Afghanistan", "Albania", "Algeria", "Argentina", "Australia", "Austria")) |>
+  distinct(country, country_starts_with_A)
+```
+
+```{r}
+leaders |>
+  distinct(result)
+```
+
+```{r}
+leaders <- leaders |>
+  mutate(success = result %in% c("dies within a day after the attack", "dies between a day and a week", "dies, timing unknown", "dies between a week and a month"))
+```
 
 5. What is the overall success rate of leader assassination?
 
-6. Is there any difference in the age of targeted leaders between successful and failed attempts?
+```{r}
+leaders |>
+  summarise(attempts = n(),
+            successes = sum(success)) |>
+  mutate(success_rate = successes / attempts)
+```
+
+6. Is there any difference in the age of targeted leaders between successful and failed attempts? You can use `summarise()`, make plot(s) with `ggplot()`, or both.
+
+```{r}
+leaders |>
+  group_by(success) %>%
+  summarise(n = n(),
+            min_age = min(age),
+            mean_age = mean(age),
+            median_age = median(age),
+            max_age = max(age))
+```
+
+```{r}
+ggplot(leaders, aes(x = age, fill = success)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+ggplot(leaders, aes(x = age, fill = success)) +
+  geom_histogram(alpha = 0.5)
+```
 
 Optional causal inference: Does the data support the assumption that the success of assassination attempts is randomly determined?
 
 7. Does the average polity score over three years prior to an assassination attempt differs on average between successful and failed attempts?
 
-Optional causal inference: Do successful assassination attempts cause democratization?
+```{r}
+leaders |>
+  group_by(success) %>%
+  summarise(n = n(),
+            min_politybefore = min(politybefore),
+            mean_politybefore = mean(politybefore),
+            median_politybefore = median(politybefore),
+            max_politybefore = max(politybefore))
+```
+
+```{r}
+ggplot(leaders, aes(x = politybefore, fill = success)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+ggplot(leaders, aes(x = politybefore, fill = success)) +
+  geom_histogram(alpha = 0.5)
+```
 
 8. Create a new variable called `warbefore` that is 1 if a country is in civil or international war in the three years before the assassination attempt and 0 otherwise.
 
