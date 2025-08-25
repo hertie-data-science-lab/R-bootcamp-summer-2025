@@ -138,6 +138,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Find all flights in the summer (June, July, August) that arrived on time. (Hint: you can combine filters or use <code>%in%</code> to see if a value is in a vector like <code>value %in% c(values)</code>).</p></li>
 </ol>
 </section>
+<section id="success-of-leader-assassination-as-a-natural-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="success-of-leader-assassination-as-a-natural-experiment">Success of Leader Assassination as a Natural Experiment</h2>
+<p>Source: Chapter 2 of <a href="https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science">Quantiative Social Science: An Introduction with Tidyverse</a> with modifications by <a href="www.jacksonmluckey.com">Jackson Luckey</a> to shift the emphasis towards data science and away from causal inference.</p>
+<p>One longstanding debate in the study of international relations concerns the question of whether individual political leaders can make a difference. Some emphasize that leaders with different ideologies and personalities can significantly affect the course of a nation. Others argue that political leaders are severely constrained by historical and institutional forces. Did individuals like Hitler, Mao, Roosevelt, and Churchill make a big difference? The difficulty of empirically testing these arguments stems from the fact that the change of leadership is not random and there are many confounding factors to be adjusted.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 81%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>country</code></td>
+<td>Country</td>
+</tr>
+<tr class="even">
+<td><code>year</code></td>
+<td>Year</td>
+</tr>
+<tr class="odd">
+<td><code>leadername</code></td>
+<td>Name of leader who was targeted</td>
+</tr>
+<tr class="even">
+<td><code>age</code></td>
+<td>Age of the targeted leader</td>
+</tr>
+<tr class="odd">
+<td><code>politybefore</code></td>
+<td>Average polity score during the three-year period prior to the attempt</td>
+</tr>
+<tr class="even">
+<td><code>polityafter</code></td>
+<td>Average polity score during the three-year period after the attempt</td>
+</tr>
+<tr class="odd">
+<td><code>civilwarbefore</code></td>
+<td>1 if the country was in civil war during the three-year period prior to the attempt, 0 otherwise</td>
+</tr>
+<tr class="even">
+<td><code>civilwarafter</code></td>
+<td>1 if the country was in civil war during the three-year period after the attempt, 0 otherwise</td>
+</tr>
+<tr class="odd">
+<td><code>interwarbefore</code></td>
+<td>1 if the country was in international war during the three-year period prior to the attempt, 0 otherwise</td>
+</tr>
+<tr class="even">
+<td><code>interwarafter</code></td>
+<td>1 if the country was in international war during the three-year period after the attempt, 0 otherwise</td>
+</tr>
+<tr class="odd">
+<td><code>result</code></td>
+<td>Result of the assassination attempt</td>
+</tr>
+</tbody>
+</table>
+<p>In this exercise we consider a natural experiment in which the success or failure of assassination attempts is assumed to be essentially random. Each observation of the CSV data set <code>leaders.csv</code> contains information about an assassination attempt. The table above presents the names and descriptions of variables in this leader assassination data set.</p>
+<p>The polity variable represents the so-called polity score from the Polity Project. The Polity Project systematically documents and quantifies the regime types of all countries in the world from the year 1800. The polity score is a 21-point scale ranging from - 10 (hereditary nonarchy) to 10 (consolidated democracy). The <code>result</code> variable is a 10-category factor variable describing the result of each assassination attempt.</p>
+<ol type="1">
+<li><p>How many assassination attempts are recorded in the data?</p></li>
+<li><p>How many countries experienced at least one leader assassination attempt?</p></li>
+<li><p>Among countries with at least one leader assassination attempt, what is the average number of attempts per year?</p></li>
+<li><p>Create a new variable called <code>success</code> that is equal to 1 if a leader dies from the attack at any point and 0 if the leader survives (you’ll need to look at the possible values for the result variable).</p></li>
+<li><p>What is the overall success rate of leader assassination?</p></li>
+<li><p>Is there any difference in the age of targeted leaders between successful and failed attempts?</p></li>
+</ol>
+<p>Optional causal inference: Does the data support the assumption that the success of assassination attempts is randomly determined?</p>
+<ol start="7" type="1">
+<li>Does the average polity score over three years prior to an assassination attempt differs on average between successful and failed attempts?</li>
+</ol>
+<p>Optional causal inference: Do successful assassination attempts cause democratization?</p>
+<ol start="8" type="1">
+<li><p>Create a new variable called <code>warbefore</code> that is 1 if a country is in civil or international war in the three years before the assassination attempt and 0 otherwise.</p></li>
+<li></li>
+</ol>
+</section>
 
 </main>
 <!-- /main column -->
