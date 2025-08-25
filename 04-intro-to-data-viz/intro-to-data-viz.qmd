@@ -84,3 +84,109 @@ ggplot(penguins, aes(x = body_mass, y = flipper_len, color = island)) +
   geom_point()
 ```
 
+## Geometry Options
+
+Some of the most common geometries are
+
+::: {.columns}
+
+::: {.column width="50%"}
+- `geom_point()`
+- `geom_line()`
+- `geom_bar()`
+- `geom_col()`
+:::
+
+::: {.column width="50%"}
+- `geom_histogram()`
+- `geom_density()`
+- `geom_label()`
+- `geom_smooth()`
+:::
+
+:::
+
+You can read about all the geometries [here](https://ggplot2.tidyverse.org/reference/index.html#geoms).
+
+## `geom_bar()` Example
+
+```{r}
+ggplot(penguins, aes(x = species)) +
+  geom_bar()
+```
+
+## Second `geom_bar()` Example
+
+```{r}
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar()
+```
+
+## `geom_density()` Example
+
+```{r}
+ggplot(penguins, aes(x = body_mass, fill = species)) +
+  geom_density(alpha = 0.5)
+```
+
+## `geom_smooth()` Example
+
+```{r}
+ggplot(penguins, aes(x = body_mass, y = flipper_len, color = species)) +
+  geom_point() +
+  geom_smooth(method = "lm") # linear regression
+```
+
+## Labels
+
+You can label your plot with `labs()` like
+
+```{r}
+#| eval: false
+labs(
+    title = "The plot title",
+    x = "The x-axis label",
+    y = "The y=axis label",
+    caption = "The plot caption"
+)
+```
+
+## Example of Labels
+
+```{r}
+#| eval: false
+ggplot(penguins, aes(x = body_mass, y = flipper_len, color = species)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Relationship Between Body Mass and Flipper Length of Penguins",
+    x = "Body Mass (grams)",
+    y = "Flipper Length (mm)",
+    caption = "Body mass and flipper length are positively correlated for all three species of penguin"
+  )
+```
+
+## Example of Labels
+
+```{r}
+#| echo: false
+ggplot(penguins, aes(x = body_mass, y = flipper_len, color = species)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Relationship Between Body Mass and Flipper Length of Penguins",
+    x = "Body Mass (grams)",
+    y = "Flipper Length (mm)",
+    caption = "Body mass and flipper length are positively correlated for all three species of penguin"
+  )
+```
+
+## Experiment
+
+Let's take a little bit and practice making various plots. You can use the penguins dataset or try
+
+- `iris`: Data on the length and width of the sepal and flower of three species of Iris plants.
+- `Titanic`: Survival status of passengers on the Titantic by class, sex, and age.
+- `trees`: The girth, height, and volume of 31 trees.
+
+You can read about all the datasets built into R with `?datasets`.

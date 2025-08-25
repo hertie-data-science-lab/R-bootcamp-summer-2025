@@ -273,8 +273,102 @@ Jackson M Luckey
 <span id="cb5-2"><a href=""></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-
 <img data-src="intro-to-data-viz_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="geometry-options" class="slide level2">
+<h2>Geometry Options</h2>
+<p>Some of the most common geometries are</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><code>geom_point()</code></li>
+<li><code>geom_line()</code></li>
+<li><code>geom_bar()</code></li>
+<li><code>geom_col()</code></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><code>geom_histogram()</code></li>
+<li><code>geom_density()</code></li>
+<li><code>geom_label()</code></li>
+<li><code>geom_smooth()</code></li>
+</ul>
+</div></div>
+<p>You can read about all the geometries <a href="https://ggplot2.tidyverse.org/reference/index.html#geoms">here</a>.</p>
+</section>
+<section id="geom_bar-example" class="slide level2">
+<h2><code>geom_bar()</code> Example</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href=""></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro-to-data-viz_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="second-geom_bar-example" class="slide level2">
+<h2>Second <code>geom_bar()</code> Example</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> island, <span class="at">fill =</span> species)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href=""></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro-to-data-viz_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="geom_density-example" class="slide level2">
+<h2><code>geom_density()</code> Example</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass, <span class="at">fill =</span> species)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro-to-data-viz_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="geom_smooth-example" class="slide level2">
+<h2><code>geom_smooth()</code> Example</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass, <span class="at">y =</span> flipper_len, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-3"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="co"># linear regression</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro-to-data-viz_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="labels" class="slide level2">
+<h2>Labels</h2>
+<p>You can label your plot with <code>labs()</code> like</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">labs</span>(</span>
+<span id="cb10-2"><a href=""></a>    <span class="at">title =</span> <span class="st">"The plot title"</span>,</span>
+<span id="cb10-3"><a href=""></a>    <span class="at">x =</span> <span class="st">"The x-axis label"</span>,</span>
+<span id="cb10-4"><a href=""></a>    <span class="at">y =</span> <span class="st">"The y=axis label"</span>,</span>
+<span id="cb10-5"><a href=""></a>    <span class="at">caption =</span> <span class="st">"The plot caption"</span></span>
+<span id="cb10-6"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="example-of-labels" class="slide level2">
+<h2>Example of Labels</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass, <span class="at">y =</span> flipper_len, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-5"><a href=""></a>    <span class="at">title =</span> <span class="st">"Relationship Between Body Mass and Flipper Length of Penguins"</span>,</span>
+<span id="cb11-6"><a href=""></a>    <span class="at">x =</span> <span class="st">"Body Mass (grams)"</span>,</span>
+<span id="cb11-7"><a href=""></a>    <span class="at">y =</span> <span class="st">"Flipper Length (mm)"</span>,</span>
+<span id="cb11-8"><a href=""></a>    <span class="at">caption =</span> <span class="st">"Body mass and flipper length are positively correlated for all three species of penguin"</span></span>
+<span id="cb11-9"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="example-of-labels-1" class="slide level2">
+<h2>Example of Labels</h2>
+
+<img data-src="intro-to-data-viz_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="experiment" class="slide level2">
+<h2>Experiment</h2>
+<p>Let’s take a little bit and practice making various plots. You can use the penguins dataset or try</p>
+<ul>
+<li><code>iris</code>: Data on the length and width of the sepal and flower of three species of Iris plants.</li>
+<li><code>Titanic</code>: Survival status of passengers on the Titantic by class, sex, and age.</li>
+<li><code>trees</code>: The girth, height, and volume of 31 trees.</li>
+</ul>
+<p>You can read about all the datasets built into R with <code>?datasets</code>.</p>
+
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
