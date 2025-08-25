@@ -211,17 +211,19 @@ pop |>
 
 ## Exercise
 
-Calculate the _crude birth rate_ (CDR) for each row, where
+Calculate the _crude birth rate_ (CBR) for each row, where
 
 $$
-CDR = \frac{\text{number of births}}{\text{number of person-years}}
+CBR = \frac{\text{number of births}}{\text{number of person-years}}
 $$
+
+Source: [Quantiative Social Science: An Introduction](https://press.princeton.edu/books/paperback/9780691175461/quantitative-social-science)
 
 ## Solution
 
 ```{r}
 pop |>
-  mutate(cdr = births / (py.men + py.women))
+  mutate(CBR = births / (py.men + py.women))
 ```
 
 ## Exercise
@@ -232,6 +234,124 @@ What row has the highest crude birth rate?
 
 ```{r}
 pop |>
-  mutate(cdr = births / (py.men + py.women)) |>
-  arrange(desc(cdr))
+  mutate(CBR = births / (py.men + py.women)) |>
+  arrange(desc(CBR))
+```
+
+## `summarise()`
+
+`summarise()` is used to calculate summary statistics for a dataframe. For example, we can find the minimum, mean, and maximum number of births in the dataset with
+
+```{r}
+pop |>
+  summarise(min_births = min(births),
+            mean_births = mean(births),
+            max_births = max(births))
+```
+
+## Exercise
+
+Find the minimum, mean, and maximum number of births among rows with more than zero births.
+
+## Solution
+
+```{r}
+pop |>
+  filter(births > 0) |>
+  summarise(min_births = min(births),
+            mean_births = mean(births),
+            max_births = max(births))
+```
+
+## Summarise Functions
+
+Many functions can be used with summarise, including
+
+::: {.columns}
+
+::: {.column width="30%"}
+- `min()`
+- `max()`
+- `mean()`
+- `median()`
+- `sum()`
+:::
+
+::: {.column width="70%"}
+- `first()`: value of first row
+- `last()`: value of last row
+- `n()`: count of rows
+- `n_distinct()`: number of distinct rows
+:::
+
+:::
+
+## `group_by()`
+
+`group_by()` tells R to perform operations on the distinct groups defined inside `group_by()` until `ungroup()` is used. For example
+
+```{r}
+pop |>
+  filter(births > 0) |>
+  group_by(period) |>
+  summarise(min_births = min(births),
+            mean_births = mean(births),
+            max_births = max(births))
+```
+
+## Exercise
+
+Calculate the crude birth rate for each period (1950-1955 and 2005-2010) across age groups by
+
+1. Calculating the combined number of person-years for each age group for each period
+2. Summing person-years and births by time period
+3. Dividing births by person-years
+
+## Solution
+
+```{r}
+pop |>
+  mutate(person_years = py.men + py.women) |>
+  group_by(period) |>
+  summarise(births = sum(births),
+            person_years = sum(person_years)) |>
+  mutate(CBR = births / person_years)
+```
+
+## Exercise
+
+Let's return to the penguin dataset. Calculate the minimum, mean, median, and maximum body mass of penguins by species and island. Include the number of penguins in each sample.
+
+## Solution
+
+```{r}
+penguins |>
+  group_by(species, island) |>
+  summarise(
+    min = min(body_mass),
+    mean = mean(body_mass),
+    median = median(body_mass),
+    max = max(body_mass),
+    n = n()
+  )
+```
+
+## Solution (cont)
+
+Some values are `NA` because `NA`s propagate in R. In other words, if any values in a group are `NA`, then functions like `min()`, `max()`, and `sum()` will return `NA` by default. We can disable this behavior by including `na.rm = TRUE` in the functions.
+
+## Solution (cont)
+
+```{r}
+penguins |>
+  group_by(species, island) |>
+  summarise(
+    min = min(body_mass, na.rm = TRUE),
+    mean = mean(body_mass, na.rm = TRUE),
+    median = median(body_mass, na.rm = TRUE),
+    max = max(body_mass, na.rm = TRUE),
+    n = n(),
+    # this is an easy way to get the number of NA values in a group when using summarise()
+    n_na = sum(is.na(body_mass))
+  )
 ```

@@ -554,19 +554,20 @@ Jackson M Luckey
 </section>
 <section id="exercise-3" class="slide level2">
 <h2>Exercise</h2>
-<p>Calculate the <em>crude birth rate</em> (CDR) for each row, where</p>
+<p>Calculate the <em>crude birth rate</em> (CBR) for each row, where</p>
 <p><span class="math display">\[
-CDR = \frac{\text{number of births}}{\text{number of person-years}}
+CBR = \frac{\text{number of births}}{\text{number of person-years}}
 \]</span></p>
+<p>Source: <a href="https://press.princeton.edu/books/paperback/9780691175461/quantitative-social-science">Quantiative Social Science: An Introduction</a></p>
 </section>
 <section id="solution-3" class="slide level2">
 <h2>Solution</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
-<span id="cb30-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">cdr =</span> births <span class="sc">/</span> (py.men <span class="sc">+</span> py.women))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">CBR =</span> births <span class="sc">/</span> (py.men <span class="sc">+</span> py.women))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 30 × 8
-   country period    age    births  deaths  py.men py.women     cdr
+   country period    age    births  deaths  py.men py.women     CBR
    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
  1 WORLD   1950-1955 0-4        0  101090. 946911.  904909. 0      
  2 WORLD   1950-1955 5-9        0    7961. 726903.  694575. 0      
@@ -590,11 +591,11 @@ CDR = \frac{\text{number of births}}{\text{number of person-years}}
 <h2>Solution</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
-<span id="cb32-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">cdr =</span> births <span class="sc">/</span> (py.men <span class="sc">+</span> py.women)) <span class="sc">|&gt;</span></span>
-<span id="cb32-3"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(cdr))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">CBR =</span> births <span class="sc">/</span> (py.men <span class="sc">+</span> py.women)) <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(CBR))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 30 × 8
-   country period    age    births deaths   py.men py.women    cdr
+   country period    age    births deaths   py.men py.women    CBR
    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
  1 WORLD   1950-1955 25-29 128063.  6425.  508500.  507277. 0.126 
  2 WORLD   1950-1955 20-24 131939.  6649.  573518.  555221. 0.117 
@@ -607,6 +608,169 @@ CDR = \frac{\text{number of births}}{\text{number of person-years}}
  9 WORLD   1950-1955 40-44  24327.  7995.  373771.  382444. 0.0322
 10 WORLD   2005-2010 15-19  73195.  4043. 1593938. 1509489. 0.0236
 # ℹ 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="summarise" class="slide level2">
+<h2><code>summarise()</code></h2>
+<p><code>summarise()</code> is used to calculate summary statistics for a dataframe. For example, we can find the minimum, mean, and maximum number of births in the dataset with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">min_births =</span> <span class="fu">min</span>(births),</span>
+<span id="cb34-3"><a href=""></a>            <span class="at">mean_births =</span> <span class="fu">mean</span>(births),</span>
+<span id="cb34-4"><a href=""></a>            <span class="at">max_births =</span> <span class="fu">max</span>(births))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  min_births mean_births max_births
+       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
+1          0      38782.    219277.</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-5" class="slide level2">
+<h2>Exercise</h2>
+<p>Find the minimum, mean, and maximum number of births among rows with more than zero births.</p>
+</section>
+<section id="solution-5" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href=""></a>  <span class="fu">filter</span>(births <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">min_births =</span> <span class="fu">min</span>(births),</span>
+<span id="cb36-4"><a href=""></a>            <span class="at">mean_births =</span> <span class="fu">mean</span>(births),</span>
+<span id="cb36-5"><a href=""></a>            <span class="at">max_births =</span> <span class="fu">max</span>(births))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  min_births mean_births max_births
+       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
+1      4279.      83105.    219277.</code></pre>
+</div>
+</div>
+</section>
+<section id="summarise-functions" class="slide level2">
+<h2>Summarise Functions</h2>
+<p>Many functions can be used with summarise, including</p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ul>
+<li><code>min()</code></li>
+<li><code>max()</code></li>
+<li><code>mean()</code></li>
+<li><code>median()</code></li>
+<li><code>sum()</code></li>
+</ul>
+</div><div class="column" style="width:70%;">
+<ul>
+<li><code>first()</code>: value of first row</li>
+<li><code>last()</code>: value of last row</li>
+<li><code>n()</code>: count of rows</li>
+<li><code>n_distinct()</code>: number of distinct rows</li>
+</ul>
+</div></div>
+</section>
+<section id="group_by" class="slide level2">
+<h2><code>group_by()</code></h2>
+<p><code>group_by()</code> tells R to perform operations on the distinct groups defined inside <code>group_by()</code> until <code>ungroup()</code> is used. For example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href=""></a>  <span class="fu">filter</span>(births <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href=""></a>  <span class="fu">group_by</span>(period) <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">min_births =</span> <span class="fu">min</span>(births),</span>
+<span id="cb38-5"><a href=""></a>            <span class="at">mean_births =</span> <span class="fu">mean</span>(births),</span>
+<span id="cb38-6"><a href=""></a>            <span class="at">max_births =</span> <span class="fu">max</span>(births))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  period    min_births mean_births max_births
+  &lt;chr&gt;          &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
+1 1950-1955      5072.      69842.    131939.
+2 2005-2010      4279.      96369.    219277.</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-6" class="slide level2">
+<h2>Exercise</h2>
+<p>Calculate the crude birth rate for each period (1950-1955 and 2005-2010) across age groups by</p>
+<ol type="1">
+<li>Calculating the combined number of person-years for each age group for each period</li>
+<li>Summing person-years and births by time period</li>
+<li>Dividing births by person-years</li>
+</ol>
+</section>
+<section id="solution-6" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">person_years =</span> py.men <span class="sc">+</span> py.women) <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href=""></a>  <span class="fu">group_by</span>(period) <span class="sc">|&gt;</span></span>
+<span id="cb40-4"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">births =</span> <span class="fu">sum</span>(births),</span>
+<span id="cb40-5"><a href=""></a>            <span class="at">person_years =</span> <span class="fu">sum</span>(person_years)) <span class="sc">|&gt;</span></span>
+<span id="cb40-6"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">CBR =</span> births <span class="sc">/</span> person_years)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  period     births person_years    CBR
+  &lt;chr&gt;       &lt;dbl&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+1 1950-1955 488892.    13096959. 0.0373
+2 2005-2010 674581.    33368800. 0.0202</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-7" class="slide level2">
+<h2>Exercise</h2>
+<p>Let’s return to the penguin dataset. Calculate the minimum, mean, median, and maximum body mass of penguins by species and island. Include the number of penguins in each sample.</p>
+</section>
+<section id="solution-7" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb42-2"><a href=""></a>  <span class="fu">group_by</span>(species, island) <span class="sc">|&gt;</span></span>
+<span id="cb42-3"><a href=""></a>  <span class="fu">summarise</span>(</span>
+<span id="cb42-4"><a href=""></a>    <span class="at">min =</span> <span class="fu">min</span>(body_mass),</span>
+<span id="cb42-5"><a href=""></a>    <span class="at">mean =</span> <span class="fu">mean</span>(body_mass),</span>
+<span id="cb42-6"><a href=""></a>    <span class="at">median =</span> <span class="fu">median</span>(body_mass),</span>
+<span id="cb42-7"><a href=""></a>    <span class="at">max =</span> <span class="fu">max</span>(body_mass),</span>
+<span id="cb42-8"><a href=""></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb42-9"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 7
+# Groups:   species [3]
+  species   island      min  mean median   max     n
+  &lt;fct&gt;     &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+1 Adelie    Biscoe     2850 3710.   3750  4775    44
+2 Adelie    Dream      2900 3688.   3575  4650    56
+3 Adelie    Torgersen    NA   NA      NA    NA    52
+4 Chinstrap Dream      2700 3733.   3700  4800    68
+5 Gentoo    Biscoe       NA   NA      NA    NA   124</code></pre>
+</div>
+</div>
+</section>
+<section id="solution-cont" class="slide level2">
+<h2>Solution (cont)</h2>
+<p>Some values are <code>NA</code> because <code>NA</code>s propagate in R. In other words, if any values in a group are <code>NA</code>, then functions like <code>min()</code>, <code>max()</code>, and <code>sum()</code> will return <code>NA</code> by default. We can disable this behavior by including <code>na.rm = TRUE</code> in the functions.</p>
+</section>
+<section id="solution-cont-1" class="slide level2">
+<h2>Solution (cont)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb44-2"><a href=""></a>  <span class="fu">group_by</span>(species, island) <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href=""></a>  <span class="fu">summarise</span>(</span>
+<span id="cb44-4"><a href=""></a>    <span class="at">min =</span> <span class="fu">min</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb44-5"><a href=""></a>    <span class="at">mean =</span> <span class="fu">mean</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb44-6"><a href=""></a>    <span class="at">median =</span> <span class="fu">median</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb44-7"><a href=""></a>    <span class="at">max =</span> <span class="fu">max</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb44-8"><a href=""></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb44-9"><a href=""></a>    <span class="co"># this is an easy way to get the number of NA values in a group when using summarise()</span></span>
+<span id="cb44-10"><a href=""></a>    <span class="at">n_na =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(body_mass))</span>
+<span id="cb44-11"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 8
+# Groups:   species [3]
+  species   island      min  mean median   max     n  n_na
+  &lt;fct&gt;     &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+1 Adelie    Biscoe     2850 3710.   3750  4775    44     0
+2 Adelie    Dream      2900 3688.   3575  4650    56     0
+3 Adelie    Torgersen  2900 3706.   3700  4700    52     1
+4 Chinstrap Dream      2700 3733.   3700  4800    68     0
+5 Gentoo    Biscoe     3950 5076.   5000  6300   124     1</code></pre>
 </div>
 </div>
 
