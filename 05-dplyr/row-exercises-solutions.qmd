@@ -18,8 +18,33 @@ These exercises come from (or were adapted from) [R for Data Science](https://r4
 
 1. Was there a flight on every day in 2013?
 
+```{r}
+flights |>
+  distinct(day, month) %>%
+  count()
+```
+
+
 2. Find all flights that arrived more than two hours late but didn’t leave late.
+
+```{r}
+flights |>
+  filter(dep_delay <= 0) |>
+  filter(arr_delay >= 120)
+```
 
 3. Find all destinations that had at least one flight with a flight time of 12 hours or more.
 
-4. Find all flights in the summer (June, July, August) that arrived on time. (Hint: you can combine filters or use `%in%` to see if a value is in a vector like `value %in% c(values)`).
+```{r}
+flights |>
+  filter(air_time >= 600) |>
+  distinct(dest)
+```
+
+4. Find all flights in the summer (June, July, August) that arrived on time.
+
+```{r}
+flights |>
+  filter(month >= 6, month <= 8) |>
+  filter(arr_delay <= 0)
+```

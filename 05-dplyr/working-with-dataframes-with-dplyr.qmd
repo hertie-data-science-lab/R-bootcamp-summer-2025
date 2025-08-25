@@ -165,3 +165,7 @@ pop |>
   filter(py.men > py.women) |>
   count(period)
 ```
+
+## dplyr Row Exercises
+
+Let's take a break to work through the exercises in [row-exercises.qmd](row-exercises.qmd).
