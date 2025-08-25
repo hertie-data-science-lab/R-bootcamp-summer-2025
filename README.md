@@ -2,7 +2,7 @@
 
 Taught by [Jackson Luckey](http://www.jacksonmluckey.com) at the [Hertie School in Berlin](https://www.hertie-school.org/en/).
 
-Before the first day, please go through TODO add links to the two slides in bootcamp-overview
+Before the first day, please install [R](01-overview/bootcamp-overview.html#installing-r) and [RStudio](01-overview/bootcamp-overview.html#installing-rstudio).
 
 ## Course Sections
 
@@ -12,12 +12,9 @@ TODO consider splitting Intro to R into two sections to do some fun and easy dat
 3. [Intro to R](03-R-intro/intro-to-R.html): Introduces the basics of base R (objects, vectors, functions, and dataframes).
 4. [Intro to Data Visualization](04-intro-to-data-viz/intro-to-data-viz.html): Introduces the basics of data visualization with R using ggplot2.
 5. [Working with Dataframes with `dplyr`]()
-Vectors and Matrices in Base R
-Working with Dataframes in Base R (TODO move from section 3?)
-Pushing and Pulling with Git
-
-
-### Exercises
+6. Vectors and Matrices in Base R
+7. Working with Dataframes in Base R (TODO move from section 3?)
+8. Pushing and Pulling with Git
 
 ## Sources
 
