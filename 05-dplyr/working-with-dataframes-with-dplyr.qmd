@@ -2,3 +2,166 @@
 title: "Working with Dataframes with `dplyr`"
 format: revealjs
 ---
+
+## dplyr
+
+dplyr is a R package for working with dataframes. It's used for subsetting and manipulating data and is one of the core packages in the Tidyverse, a collection of packages used by most people in the R community. ggplot is another Tidyverse package.
+
+```{r}
+library(tidyverse)
+```
+
+## World Population Data
+
+::: {.columns}
+
+::: {.column width="50%"}
+- `country`: Abbreviated country name
+- `period`: Five year period of data collection
+- `age`: Age group
+- `births`: Number of births*
+:::
+
+::: {.column width="50%"}
+- `deaths`: Number of deaths*
+- `py.men`: Number of person-years*
+- `py.women`: Number of person-years*
+
+\* (in thousands)
+:::
+
+:::
+
+where person-year is a measure of the time contribution of each person during the period. For example, someone alive for two years during a five year period of data collection has two person-years.
+
+Source: [Quantiative Social Science: An Introduction](https://press.princeton.edu/books/paperback/9780691175461/quantitative-social-science)
+
+## Reading in a Dataframe
+
+```{r}
+pop <- read_csv("data/World.csv")
+
+pop
+```
+
+## dplyr Basics
+
+With dplyr verbs (functions)
+
+1. the first argument is always a data frame.
+2. the subsequent arguments typically describe which columns to operate on using the variable names (without quotes).
+3. the output is always a new data frame.
+
+The functions are combined with the pipe operator `|>` or `%>%`.
+
+Source: [Data Transformation in R for Data Science](https://r4ds.hadley.nz/data-transform.html#dplyr-basics)
+
+## dplyr Basics
+
+![The first argument of dplyr functions is a dataframe. dplyr functions return a dataframe. This makes them easy to chain together.](images/data_verb_input_output.png)
+
+Source: [Data Programming for the Social Sciences](https://ds4ps.org/dp4ss/)
+
+## The Pipe
+
+![dplyr functions can be chained together using the pipe operator (`|>` or `%>%`). The pipe operator passes the dataframe returned by a function into the next function.](images/chaining_data_verbs.png)
+
+Source: [Data Programming for the Social Sciences](https://ds4ps.org/dp4ss/)
+
+## `filter()`
+
+`filter()` allows us to subset rows in a dataframe. For example, if we are only interested in population data for ages 25 to 29, we can do
+
+```{r}
+pop |>
+  filter(age == "25-29")
+```
+
+## `filter()`
+
+`filter()` can have subset rows multiple ways by separating the filters with a comma. These chunks of code do the same thing
+
+::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+pop |>
+  filter(age == "25-29") |>
+  filter(period == "2005-2010")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+pop |>
+  filter(age == "25-29",
+         period == "2005-2010")
+```
+:::
+
+:::
+
+## Exercise
+
+Find the row(s) where births exceed deaths and there are more person-years for men than women.
+
+## Solution
+
+```{r}
+pop |>
+  filter(births > deaths) |>
+  filter(py.men > py.women)
+```
+
+## `arrange()`
+
+`arrange()` reorders rows based on the value of columns.
+
+```{r}
+pop |>
+  arrange(desc(births))
+```
+
+## Exercise
+
+Sort the rows where births exceed deaths and there are more person-years for men than women by deaths (descending).
+
+## Solution
+
+```{r}
+pop |>
+  filter(births > deaths) |>
+  filter(py.men > py.women) |>
+  arrange(desc(deaths))
+```
+
+## `distinct()`
+
+`distinct()` returns unique rows in the dataframe. It optionally takes column names as arguments. If supplied with column names, it returns the unique rows of the columns.
+
+```{r}
+pop |>
+  distinct(period)
+```
+
+## `count()`
+
+`count()` is like `distinct()` with named columns, but includes a column (`n`) with the number of rows in the original dataframe per unique combination.
+
+```{r}
+pop |>
+  count(period)
+```
+
+## Exercise
+
+Count the number of rows in each time period where births exceed deaths and there are more person-years for men than women.
+
+## Solution
+
+```{r}
+pop |>
+  filter(births > deaths) |>
+  filter(py.men > py.women) |>
+  count(period)
+```

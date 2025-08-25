@@ -28,6 +28,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="working-with-dataframes-with-dplyr_files/libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
   <link href="working-with-dataframes-with-dplyr_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -138,8 +204,250 @@ Jackson M Luckey
 </div>
 
 </section>
-<section class="slide level2">
+<section id="dplyr" class="slide level2">
+<h2>dplyr</h2>
+<p>dplyr is a R package for working with dataframes. It’s used for subsetting and manipulating data and is one of the core packages in the Tidyverse, a collection of packages used by most people in the R community. ggplot is another Tidyverse package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="world-population-data" class="slide level2">
+<h2>World Population Data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><code>country</code>: Abbreviated country name</li>
+<li><code>period</code>: Five year period of data collection</li>
+<li><code>age</code>: Age group</li>
+<li><code>births</code>: Number of births*</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><code>deaths</code>: Number of deaths*</li>
+<li><code>py.men</code>: Number of person-years*</li>
+<li><code>py.women</code>: Number of person-years*</li>
+</ul>
+<p>* (in thousands)</p>
+</div></div>
+<p>where person-year is a measure of the time contribution of each person during the period. For example, someone alive for two years during a five year period of data collection has two person-years.</p>
+<p>Source: <a href="https://press.princeton.edu/books/paperback/9780691175461/quantitative-social-science">Quantiative Social Science: An Introduction</a></p>
+</section>
+<section id="reading-in-a-dataframe" class="slide level2">
+<h2>Reading in a Dataframe</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>pop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/World.csv"</span>)</span>
+<span id="cb2-2"><a href=""></a></span>
+<span id="cb2-3"><a href=""></a>pop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 7
+   country period    age    births  deaths  py.men py.women
+   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+ 1 WORLD   1950-1955 0-4        0  101090. 946911.  904909.
+ 2 WORLD   1950-1955 5-9        0    7961. 726903.  694575.
+ 3 WORLD   1950-1955 10-14      0    5550. 666795.  635492.
+ 4 WORLD   1950-1955 15-19  54238.   5831. 626191.  600678.
+ 5 WORLD   1950-1955 20-24 131939.   6649. 573518.  555221.
+ 6 WORLD   1950-1955 25-29 128063.   6425. 508500.  507277.
+ 7 WORLD   1950-1955 30-34  89247.   6209. 433338.  437132.
+ 8 WORLD   1950-1955 35-39  56006.   6877. 400279.  405528.
+ 9 WORLD   1950-1955 40-44  24327.   7995. 373771.  382444.
+10 WORLD   1950-1955 45-49   5072.   8886. 326278.  333889.
+# ℹ 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="dplyr-basics" class="slide level2">
+<h2>dplyr Basics</h2>
+<p>With dplyr verbs (functions)</p>
+<ol type="1">
+<li>the first argument is always a data frame.</li>
+<li>the subsequent arguments typically describe which columns to operate on using the variable names (without quotes).</li>
+<li>the output is always a new data frame.</li>
+</ol>
+<p>The functions are combined with the pipe operator <code>|&gt;</code> or <code>%&gt;%</code>.</p>
+<p>Source: <a href="https://r4ds.hadley.nz/data-transform.html#dplyr-basics">Data Transformation in R for Data Science</a></p>
+</section>
+<section id="dplyr-basics-1" class="slide level2">
+<h2>dplyr Basics</h2>
 
+<img data-src="images/data_verb_input_output.png" class="r-stretch quarto-figure-center"><p class="caption">The first argument of dplyr functions is a dataframe. dplyr functions return a dataframe. This makes them easy to chain together.</p><p>Source: <a href="https://ds4ps.org/dp4ss/">Data Programming for the Social Sciences</a></p>
+</section>
+<section id="the-pipe" class="slide level2">
+<h2>The Pipe</h2>
+
+<img data-src="images/chaining_data_verbs.png" class="r-stretch quarto-figure-center"><p class="caption">dplyr functions can be chained together using the pipe operator (<code>|&gt;</code> or <code>%&gt;%</code>). The pipe operator passes the dataframe returned by a function into the next function.</p><p>Source: <a href="https://ds4ps.org/dp4ss/">Data Programming for the Social Sciences</a></p>
+</section>
+<section id="filter" class="slide level2">
+<h2><code>filter()</code></h2>
+<p><code>filter()</code> allows us to subset rows in a dataframe. For example, if we are only interested in population data for ages 25 to 29, we can do</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href=""></a>  <span class="fu">filter</span>(age <span class="sc">==</span> <span class="st">"25-29"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 7
+  country period    age    births deaths   py.men py.women
+  &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 WORLD   1950-1955 25-29 128063.  6425.  508500.  507277.
+2 WORLD   2005-2010 25-29 190319.  5997. 1337034. 1294853.</code></pre>
+</div>
+</div>
+</section>
+<section id="filter-1" class="slide level2">
+<h2><code>filter()</code></h2>
+<p><code>filter()</code> can have subset rows multiple ways by separating the filters with a comma. These chunks of code do the same thing</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href=""></a>  <span class="fu">filter</span>(age <span class="sc">==</span> <span class="st">"25-29"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href=""></a>  <span class="fu">filter</span>(period <span class="sc">==</span> <span class="st">"2005-2010"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  country period    age    births deaths   py.men py.women
+  &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 WORLD   2005-2010 25-29 190319.  5997. 1337034. 1294853.</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href=""></a>  <span class="fu">filter</span>(age <span class="sc">==</span> <span class="st">"25-29"</span>,</span>
+<span id="cb8-3"><a href=""></a>         period <span class="sc">==</span> <span class="st">"2005-2010"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  country period    age    births deaths   py.men py.women
+  &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 WORLD   2005-2010 25-29 190319.  5997. 1337034. 1294853.</code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="exercise" class="slide level2">
+<h2>Exercise</h2>
+<p>Find the row(s) where births exceed deaths and there are more person-years for men than women.</p>
+</section>
+<section id="solution" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href=""></a>  <span class="fu">filter</span>(births <span class="sc">&gt;</span> deaths) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href=""></a>  <span class="fu">filter</span>(py.men <span class="sc">&gt;</span> py.women)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 7
+  country period    age    births deaths   py.men py.women
+  &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 WORLD   1950-1955 15-19  54238.  5831.  626191.  600678.
+2 WORLD   1950-1955 20-24 131939.  6649.  573518.  555221.
+3 WORLD   1950-1955 25-29 128063.  6425.  508500.  507277.
+4 WORLD   2005-2010 15-19  73195.  4043. 1593938. 1509489.
+5 WORLD   2005-2010 20-24 219277.  5399. 1503388. 1442885.
+6 WORLD   2005-2010 25-29 190319.  5997. 1337034. 1294853.
+7 WORLD   2005-2010 30-34 114931.  6519. 1259434. 1225102.
+8 WORLD   2005-2010 35-39  54976.  7238. 1210084. 1177473.
+9 WORLD   2005-2010 40-44  17605.  8213. 1105937. 1082103.</code></pre>
+</div>
+</div>
+</section>
+<section id="arrange" class="slide level2">
+<h2><code>arrange()</code></h2>
+<p><code>arrange()</code> reorders rows based on the value of columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(births))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 7
+   country period    age    births deaths   py.men py.women
+   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 WORLD   2005-2010 20-24 219277.  5399. 1503388. 1442885.
+ 2 WORLD   2005-2010 25-29 190319.  5997. 1337034. 1294853.
+ 3 WORLD   1950-1955 20-24 131939.  6649.  573518.  555221.
+ 4 WORLD   1950-1955 25-29 128063.  6425.  508500.  507277.
+ 5 WORLD   2005-2010 30-34 114931.  6519. 1259434. 1225102.
+ 6 WORLD   1950-1955 30-34  89247.  6209.  433338.  437132.
+ 7 WORLD   2005-2010 15-19  73195.  4043. 1593938. 1509489.
+ 8 WORLD   1950-1955 35-39  56006.  6877.  400279.  405528.
+ 9 WORLD   2005-2010 35-39  54976.  7238. 1210084. 1177473.
+10 WORLD   1950-1955 15-19  54238.  5831.  626191.  600678.
+# ℹ 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise</h2>
+<p>Sort the rows where births exceed deaths and there are more person-years for men than women by deaths (descending).</p>
+</section>
+<section id="solution-1" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href=""></a>  <span class="fu">filter</span>(births <span class="sc">&gt;</span> deaths) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href=""></a>  <span class="fu">filter</span>(py.men <span class="sc">&gt;</span> py.women) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(deaths))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 7
+  country period    age    births deaths   py.men py.women
+  &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 WORLD   2005-2010 40-44  17605.  8213. 1105937. 1082103.
+2 WORLD   2005-2010 35-39  54976.  7238. 1210084. 1177473.
+3 WORLD   1950-1955 20-24 131939.  6649.  573518.  555221.
+4 WORLD   2005-2010 30-34 114931.  6519. 1259434. 1225102.
+5 WORLD   1950-1955 25-29 128063.  6425.  508500.  507277.
+6 WORLD   2005-2010 25-29 190319.  5997. 1337034. 1294853.
+7 WORLD   1950-1955 15-19  54238.  5831.  626191.  600678.
+8 WORLD   2005-2010 20-24 219277.  5399. 1503388. 1442885.
+9 WORLD   2005-2010 15-19  73195.  4043. 1593938. 1509489.</code></pre>
+</div>
+</div>
+</section>
+<section id="distinct" class="slide level2">
+<h2><code>distinct()</code></h2>
+<p><code>distinct()</code> returns unique rows in the dataframe. It optionally takes column names as arguments. If supplied with column names, it returns the unique rows of the columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href=""></a>  <span class="fu">distinct</span>(period)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 1
+  period   
+  &lt;chr&gt;    
+1 1950-1955
+2 2005-2010</code></pre>
+</div>
+</div>
+</section>
+<section id="count" class="slide level2">
+<h2><code>count()</code></h2>
+<p><code>count()</code> is like <code>distinct()</code> with named columns, but includes a column (<code>n</code>) with the number of rows in the original dataframe per unique combination.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href=""></a>  <span class="fu">count</span>(period)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  period        n
+  &lt;chr&gt;     &lt;int&gt;
+1 1950-1955    15
+2 2005-2010    15</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise</h2>
+<p>Count the number of rows in each time period where births exceed deaths and there are more person-years for men than women.</p>
+</section>
+<section id="solution-2" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>pop <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href=""></a>  <span class="fu">filter</span>(births <span class="sc">&gt;</span> deaths) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href=""></a>  <span class="fu">filter</span>(py.men <span class="sc">&gt;</span> py.women) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href=""></a>  <span class="fu">count</span>(period)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  period        n
+  &lt;chr&gt;     &lt;int&gt;
+1 1950-1955     3
+2 2005-2010     6</code></pre>
+</div>
+</div>
 
 </section>
     </div>
@@ -357,6 +665,44 @@ Jackson M Luckey
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
