@@ -1,6 +1,6 @@
 # Hertie School's 2025 Summer R and Math Bootcamp
 
-Taught by [Jackson Luckey](http://www.jacksonmluckey.com) at the [Hertie School in Berlin](https://www.hertie-school.org/en/).
+Taught by [Jackson Luckey](http://www.jacksonmluckey.com) at the [Hertie School in Berlin](https://www.hertie-school.org/en/) in summer 2025.
 
 Before the first day, please install [R](01-overview/bootcamp-overview.html#installing-r) and [RStudio](01-overview/bootcamp-overview.html#installing-rstudio).
 
@@ -21,6 +21,7 @@ This course borrows liberally from Simon Munzert's [Introduction to Data Science
 
 I also took inspiration, examples, and exercises from:
 
+- [R Intro in the R Manual](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
 - [R for Data Science](https://r4ds.hadley.nz/)
 - [Quantiative Social Science: An Introduction](https://press.princeton.edu/books/paperback/9780691175461/quantitative-social-science)
 - [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science)
