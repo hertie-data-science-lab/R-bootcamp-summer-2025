@@ -104,8 +104,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="nyc-flights-in-2013" class="level2">
-<h2 class="anchored" data-anchor-id="nyc-flights-in-2013">NYC Flights in 2013</h2>
+<section id="nyc-flights-in-2013" class="level1">
+<h1>NYC Flights in 2013</h1>
 <p>For these exercises, we will use the dataframe <code>flights</code> from the <code>nycflights13</code> package, which has one row per flight that departed from New York City in 2013 (336776 rows).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -125,17 +125,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"nycflights13"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> flights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> flights</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>flights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      542            540         2      923            850
+ 4  2013     1     1      544            545        -1     1004           1022
+ 5  2013     1     1      554            600        -6      812            837
+ 6  2013     1     1      554            558        -4      740            728
+ 7  2013     1     1      555            600        -5      913            854
+ 8  2013     1     1      557            600        -3      709            723
+ 9  2013     1     1      557            600        -3      838            846
+10  2013     1     1      558            600        -2      753            745
+# ℹ 336,766 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
-<p>These exercises come from (or were adapted from) <a href="https://r4ds.hadley.nz/data-transform.html#exercises">R for Data Science</a>.</p>
-<p>Hint: Exercises 1 through 4 can be solved with <code>filter()</code>, <code>distinct()</code>, and <code>count()</code> from <code>dplyr</code>.</p>
+</div>
+<p>Exercises 1 through 4 come from (or were adapted from) <a href="https://r4ds.hadley.nz/data-transform.html#exercises">R for Data Science</a>. Hint: these exercises can be solved with <code>filter()</code>, <code>distinct()</code>, and <code>count()</code>.</p>
 <ol type="1">
 <li>Was there a flight on every day in 2013?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(day, month) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(day, month) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
       n
@@ -147,9 +167,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Find all flights that arrived more than two hours late but didn’t leave late.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dep_delay <span class="sc">&lt;=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(arr_delay <span class="sc">&gt;=</span> <span class="dv">120</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dep_delay <span class="sc">&lt;=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(arr_delay <span class="sc">&gt;=</span> <span class="dv">120</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 29 × 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -174,9 +194,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Find all destinations that had at least one flight with a flight time of 12 hours or more.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(air_time <span class="sc">&gt;=</span> <span class="dv">600</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(dest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(air_time <span class="sc">&gt;=</span> <span class="dv">600</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(dest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   dest 
@@ -188,9 +208,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Find all flights in the summer (June, July, August) that arrived on time.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">&gt;=</span> <span class="dv">6</span>, month <span class="sc">&lt;=</span> <span class="dv">8</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(arr_delay <span class="sc">&lt;=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">&gt;=</span> <span class="dv">6</span>, month <span class="sc">&lt;=</span> <span class="dv">8</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(arr_delay <span class="sc">&lt;=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 46,701 × 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -209,6 +229,293 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p>The remainder of the exercises were written by Jackson Luckey and will also use <code>group_by()</code>, <code>summarise()</code>, and <code>mutate()</code>.</p>
+<ol start="5" type="1">
+<li>How many destinations does each airport in NYC serve?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_destinations =</span> <span class="fu">n_distinct</span>(dest))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  origin n_destinations
+  &lt;chr&gt;           &lt;int&gt;
+1 EWR                86
+2 JFK                70
+3 LGA                68</code></pre>
+</div>
+</div>
+<ol start="6" type="1">
+<li>How many flights departed each airport in 2013? Does this follow the same pattern as the number of destinations?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_destinations =</span> <span class="fu">n_distinct</span>(dest),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights =</span> <span class="fu">n</span>()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_flights_per_destination =</span> n_flights <span class="sc">/</span> n_destinations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  origin n_destinations n_flights n_flights_per_destination
+  &lt;chr&gt;           &lt;int&gt;     &lt;int&gt;                     &lt;dbl&gt;
+1 EWR                86    120835                     1405.
+2 JFK                70    111279                     1590.
+3 LGA                68    104662                     1539.</code></pre>
+</div>
+</div>
+<ol start="7" type="1">
+<li>How about carriers?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_destinations =</span> <span class="fu">n_distinct</span>(dest),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_carriers =</span> <span class="fu">n_distinct</span>(carrier),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights =</span> <span class="fu">n</span>()</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights_per_destination =</span> n_flights <span class="sc">/</span> n_destinations,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights_per_carrier =</span> n_flights <span class="sc">/</span> n_carriers</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 6
+  origin n_destinations n_carriers n_flights n_flights_per_destination
+  &lt;chr&gt;           &lt;int&gt;      &lt;int&gt;     &lt;int&gt;                     &lt;dbl&gt;
+1 EWR                86         12    120835                     1405.
+2 JFK                70         10    111279                     1590.
+3 LGA                68         13    104662                     1539.
+# ℹ 1 more variable: n_flights_per_carrier &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>For the rest of the exercises, imagine that you are an analyst at ann organization tasked with assessing the performance of New York City’s three airports and the carriers operating out of them as part of an effort to reduce departure delays.</p>
+<ol start="8" type="1">
+<li>Create a new variable, <code>delayed_departure</code>, that is <code>TRUE</code> when a flight has a delayed departure. What proportion of flights have delayed departures?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delayed_departure =</span> dep_delay <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(delayed_departure) <span class="sc">|&gt;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  delayed_departure      n   prop
+  &lt;lgl&gt;              &lt;int&gt;  &lt;dbl&gt;
+1 FALSE             200089 0.594 
+2 TRUE              128432 0.381 
+3 NA                  8255 0.0245</code></pre>
+</div>
+</div>
+<p>Note: <code>dep_delay</code> is missing for ~2.5% of flights, which is the source of <code>NA</code>. Recall that <code>NA</code>s propagate in R. In other words, if any values in a group are <code>NA</code>, then functions like <code>min()</code>, <code>max()</code>, and <code>sum()</code> will return <code>NA</code> by default. We can disable this behavior by including <code>na.rm = TRUE</code> in the functions like <code>min(column, na.rm = TRUE)</code>. We’ll ignore this for now and use <code>na.rm = TRUE</code> as needed.</p>
+<ol start="9" type="1">
+<li>Calculate the proportion of flights with delayed departures by origin airport and by carrier. You’re producing two separate tables.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_delayed =</span> <span class="fu">mean</span>(delayed_departure, <span class="at">na.rm  =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(prop_delayed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  origin prop_delayed
+  &lt;chr&gt;         &lt;dbl&gt;
+1 EWR           0.448
+2 JFK           0.384
+3 LGA           0.332</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_delayed =</span> <span class="fu">mean</span>(delayed_departure, <span class="at">na.rm  =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(prop_delayed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 2
+   carrier prop_delayed
+   &lt;chr&gt;          &lt;dbl&gt;
+ 1 WN             0.543
+ 2 FL             0.519
+ 3 F9             0.5  
+ 4 UA             0.470
+ 5 EV             0.451
+ 6 VX             0.434
+ 7 YV             0.428
+ 8 9E             0.406
+ 9 B6             0.396
+10 MQ             0.319
+11 DL             0.319
+12 AS             0.317
+13 AA             0.317
+14 OO             0.310
+15 US             0.240
+16 HA             0.202</code></pre>
+</div>
+</div>
+<p>You notice that the departure delay rate varies signficantly by origin, destination, and carrier. With just this information, however, it is hard to identify the route of the problem. NYC’s three airports could have different departure delay rates through no fault of their own because the carriers operating out of them differ. Likewise, the departure delay rates of the carriers might differ because of differences between the airports they operate in. To address this, you decide to analyze the airports and carriers conjointly.</p>
+<ol start="10" type="1">
+<li>Create a new dataframe with one row per origin airport per carrier that counts the number of flights and the departure delay rate. I named it <code>origin_carrier</code>, but feel free to use a different name.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>origin_carrier <span class="ot">&lt;-</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin, carrier) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights =</span> <span class="fu">n</span>(),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_delayed =</span> <span class="fu">mean</span>(delayed_departure, <span class="at">na.rm  =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(prop_delayed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'origin'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>origin_carrier</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 4
+# Groups:   origin [3]
+   origin carrier n_flights prop_delayed
+   &lt;chr&gt;  &lt;chr&gt;       &lt;int&gt;        &lt;dbl&gt;
+ 1 LGA    WN           6087        0.545
+ 2 EWR    WN           6188        0.540
+ 3 LGA    FL           3260        0.519
+ 4 EWR    OO              6        0.5  
+ 5 LGA    F9            685        0.5  
+ 6 EWR    UA          46087        0.498
+ 7 JFK    VX           3596        0.470
+ 8 EWR    EV          43939        0.462
+ 9 JFK    9E          14651        0.439
+10 LGA    YV            601        0.428
+# ℹ 25 more rows</code></pre>
+</div>
+</div>
+<p>You want to compare the departure delay rate in <code>origin_carrier</code> to the airport departure delay rate and the carrier departure delay rate. While you’ll learn another way to do this in the Intro to Data Science course (joins), this can be accomplished by combining <code>group_by()</code> and <code>mutate()</code>. When combined with <code>group_by()</code>, <code>mutate()</code> performs operations on groups rather than rows. In other words, it functions similarily to <code>summarise()</code> but does not reduce the number of rows. For example, we can add a column with the total number of flights per origin airport with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>origin_carrier <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">origin_flights =</span> <span class="fu">sum</span>(n_flights))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 5
+# Groups:   origin [3]
+   origin carrier n_flights prop_delayed origin_flights
+   &lt;chr&gt;  &lt;chr&gt;       &lt;int&gt;        &lt;dbl&gt;          &lt;int&gt;
+ 1 LGA    WN           6087        0.545         104662
+ 2 EWR    WN           6188        0.540         120835
+ 3 LGA    FL           3260        0.519         104662
+ 4 EWR    OO              6        0.5           120835
+ 5 LGA    F9            685        0.5           104662
+ 6 EWR    UA          46087        0.498         120835
+ 7 JFK    VX           3596        0.470         111279
+ 8 EWR    EV          43939        0.462         120835
+ 9 JFK    9E          14651        0.439         111279
+10 LGA    YV            601        0.428         104662
+# ℹ 25 more rows</code></pre>
+</div>
+</div>
+<p>A fundamental skill in data analysis is identifying the correct unit of analysis. In <code>flights</code>, each row is a flight departing from one of New York City’s three airports. Therefore, <code>n_flights</code> in exercises 6 and 7 identifies the total number of flights that departed. Likewise, the <code>prop_delayed</code> calculations in exercises 9 and 10 use the number of flights that departed as the denominator. We want to calculate the airport and carrier departure delay rates the same way. In <code>origin_carrier</code>, each row is an airport-carrier pair. If we calculated it using <code>mean(prop_delayed)</code> on <code>origin_carrier</code> as is, we would be count origin-carrier pairs with tens of thousands of flights as equivalent to those with only a small number of flights. Compare</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>origin_carrier <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_delayed =</span> <span class="fu">mean</span>(prop_delayed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  origin prop_delayed
+  &lt;chr&gt;         &lt;dbl&gt;
+1 EWR           0.371
+2 JFK           0.361
+3 LGA           0.372</code></pre>
+</div>
+</div>
+<p>to</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_delayed =</span> <span class="fu">mean</span>(delayed_departure, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  origin prop_delayed
+  &lt;chr&gt;         &lt;dbl&gt;
+1 EWR           0.448
+2 JFK           0.384
+3 LGA           0.332</code></pre>
+</div>
+</div>
+<p>You can address this by either using <code>n_flights</code> as a weight (<code>sum(n_flights * prop_delayed) / sum(n_flights)</code>) or calculating the origin and airport departure delay rates before using <code>summarise()</code>.</p>
+<ol start="11" type="1">
+<li>Modify <code>origin_carrier</code> to include the airport departure delay rates and the carrier departure delay rates.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># weighting</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>origin_carrier <span class="ot">&lt;-</span> origin_carrier <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">origin_prop_delayed =</span> <span class="fu">sum</span>(n_flights <span class="sc">*</span> prop_delayed) <span class="sc">/</span> <span class="fu">sum</span>(n_flights)) <span class="sc">|&gt;</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">carrier_prop_delayed =</span> <span class="fu">sum</span>(n_flights <span class="sc">*</span> prop_delayed) <span class="sc">/</span> <span class="fu">sum</span>(n_flights))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From scratch</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>origin_carrier <span class="ot">&lt;-</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">origin_prop_delayed =</span> <span class="fu">mean</span>(delayed_departure, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">carrier_prop_delayed =</span> <span class="fu">mean</span>(delayed_departure, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Need to include origin_prop_delayed and carrier_prop_delayed so they persist after summarise()</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin, carrier, origin_prop_delayed, carrier_prop_delayed) <span class="sc">|&gt;</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights =</span> <span class="fu">n</span>(),</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_delayed =</span> <span class="fu">mean</span>(delayed_departure, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'origin', 'carrier', 'origin_prop_delayed'.
+You can override using the `.groups` argument.</code></pre>
+</div>
+</div>
+<ol start="12" type="1">
+<li>What origin-carrier pairs outperform the baseline for both the origin and carrier (i.e.&nbsp;have a lower delay rate than the origin and carrier delay rates)? What origin-carrier pairs underperform?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>origin_carrier <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(prop_delayed <span class="sc">&lt;</span> origin_prop_delayed, prop_delayed <span class="sc">&lt;</span> carrier_prop_delayed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13 × 6
+# Groups:   origin, carrier, origin_prop_delayed [13]
+   origin carrier origin_prop_delayed carrier_prop_delayed n_flights
+   &lt;chr&gt;  &lt;chr&gt;                 &lt;dbl&gt;                &lt;dbl&gt;     &lt;int&gt;
+ 1 EWR    9E                    0.448                0.406      1268
+ 2 EWR    AA                    0.448                0.317      3487
+ 3 EWR    B6                    0.448                0.396      6557
+ 4 EWR    DL                    0.448                0.319      4342
+ 5 EWR    US                    0.448                0.240      4405
+ 6 EWR    VX                    0.448                0.434      1566
+ 7 JFK    UA                    0.384                0.470      4534
+ 8 LGA    9E                    0.332                0.406      2541
+ 9 LGA    AA                    0.332                0.317     15459
+10 LGA    DL                    0.332                0.319     23067
+11 LGA    MQ                    0.332                0.319     16928
+12 LGA    OO                    0.332                0.310        26
+13 LGA    US                    0.332                0.240     13136
+# ℹ 1 more variable: prop_delayed &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>origin_carrier <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(prop_delayed <span class="sc">&gt;</span> origin_prop_delayed, prop_delayed <span class="sc">&gt;</span> carrier_prop_delayed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 6
+# Groups:   origin, carrier, origin_prop_delayed [7]
+  origin carrier origin_prop_delayed carrier_prop_delayed n_flights prop_delayed
+  &lt;chr&gt;  &lt;chr&gt;                 &lt;dbl&gt;                &lt;dbl&gt;     &lt;int&gt;        &lt;dbl&gt;
+1 EWR    EV                    0.448                0.451     43939        0.462
+2 EWR    OO                    0.448                0.310         6        0.5  
+3 EWR    UA                    0.448                0.470     46087        0.498
+4 JFK    9E                    0.384                0.406     14651        0.439
+5 JFK    B6                    0.384                0.396     42076        0.404
+6 JFK    VX                    0.384                0.434      3596        0.470
+7 LGA    WN                    0.332                0.543      6087        0.545</code></pre>
 </div>
 </div>
 </section>

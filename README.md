@@ -17,7 +17,7 @@ Before the first day, please install [R](01-overview/bootcamp-overview.html#inst
 
 ## Exercises
 
-### For [Intro to Data Visualization](04-intro-to-data-viz/intro-to-data-viz.html) and [Working with Dataframes with `dplyr`](05-dplyr/working-with-dataframes-with-dplyr.html)
+The prerequisites (unless stated otherwise) are the [Intro to Data Visualization](04-intro-to-data-viz/intro-to-data-viz.html) and [Working with Dataframes with `dplyr`](05-dplyr/working-with-dataframes-with-dplyr.html) slides.
 
 - [`dplyr` and `ggplot` with NYC Flights](Exercises/nyc-flights/nyc-flights.qmd): Practice using `dplyr` and `ggplot2` with a dataset of all flights departing NYC in 2013.
 - [Leader Assassination as a Natural Experiment](Exercises/leader-assassination/leader-assassination.qmd): Practice using `dplyr` and `ggplot2` to investigate the effects of leader assassinations on democracy and war. Adapted from [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science).
