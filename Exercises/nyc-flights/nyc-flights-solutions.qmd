@@ -1,4 +1,4 @@
-## NYC Flights in 2013
+# NYC Flights in 2013
 
 For these exercises, we will use the dataframe `flights` from the `nycflights13` package, which has one row per flight that departed from New York City in 2013 (336776 rows).
 
@@ -10,11 +10,12 @@ if (!("nycflights13" %in% installed.packages())) {
 }
 library(nycflights13)
 flights <- flights
+
+flights
 ```
 
-These exercises come from (or were adapted from) [R for Data Science](https://r4ds.hadley.nz/data-transform.html#exercises).
 
-Hint: Exercises 1 through 4 can be solved with `filter()`, `distinct()`, and `count()` from `dplyr`.
+Exercises 1 through 4 come from (or were adapted from) [R for Data Science](https://r4ds.hadley.nz/data-transform.html#exercises). Hint: these exercises can be solved with `filter()`, `distinct()`, and `count()`.
 
 1. Was there a flight on every day in 2013?
 
@@ -47,4 +48,111 @@ flights |>
 flights |>
   filter(month >= 6, month <= 8) |>
   filter(arr_delay <= 0)
+```
+
+The remainder of the exercises were written by Jackson Luckey. They will use `mutate()`, `group_by()`, `summarise()`, and plotting with ggplot.
+
+5. How many destinations does each airport in NYC serve?
+
+```{r}
+flights |>
+  group_by(origin) |>
+  summarise(n_destinations = n_distinct(dest))
+```
+
+6. How many flights departed each airport in 2013? Does this follow the same pattern as the number of destinations?
+
+```{r}
+flights |>
+  group_by(origin) |>
+  summarise(
+    n_destinations = n_distinct(dest),
+    n_flights = n()
+  ) |>
+  mutate(n_flights_per_destination = n_flights / n_destinations)
+```
+
+7. How about carriers?
+
+```{r}
+flights |>
+  group_by(origin) |>
+  summarise(
+    n_destinations = n_distinct(dest),
+    n_carriers = n_distinct(carrier),
+    n_flights = n()
+  ) |>
+  mutate(
+    n_flights_per_destination = n_flights / n_destinations,
+    n_flights_per_carrier = n_flights / n_carriers
+  )
+```
+
+8. Create a new dataframe (in the solutions I call it `origin_carrier_dest` but feel free to use a different name--mine is not very good) that counts the number of flights and the mean departure delay, arrival delay, and air time per origin airport per carrier per destination airport. If your new dataframe has `NA`s, recall that `NA`s propagate in R. In other words, if any values in a group are `NA`, then functions like `min()`, `max()`, and `sum()` will return `NA` by default. We can disable this behavior by including `na.rm = TRUE` in the functions like `min(column, na.rm = TRUE)`.
+
+```{r}
+origin_carrier_dest <- flights |>
+  group_by(origin, carrier, dest) |>
+  summarise(
+    n_flights = n(),
+    dep_delay = mean(dep_delay, na.rm = TRUE),
+    arr_delay = mean(arr_delay, na.rm = TRUE),
+    air_time = mean(air_time, na.rm = TRUE)
+  ) |>
+  ungroup()
+
+origin_carrier_dest
+```
+
+The new dataframe (`origin_carrier_dest`) has one row per origin airport per carrier per destination airport instead of one row per flight. This probably sounds obvious, but one of the most important things to keep in mind when doing data analysis is what a row in your data represents and how that relates to the question(s) that you are trying to answer.
+
+For example, let's say that we're interested in the average flight time between origin and destination airports among flights departing NYC in 2013.
+
+```{r}
+origin_carrier_dest |>
+  group_by(origin, dest) |>
+  summarise(
+    unweighted = mean(air_time)
+  )
+```
+
+```{r}
+ggplot(origin_carrier_dest, aes(x = air_time, y = dep_delay, size = n_flights)) +
+  geom_point(alpha = 0.1)
+```
+
+
+Create a new dataframe with one row per destination per carrier per origin airport. This dataframe should identify the number of flights and the mean, minimum, median, and maximum departure delay, arrival delay, and air time.
+
+```{r}
+flights |>
+  group_by(origin, carrier, dest) |>
+  summarise(
+    n_flights = n(),
+    across(
+      c(dep_delay, arr_delay, air_time),
+      list(
+        mean = \(col) mean(col, na.rm = TRUE),
+        min = \(col) min(col, na.rm = TRUE),
+        median = \(col) median(col, na.rm = TRUE),
+        max = \(col) max(col, na.rm = TRUE))
+    )
+  )
+```
+
+
+The `flights` dataframe has one row per departure flight, which is what we counted in exercise 6.
+
+```{r}
+flights |>
+  distinct(origin, dest, flight) |>
+  count(flight)
+```
+
+TODO this would be a good place for a live coding exercise because of all the potential gotchas (overnight flights)
+Create a new variable, `sched_air_time`, that calculates the number of minutes between `sched_dep_time` and `sched_arr_time`.
+
+```{r}
+flights |>
+  mutate(sched_arr_time - sched_dep_time)
 ```
