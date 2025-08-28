@@ -1,36 +1,8 @@
----
-title: dplyr Row Exercises
----
-
-```{r}
-library(tidyverse)
-```
-
-## Row Level Exercises (`filter()`, `distinct()`, and `count()`)
-
-```{r}
-if (!("nycflights13" %in% installed.packages())) {
-  install.packages("nycflights13")
-}
-library(nycflights13)
-flights <- flights
-```
-
-For these exercises, we will use the dataframe `flights` from the `nycflights13` package, which has one row per flight that departed from New York City in 2013 (336776 rows).
-
-These exercises come from (or were adapted from) [R for Data Science](https://r4ds.hadley.nz/data-transform.html#exercises).
-
-1. Was there a flight on every day in 2013?
-
-2. Find all flights that arrived more than two hours late but didn’t leave late.
-
-3. Find all destinations that had at least one flight with a flight time of 12 hours or more.
-
-4. Find all flights in the summer (June, July, August) that arrived on time. (Hint: you can combine filters or use `%in%` to see if a value is in a vector like `value %in% c(values)`).
-
 ## Success of Leader Assassination as a Natural Experiment
 
 ```{r}
+library(tidyverse)
+
 leaders <- read_csv("data/leaders.csv")
 
 leaders

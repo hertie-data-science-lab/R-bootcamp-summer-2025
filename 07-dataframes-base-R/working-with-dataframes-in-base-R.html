@@ -204,9 +204,13 @@ Jackson M Luckey
 </div>
 
 </section>
+<section id="dataframes-with-base" class="slide level2">
+<h2>Dataframes with Base</h2>
+<p>While you’ll work with dataframes with <a href="../05-dplyr/working-with-dataframes-with-dplyr.html"><code>dplyr</code></a> throughout Intro to Data Science, it’s also possible to work with them using only base R.</p>
+</section>
 <section id="dataframe-columns-as-vectors" class="slide level2">
 <h2>Dataframe Columns as Vectors</h2>
-<p>Dataframe columns can be accessed as vectors using <code>[[]]</code>, <code>$</code>, or <code>[,]</code> (the leading comma tells R you are selecting columns and not rows–dataframes use <code>[row,column]</code>).</p>
+<p>Dataframe columns can be accessed as vectors using <code>[[]]</code>, <code>$</code>, or <code>[,]</code> (the leading comma tells R you are selecting columns and not rows–dataframes use <code>[row,column]</code> like matrices).</p>
 <p>With <code>[[]]</code> and <code>[,]</code>, you need to quote the column name. You do not need to with <code>$</code>, although you can.</p>
 </section>
 <section id="dataframe-columns-as-vectors-1" class="slide level2">
@@ -226,6 +230,7 @@ Jackson M Luckey
 </section>
 <section id="exercises" class="slide level2">
 <h2>Exercises</h2>
+<p>Without using <code>dplyr</code> (e.g.&nbsp;<code>summarise()</code>),</p>
 <ol type="1">
 <li>How many islands are represented in the dataset?</li>
 <li>What are the earliest and latest years represented in the dataset?</li>

@@ -4,16 +4,23 @@ Taught by [Jackson Luckey](http://www.jacksonmluckey.com) at the [Hertie School 
 
 Before the first day, please install [R](01-overview/bootcamp-overview.html#installing-r) and [RStudio](01-overview/bootcamp-overview.html#installing-rstudio).
 
-## Course Sections
+## Slides
 
 1. [Overview](01-overview/bootcamp-overview.html): Overview of what we will cover during the bootcamp.
 2. [Git](02-git/git-intro.html): Introduces Git to get everyone to the point that they can use this repo throughout the bootcamp.
 3. [Intro to R](03-R-intro/intro-to-R.html): Introduces the basics of base R (objects, vectors, functions, and dataframes).
 4. [Intro to Data Visualization](04-intro-to-data-viz/intro-to-data-viz.html): Introduces the basics of data visualization with R using ggplot2.
-5. [Working with Dataframes with `dplyr`](05-dplyr/working-with-dataframes-with-dplyr.html): 
+5. [Working with Dataframes with `dplyr`](05-dplyr/working-with-dataframes-with-dplyr.html): Covers the main `dplyr` verbs (functions) such as `filter()`, `select()`, `mutate()`, `summarize()`, and `group_by()`.
 6. [Vectors and Matrices](06-vectors-matrices/vectors-and-matrices.html)
 7. [Working with Dataframes in Base R](07-dataframes-base-R/working-with-dataframes-in-base-R.html):
 8. [Pushing and Pulling with Git](08-git-push-pull/pushing-and-pulling-git.html)
+
+## Exercises
+
+### For [Intro to Data Visualization](04-intro-to-data-viz/intro-to-data-viz.html) and [Working with Dataframes with `dplyr`](05-dplyr/working-with-dataframes-with-dplyr.html)
+
+- [`dplyr` and `ggplot` with NYC Flights](Exercises/nyc-flights/nyc-flights.qmd): Practice using `dplyr` and `ggplot2` with a dataset of all flights departing NYC in 2013.
+- [Leader Assassination as a Natural Experiment](Exercises/leader-assassination/leader-assassination.qmd): Practice using `dplyr` and `ggplot2` to investigate the effects of leader assassinations on democracy and war. Adapted from [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science).
 
 ## Sources
 

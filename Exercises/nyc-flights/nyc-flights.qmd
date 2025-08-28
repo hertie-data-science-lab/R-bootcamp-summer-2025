@@ -1,0 +1,25 @@
+## NYC Flights in 2013
+
+For these exercises, we will use the dataframe `flights` from the `nycflights13` package, which has one row per flight that departed from New York City in 2013 (336776 rows).
+
+```{r}
+library(tidyverse)
+
+if (!("nycflights13" %in% installed.packages())) {
+  install.packages("nycflights13")
+}
+library(nycflights13)
+flights <- flights
+```
+
+These exercises come from (or were adapted from) [R for Data Science](https://r4ds.hadley.nz/data-transform.html#exercises).
+
+Hint: Exercises 1 through 4 can be solved with `filter()`, `distinct()`, and `count()` from `dplyr`.
+
+1. Was there a flight on every day in 2013?
+
+2. Find all flights that arrived more than two hours late but didn’t leave late.
+
+3. Find all destinations that had at least one flight with a flight time of 12 hours or more.
+
+4. Find all flights in the summer (June, July, August) that arrived on time. (Hint: you can combine filters or use `%in%` to see if a value is in a vector like `value %in% c(values)`).

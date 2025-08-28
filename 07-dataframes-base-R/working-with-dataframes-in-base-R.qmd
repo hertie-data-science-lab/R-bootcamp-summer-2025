@@ -3,9 +3,13 @@ title: "Working with Dataframes in Base R"
 format: revealjs
 ---
 
+## Dataframes with Base
+
+While you'll work with dataframes with [`dplyr`](../05-dplyr/working-with-dataframes-with-dplyr.html) throughout Intro to Data Science, it's also possible to work with them using only base R.
+
 ## Dataframe Columns as Vectors
 
-Dataframe columns can be accessed as vectors using `[[]]`, `$`, or `[,]` (the leading comma tells R you are selecting columns and not rows--dataframes use `[row,column]`).
+Dataframe columns can be accessed as vectors using `[[]]`, `$`, or `[,]` (the leading comma tells R you are selecting columns and not rows--dataframes use `[row,column]` like matrices).
 
 With `[[]]` and `[,]`, you need to quote the column name. You do not need to with `$`, although you can.
 
@@ -30,6 +34,8 @@ unique(penguins[,"species"])
 ```
 
 ## Exercises
+
+Without using `dplyr` (e.g. `summarise()`),
 
 1. How many islands are represented in the dataset?
 2. What are the earliest and latest years represented in the dataset?
