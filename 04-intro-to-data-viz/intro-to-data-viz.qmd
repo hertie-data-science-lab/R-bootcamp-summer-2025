@@ -57,6 +57,10 @@ Common aesthetics include:
 
 You can read more about aesthetics in the ggplot documentation [here](https://ggplot2.tidyverse.org/reference/index.html#aesthetics).
 
+## Grammar of Graphics
+
+The core idea behind ggplot is that plots are composed by combining components like geometries and themes using `+`. This makes it easy to iterately make data visualizations and keeps the syntax consistent between different kinds of plots.
+
 ## Geometries
 
 The next step in making a plot with ggplot is choosing how to visualize the data. We'll start with a scatter plot.
@@ -122,6 +126,27 @@ ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar()
 ```
 
+## `geom_bar()` versus `geom_smooth()`
+
+`geom_bar()` only takes an x-axis in `aes()` and uses the number of rows for the y-axis.
+
+In contrast, `geom_col()` takes a y-axis argument.
+
+## `geom_histogram()`
+
+`geom_histogram()` produces a histogram which visualizes the distribution of a variable/column. Histograms place values into bins (e.g. dividing 0 to 99 into 0-9, 10-19, 20-29... 90-99). The bins are the x-axis and the count of items in each bin is the y-axis.
+
+## `geom_histogram()` Example
+
+```{r}
+ggplot(penguins, aes(x = body_mass, fill = species)) +
+  geom_histogram()
+```
+
+## `geom_density()`
+
+`geom_density()` is another visualization of the distribution of a variable/column. You can think of it as something like a smoothed out histogram.
+
 ## `geom_density()` Example
 
 ```{r}
@@ -129,12 +154,16 @@ ggplot(penguins, aes(x = body_mass, fill = species)) +
   geom_density(alpha = 0.5)
 ```
 
+## `geom_smooth()`
+
+`geom_smooth()` adds lines of best fit to the plot. `geom_smooth(method = "lm")` finds the line of best fit with a linear regression (if you don't know what that is, don't worry--it will be covered in Math for Data Science).
+
 ## `geom_smooth()` Example
 
 ```{r}
 ggplot(penguins, aes(x = body_mass, y = flipper_len, color = species)) +
   geom_point() +
-  geom_smooth(method = "lm") # linear regression
+  geom_smooth(method = "lm", se = FALSE) # linear regression
 ```
 
 ## Labels
@@ -157,7 +186,7 @@ labs(
 #| eval: false
 ggplot(penguins, aes(x = body_mass, y = flipper_len, color = species)) +
   geom_point() +
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "lm", se = FALSE) +
   labs(
     title = "Relationship Between Body Mass and Flipper Length of Penguins",
     x = "Body Mass (grams)",
@@ -172,14 +201,56 @@ ggplot(penguins, aes(x = body_mass, y = flipper_len, color = species)) +
 #| echo: false
 ggplot(penguins, aes(x = body_mass, y = flipper_len, color = species)) +
   geom_point() +
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "lm", se = FALSE) +
   labs(
     title = "Relationship Between Body Mass and Flipper Length of Penguins",
     x = "Body Mass (grams)",
     y = "Flipper Length (mm)",
+    color = "Species",
     caption = "Body mass and flipper length are positively correlated for all three species of penguin"
   )
 ```
+
+## Themes
+
+You can change the appearance of ggplot figures using themes. Complete themes start with `theme_`. You can also adjust the individual theme components with `theme()`.
+
+## Theming Example
+
+```{r}
+#| eval: false
+ggplot(penguins, aes(x = body_mass, y = flipper_len, color = species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Relationship Between Body Mass and Flipper Length of Penguins",
+    x = "Body Mass (grams)",
+    y = "Flipper Length (mm)",
+    color = "Species",
+    caption = "Body mass and flipper length are positively correlated for all three species of penguin"
+  ) +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
+```
+
+## Theming Example
+
+```{r}
+#| echo: false
+ggplot(penguins, aes(x = body_mass, y = flipper_len, color = species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Relationship Between Body Mass and Flipper Length of Penguins",
+    x = "Body Mass (grams)",
+    y = "Flipper Length (mm)",
+    color = "Species",
+    caption = "Body mass and flipper length are positively correlated for all three species of penguin"
+  ) +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
+```
+
 
 ## Experiment
 

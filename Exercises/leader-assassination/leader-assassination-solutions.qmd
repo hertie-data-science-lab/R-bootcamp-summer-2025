@@ -1,9 +1,9 @@
-## Success of Leader Assassination as a Natural Experiment (Solutions)
+# Success of Leader Assassination as a Natural Experiment (Solutions)
 
 ```{r}
 library(tidyverse)
 
-leaders <- read_csv("data/leaders.csv")
+leaders <- read_csv(here::here('Exercises', 'leader-assassination', 'data', 'leaders.csv'))
 
 leaders
 ```

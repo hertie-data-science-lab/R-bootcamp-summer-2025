@@ -1,0 +1,202 @@
+# UN Voting
+
+Source: Chapter 3 of [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science) with modifications and new exercises by [Jackson Luckey](www.jacksonmluckey.com) to shift the emphasis towards data science and away from causal inference and to include more opportunities to make plots and summary tables.
+
+```{r}
+library(tidyverse)
+
+un <- read_csv(here::here('Exercises', 'un-voting', 'data', 'unvoting.csv'))
+
+un
+```
+
+Like legislators in the US Congress, the member states of the United Nations (UN) are politically divided on many issues such as trade, nuclear disarmament, and human rights. During the Cold War, countries in the UN General Assembly tended to split into two factions: one led by the capitalist United States and the other by the communist Soviet Union. In this exercise we will analyze how states' ideological positions, as captured by their votes on UN resolutions, have changed since the fall of communism.
+
+In the analysis that follows, we measure state preferences in two ways. First, we can use the percentage of votes by each country that coincide with votes on the same issue cast by the two major Cold War powers: the United States and the Soviet Union. For example, if a country voted for ten resolutions in 1992, and if its vote matched the United States's vote on exactly six of these resolutions, the variable `PctAgreeUS` in 1992 would equal 60 for this country. Second, we can also measure state preferences in terms of numerical ideal points (`idealpoint`). These ideal points capture what international relations scholars have called countries' _liberalism_ on issues such as political freedom, democratization, and financial liberalization. The two measures are highly correlated, with larger (more liberal) ideal points corresponding to a higher percentage of votes that agree with the United States.
+
+1. Let's look at how `idealpoint` has varied over time. Calculate the mean of `idealpoint` by year and make a line plot (`geom_line()`) with the year as the x-axis and the mean `idealpoint` as the y-axis.
+
+```{r}
+un |>
+    group_by(Year) |>
+    summarise(idealpoint = mean(idealpoint)) |>
+    ggplot(aes(x = Year, y = idealpoint)) +
+    geom_line() +
+    theme_minimal() +
+    labs(
+        title = "Mean Political Ideal Across the United Nations by Year",
+        subtitle = "(Higher Values = More Liberal)",
+        y = "Mean Political Ideal"
+    )
+```
+
+2. Repeat this exercise with `PctAgreeUS` and `PctAgreeRUSSIA`.
+
+```{r}
+pct_agree_by_year <- un |>
+    group_by(Year) |>
+    summarise(
+        US = mean(PctAgreeUS),
+        Russia = mean(PctAgreeRUSSIA)
+    )
+```
+
+```{r}
+pct_agree_by_year |>
+    ggplot(aes(x = Year, y = US)) +
+    geom_line() +
+    theme_minimal() +
+    labs(
+        title = "Vote Share in Agreement with the US by Year"
+    )
+```
+
+```{r}
+pct_agree_by_year |>
+    ggplot(aes(x = Year, y = Russia)) +
+    geom_line() +
+    theme_minimal() +
+    labs(
+        title = "Vote Share in Agreement with Russia by Year"
+    )
+```
+
+I'm also going to show you how to get both vote shares on the same plot. We are not covering `tidyr` in this bootcamp, but the `tidyr` function `pivot_longer()` allows us to take a "wide" dataset (data in columns) and "lengthen" it so that the information stored in the columns become rows.
+
+For example, look at the first 5 rows (1946-1950) of `pct_agree_by_year`. 
+
+```{r}
+pct_agree_by_year[1:5,]
+```
+
+Using `pivot_longer()` on the `US` and `Russia` columns, we get 10 rows: 5 for `US` and 5 for `Russia`.
+
+```{r}
+pivot_longer(
+    pct_agree_by_year[1:5,],
+    cols = c(US, Russia),
+    names_to = "country",
+    values_to = "pct_agree"
+)
+```
+
+We can use this to combine the two plots we made above into
+
+```{r}
+pivot_longer(
+    pct_agree_by_year,
+    cols = c(US, Russia),
+    names_to = "country",
+    values_to = "pct_agree"
+) |>
+    ggplot(aes(x = Year, y = pct_agree, color = country)) +
+    geom_line() +
+    theme_minimal() +
+    labs(
+        title = "Vote Share Agreement in UN by Year",
+        color = "Country",
+        y = "Percent of UN Votes"
+    )
+```
+
+3. Create a new variable, `AgreeMoreUS`, that is `TRUE` when `PctAgreeUS` is greater than `PctAgreeRUSSIA`. Use `AgreeMoreUS` to create a new line plot showing what percentage of countries vote more with the US than Russia over time.
+
+```{r}
+un <- un |>
+    mutate(AgreeMoreUS = PctAgreeUS > PctAgreeRUSSIA)
+```
+
+```{r}
+un |>
+    group_by(Year) |>
+    summarise(PropAgreeMoreUS = mean(AgreeMoreUS)) |>
+    ggplot(aes(x = Year, y = PropAgreeMoreUS)) +
+    geom_line() +
+    theme_minimal() +
+    labs(
+        title = "Percentage of Countries Voting More with the US than Russia by Year",
+        y = "Percentage of Countries"
+    )
+```
+
+4. Let's look at how `idealpoint` varies with `AgreeMoreUS` across all countries and years. Use a histogram. Then produce the same plot but only for the years 1980 and 2000 (about one decade before and after the fall of the Berlin Wall). How do the two variables relate to each other? How do they vary over time? Does their relationship to one another change over time?
+
+```{r}
+ggplot(un, aes(x = idealpoint, fill = AgreeMoreUS)) +
+    geom_histogram() +
+    theme_minimal() +
+    labs(
+        title = "Political Ideals and Voting with US from 1946-2012"
+    )
+```
+
+```{r}
+un |>
+    filter(Year == 1980) |>
+    ggplot(aes(x = idealpoint, fill = AgreeMoreUS)) +
+    geom_histogram() +
+    theme_minimal() +
+    labs(
+        title = "Political Ideals and Voting with US in 1980"
+    )
+```
+
+```{r}
+un |>
+    filter(Year == 2000) |>
+    ggplot(aes(x = idealpoint, fill = AgreeMoreUS)) +
+    geom_histogram() +
+    theme_minimal() +
+    labs(
+        title = "Political Ideals and Voting with US in 2000"
+    )
+```
+
+5. Calculate the percentage of votes where the US and Russia agree by year and create a line graph. How does this change over time? Are there clear temporal patterns?
+
+```{r}
+un |>
+    filter(CountryAbb == "USA") |>
+    mutate(PctAgree = 1 - (PctAgreeUS - PctAgreeRUSSIA)) |>
+    ggplot(aes(x = Year, y = PctAgree)) +
+    geom_line() +
+    theme_minimal() +
+    labs(
+        title = "Percent of UN Votes where Russia and the US Agree",
+        y = "Percent of Votes"
+    )
+```
+
+6. Calculate the number of years that each country voted more with the US than Russia. Which countries voted the most years with the US over Russia?
+
+```{r}
+un |>
+    group_by(CountryName) |>
+    summarise(YearsAgreeMoreUS = sum(AgreeMoreUS)) |>
+    arrange(desc(YearsAgreeMoreUS))
+```
+
+7. Let's look at the former Soviet Union countries. I've provided a vector `former_soviet_union` that includes the names of all the countries in the former Soviet Union.
+
+```{r}
+former_soviet_union <- c(
+    "Estonia",
+    "Latvia",
+    "Lithuania",
+    "Belarus",
+    "Moldova",
+    "Ukraine",
+    "Armenia",
+    "Azerbaijian",
+    "Georgia",
+    "Kazakhstan",
+    "Kyrgyzstan",
+    "Tajikistan",
+    "Uzbekistan",
+    "Russia"
+)
+```
+
+```{r}
+
+```

@@ -59,15 +59,11 @@ I would strongly recommend learning how to use Git from the command line eventua
 
 The simplest workflow is making changes, adding them (`git add`), and then saving them to the repository (`git commit`).
 
-# Getting a Copy of the Bootcamp Slides from GitHub
+## Getting a Copy of the Bootcamp Slides from GitHub
 
-TODO: update to use final URL and have screenshots. Will require
-
-1. Open the [bootcamp's GitHub repo](TODO add URL).
-2. Fork the repository (TODO add screenshot)
-3. Clone the forked repository (TODO add screenshot)
+1. Open the bootcamp's GitHub repo
+2. Fork the repository
+3. Clone the forked repository
 4. Open in RStudio
 
-# Using Git inside RStudio
-
-TODO using screenshots, have student's add "Student's Version" to the README, add the changed README, and commit.
+## Live Demo

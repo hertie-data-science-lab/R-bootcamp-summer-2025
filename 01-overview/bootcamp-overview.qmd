@@ -9,9 +9,7 @@ I'm [Jackson Luckey](https://www.jacksonmluckey.com). I graduated from Hertie's 
 
 ## Bootcamp Overview
 
-TODO update this section once everything else is finished.
-
-Over the next three days, we'll cover the basics of R + RStudio, Git, and make some fun data visualizations
+Over the next three days, we'll cover the basics of R + RStudio, Git, and make some fun data visualizations.
 
 ## R and RStudio
 
