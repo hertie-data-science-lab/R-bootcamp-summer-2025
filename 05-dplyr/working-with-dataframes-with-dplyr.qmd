@@ -355,3 +355,8 @@ penguins |>
     n_na = sum(is.na(body_mass))
   )
 ```
+
+##Personal Notes 
+
+These are Elizabeth's notes. YADA YADA YADA :) <3 
+This is an update to my personal notes :) 
