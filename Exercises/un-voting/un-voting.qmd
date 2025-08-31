@@ -8,6 +8,7 @@ library(tidyverse)
 un <- read_csv(here::here('Exercises', 'un-voting', 'data', 'unvoting.csv'))
 
 un
+trial branche
 ```
 
 Like legislators in the US Congress, the member states of the United Nations (UN) are politically divided on many issues such as trade, nuclear disarmament, and human rights. During the Cold War, countries in the UN General Assembly tended to split into two factions: one led by the capitalist United States and the other by the communist Soviet Union. In this exercise we will analyze how states' ideological positions, as captured by their votes on UN resolutions, have changed since the fall of communism.
