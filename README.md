@@ -35,3 +35,7 @@ I also took inspiration, examples, and exercises from:
 - [Data Analysis for Social Science: A Friendly and Practical Introduction](https://press.princeton.edu/books/paperback/9780691199436/data-analysis-for-social-science)
 
 ## Personal Notes
+
+These are Jackson's notes.
+
+`1 + 1 == 1 * 1`
