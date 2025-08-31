@@ -415,9 +415,8 @@ dbl (4): Year, idealpoint, PctAgreeUS, PctAgreeRUSSIA
 # ℹ 187 more rows</code></pre>
 </div>
 </div>
-<ol start="7" type="1">
-<li>Let’s look at the former Soviet Union countries. I’ve provided a vector <code>former_soviet_union</code> that includes the names of all the countries in the former Soviet Union.</li>
-</ol>
+<p>END OF SOLUTIONS</p>
+<p>Let’s look at the former Soviet Union countries. I’ve provided a vector <code>former_soviet_union</code> that includes the names of all the countries in the former Soviet Union. You can use <code>%in%</code> inside <code>mutate()</code> or <code>filter()</code>, which returns <code>TRUE</code> when a value is in a vector and <code>FALSE</code> otherwise.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>former_soviet_union <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Estonia"</span>,</span>
@@ -436,6 +435,19 @@ dbl (4): Year, idealpoint, PctAgreeUS, PctAgreeRUSSIA
 <span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Russia"</span></span>
 <span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>For example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"Germany"</span>, <span class="st">"Ukraine"</span>) <span class="sc">%in%</span> former_soviet_union</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE</code></pre>
+</div>
+</div>
+<ol start="7" type="1">
+<li><p>Look at how <code>idealpoint</code> and voting shares have varied over time between countries in and out of the former Soviet Union. You can either produce separate line plots for countries in and out of the former Soviet Union or use <code>pivot_longer()</code> to create combined figures.</p></li>
+<li><p>Estonia, Latvia, and Lithuania are part of the European Union. Following the logic of the previous exercise, compare them to the other former Soviet Union countries since 1990. Consider other ways of grouping the former Soviet Union countries.</p></li>
+<li><p>One problem of using the percentage of votes that agree with the United States or Russia as a measure of state preferences is that the ideological positions, and consequently the voting patterns, of the two countries might themselves have changed over time. This makes it difficult to know which countries ideological positions have changed. Investigate this issue by plotting the evolution of the two countries’ ideal points over time. Add the yearly median ideal point of all countries. How might the results of this analysis modify (or not) your interpretation of earlier analyses. (This question is almost verbatim from the textbook).</p></li>
+<li><p>We have just seen that while some post-Soviet countries have retained nonliberal ideologies, other post-Soviet countries were much more liberal in 2012. Let’s examine how the median ideal points of Soviet/post-Soviet countries and all other countries has varied over all the years in the data. Plot these median ideal points by year. (This question is almost verbatim from the textbook).</p></li>
+</ol>
 </section>
 
 </main>
