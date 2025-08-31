@@ -33,3 +33,9 @@ I also took inspiration, examples, and exercises from:
 - [Quantiative Social Science: An Introduction](https://press.princeton.edu/books/paperback/9780691175461/quantitative-social-science)
 - [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science)
 - [Data Analysis for Social Science: A Friendly and Practical Introduction](https://press.princeton.edu/books/paperback/9780691199436/data-analysis-for-social-science)
+
+## Personal Notes
+
+These are Jackson's notes.
+
+`1 + 1 == 1 * 1`
