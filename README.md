@@ -36,6 +36,4 @@ I also took inspiration, examples, and exercises from:
 
 ## Personal Notes
 
-These are Jackson's notes.
-
-`1 + 1 == 1 * 1`
+These are Marci's random notes to test that everything is working.
