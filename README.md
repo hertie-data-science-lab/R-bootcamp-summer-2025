@@ -34,8 +34,12 @@ I also took inspiration, examples, and exercises from:
 - [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science)
 - [Data Analysis for Social Science: A Friendly and Practical Introduction](https://press.princeton.edu/books/paperback/9780691199436/data-analysis-for-social-science)
 
-## Personal Notes
+## Slides from Intro to Data Science
 
-These are Jackson's notes.
+On Saturday and Sunday I decided to use some slides from [an older version of the Intro to Data Science course](https://github.com/intro-to-data-science-24/lectures).
 
-`1 + 1 == 1 * 1`
+On Saturday I used part of the [Tidyverse slides](https://github.com/intro-to-data-science-24/lectures/blob/main/00-tidyverse/00-tidyverse.pdf).
+
+On Sunday I used the [version control / Git slides](https://github.com/intro-to-data-science-24/lectures/blob/main/02-version-control/02-version-control.pdf).
+
+You might also look through the [command line slides](https://raw.githack.com/intro-to-data-science-24/lectures/main/13-command-line/13-command-line.pdf).
