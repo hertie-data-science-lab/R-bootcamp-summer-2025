@@ -10,39 +10,115 @@ if (!("nycflights13" %in% installed.packages())) {
 }
 library(nycflights13)
 flights <- flights
-
 flights
 ```
 
 Exercises 1 through 4 come from (or were adapted from) [R for Data Science](https://r4ds.hadley.nz/data-transform.html#exercises). Hint: these exercises can be solved with `filter()`, `distinct()`, and `count()`.
 
 1. Was there a flight on every day in 2013?
+```{r}
+flights_2013 <- flights %>% filter(
+  year == 2013) %>% 
+  count(month, day) %>% 
+
+```
 
 2. Find all flights that arrived more than two hours late but didn’t leave late.
-
+```{r}
+late_arrival <- flights %>% 
+  filter(dep_delay <= 0 & arr_delay > 120)
+```
 3. Find all destinations that had at least one flight with a flight time of 12 hours or more.
+
+```{r}
+long_flight <- flights %>% 
+  filter(hour >= 12) %>% 
+  distinct(dest)
+```
 
 4. Find all flights in the summer (June, July, August) that arrived on time. (Hint: you can combine filters or use `%in%` to see if a value is in a vector like `value %in% c(values)`).
 
+```{r}
+on_time <- flights %>%
+  filter(month == 6 | month == 7 | month == 8 & arr_delay <= 0)
+```
+/
 The remainder of the exercises were written by Jackson Luckey and will also use `group_by()`, `summarise()`, and `mutate()`.
 
 5. How many destinations does each airport in NYC serve?
 
+```{r}
+################################### A FAIRE 
+destinations <- flights %>% 
+  group_by(origin) %>% 
+  summarise(n_origin = n_distinct(dest))
+```
+
 6. How many flights departed each airport in 2013? Does this follow the same pattern as the number of destinations?
 
+```{r}
+###### à faire 
+n_flights_2013 <- flights %>% 
+  filter(year == 2013) %>% 
+  group_by(origin, month) %>% #added analysis per month too
+  summarise(n_flights = n_distinct(flight)) %>% 
+  ungroup()
+
+#it follows the same pattern as number of destinations imo
+```
+
 7. How about carriers?
+
+```{r}
+###### à faire 
+n_carriers_2013 <- flights %>% 
+  filter(year == 2013) %>% 
+  group_by(origin) %>% 
+  summarise(n_carriers = n_distinct(carrier)) %>% 
+  ungroup()
+```
 
 For the rest of the exercises, imagine that you are an analyst at an organization tasked with assessing the performance of New York City's three airports and the carriers operating out of them as part of an effort to reduce departure delays.
 
 8. Create a new variable, `delayed_departure`, that is `TRUE` when a flight has a delayed departure. What proportion of flights have delayed departures?
 
+```{r}
+delay_rate_df <- flights %>% 
+  mutate(delayed_departure = dep_delay > 0) %>% 
+  summarise(prop_delayed_flights = mean(delayed_departure, na.rm=T))
+
+```
+
 Note: `dep_delay` is missing for ~2.5% of flights, which is the source of `NA`. Recall that `NA`s propagate in R. In other words, if any values in a group are `NA`, then functions like `min()`, `max()`, and `sum()` will return `NA` by default. We can disable this behavior by including `na.rm = TRUE` in the functions like `min(column, na.rm = TRUE)`. We'll ignore this for now and use `na.rm = TRUE` as needed.
 
 9. Calculate the proportion of flights with delayed departures by origin airport and by carrier. You're producing two separate tables.
 
+```{r}
+prop_delay_origin <- flights %>% 
+  group_by(origin) %>% 
+  mutate(delayed_departure = dep_delay > 0) %>% 
+  summarise(prop_delayed_flights = mean(delayed_departure, na.rm=T)) %>% 
+  ungroup()
+
+prop_delay_carrier <- flights %>% 
+  group_by(carrier) %>% 
+  mutate(delayed_departure = dep_delay > 0) %>% 
+  summarise(prop_delayed_flights = mean(delayed_departure, na.rm=T)) %>% 
+  ungroup()
+```
+
 You notice that the departure delay rate varies signficantly by origin, destination, and carrier. With just this information, however, it is hard to identify the route of the problem. NYC's three airports could have different departure delay rates through no fault of their own because the carriers operating out of them differ. Likewise, the departure delay rates of the carriers might differ because of differences between the airports they operate in. To address this, you decide to analyze the airports and carriers conjointly.
 
 10. Create a new dataframe with one row per origin airport per carrier that counts the number of flights and the departure delay rate. I named it `origin_carrier`, but feel free to use a different name.
+
+```{r}
+origin_carrier <- flights %>% 
+  select(origin, carrier, dep_delay) %>% 
+  group_by(origin, carrier) %>% 
+  mutate(delayed_departure = dep_delay > 0) %>% 
+  summarise(prop_delayed_flights = mean(delayed_departure, na.rm=T),
+            n_flights =)
+```
 
 You want to compare the departure delay rate in `origin_carrier` to the airport departure delay rate and the carrier departure delay rate. While you'll learn another way to do this in the Intro to Data Science course (joins), this can be accomplished by combining `group_by()` and `mutate()`. When combined with `group_by()`, `mutate()` performs operations on groups rather than rows. In other words, it functions similarily to `summarise()` but does not reduce the number of rows. For example, we can add a column with the total number of flights per origin airport with
 
@@ -74,5 +150,17 @@ flights |>
 You can address this by either using `n_flights` as a weight (`sum(n_flights * prop_delayed) / sum(n_flights)`) or calculating the origin and airport departure delay rates before using `summarise()`.
 
 11. Modify `origin_carrier` to include the airport departure delay rates and the carrier departure delay rates.
+```{r}
+origin_carrier_extended <- origin_carrier %>% 
+  group_by(origin) %>% 
+  mutate(origin_prop_delayed = sum(n_flights * prop_delayed_flights) / sum(n_flights)) %>% 
+  group_by(carrier) %>% 
+  mutate(carrier_prop_delayed = sum(n_flights * prop_delayed_flights) / sum(n_flights))
+```
 
 12. What origin-carrier pairs outperform the baseline for both the origin and carrier (i.e. have a lower delay rate than the origin and carrier delay rates)? What origin-carrier pairs underperform?
+```{r}
+origin_carrier_extended <- origin_carrier_extended |>
+  filter(prop_delayed_flights < origin_prop_delayed, prop_delayed_flights < carrier_prop_delayed)
+```
+

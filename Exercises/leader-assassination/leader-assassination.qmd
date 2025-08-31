@@ -32,25 +32,126 @@ The polity variable represents the so-called polity score from the Polity Projec
 
 1. How many assassination attempts are recorded in the data?
 
+```{r}
+n_attempts <- leaders %>% 
+  summarise(n = n()) %>% 
+  pull(n)
+  
+```
+
 2. How many countries experienced at least one leader assassination attempt?
+
+```{r}
+n_countries <-leaders %>% 
+  summarise(n = sum(n_distinct(country))) %>% 
+  pull(n)
+```
+
 
 3. Among countries with at least one leader assassination attempt, what is the average number of attempts per year?
 
+```{r}
+avg_attempts_year <- leaders %>% 
+  group_by(year) %>% 
+  summarise(avg_year = n()) %>% 
+  summarise(mean = mean(avg_year))
+```
+
+
 4. Create a new variable called `success` that is equal to 1 if a leader dies from the attack at any point and 0 if the leader survives (you'll need to look at the possible values for the `result` variable).
+
+```{r}
+success_1 <- c("dies between a day and a week", "dies between a week and a month", "dies within a day after the attack",
+                "dies, timing unknown hospitalization but no permanent disability")  
+
+success_df <- leaders %>% 
+  select(-interwarbefore, -interwarafter, -civilwarbefore, -civilwarafter) %>% 
+  mutate(success = as.integer(result %in% success_1))
+  
+
+```
+
 
 Hint: You can use `%in%` to see if a value is in a vector. For example,
 
 5. What is the overall success rate of leader assassination?
+```{r}
+success_rate <- success_df %>% 
+  summarise(avg_success = mean(success)) %>% 
+  pull()
+```
 
 6. Is there any difference in the age of targeted leaders between successful and failed attempts? You can use `summarise()`, make plot(s) with `ggplot()`, or both.
+```{r}
+avg_age_success <- age_diff %>% #create value for avg age of successfully assassinated leader
+  filter(success == 1) %>% 
+  summarise(mean_age) %>% 
+  pull()
+
+avg_age_failure <- age_diff %>% #create value for avg age of failed assassinated leader
+  filter(success == 0) %>% 
+  summarise(mean_age) %>% 
+  pull()
+
+age_diff <- success_df %>% #solution using summarise
+  group_by(success) %>% 
+  summarise(mean_age = mean(age))
+
+ggplot(data = success_df) + #solution with a plot
+  geom_jitter(width = 0.05, mapping = aes(x = success, y = age, alpha = 0.5)) +
+  geom_hline(yintercept = avg_age_success, color = "red", linetype = "dashed") +
+  geom_hline(yintercept = avg_age_failure, color = "black", linetype = "dashed")+
+  labs(x = "Assassination succeeded",
+       y = "age of leader during attempt",
+       title = "distribution of age of leaders during assassination attempt",
+       subtitle = "Red line = avg age of successful attempt ; black unsuccessful atttempt") +
+  theme_minimal()
+```
 
 Optional causal inference: Does the data support the assumption that the success of assassination attempts is randomly determined?
 
 7. Does the average polity score over three years prior to an assassination attempt differ on average between successful and failed attempts?
 
+```{r}
+avg_politybefore_success <- success_df %>% #create value for avg polity before successfully assassinated leader
+  filter(success == 1) %>% 
+  summarise(mean(politybefore)) %>% 
+  pull()
+
+avg_politybefore_failure <- success_df %>% #create value for avg age of failed assassinated leader
+  filter(success == 0) %>% 
+  summarise(mean_politybefore = mean(politybefore)) %>% 
+  pull()
+
+polity_before_diff <- success_df %>% #solution using summarise
+  group_by(success) %>% 
+  summarise(mean_polity_score_before = mean(politybefore))
+
+ggplot(data = success_df) + #solution with a plot
+  geom_jitter(width = 0.05, mapping = aes(x = success, y = politybefore, alpha = 0.5)) +
+  geom_hline(yintercept = avg_politybefore_success, color = "red", linetype = "dashed") +
+  geom_hline(yintercept = avg_politybefore_failure, color = "black", linetype = "dashed")+
+  labs(x = "Assassination succeeded",
+       y = "average polity score before attempt",
+       title = "distribution of average PS before assassination attempt",
+       subtitle = "Red line = avg PS before successful attempt ; black unsuccessful atttempt") +
+  theme_minimal()
+```
+
+
 Optional causal inference: Do you find it plausible that this is a causal effect? Why?
 
+```{r}
+"It would be strange that more democratic institutions lead to more often successful assassination attempts. Furthermore there could be other factors influencing on whether an assassination is successful or not hence, we can't assume causality here."
+```
+
+
 8. Create a new variable called `warbefore` that is 1 if a country is in civil or international war in the three years before the assassination attempt and 0 otherwise.
+
+```{r}
+
+```
+
 
 Hint: You can use the OR operator (`|`).
 
@@ -61,3 +162,9 @@ Optional causal inference: Reconsider whether the data supports the assumption t
 10. Create a new variable called `warafter` that is 1 if a country is in civil or international war in the three years after the assassination attempt and 0 otherwise.
 
 11. Calculate the rate of civil war, international war, and any kind of war after the assassination attempt between cases with and without successful assassinations.
+
+```{r}
+#notes on how to fork
+"This is a trial to fork" 
+```
+
