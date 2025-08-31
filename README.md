@@ -36,6 +36,5 @@ I also took inspiration, examples, and exercises from:
 
 ## Personal Notes
 
-These are Jackson's notes.
-
-`1 + 1 == 1 * 1`
+These are Sofia's personal notes!
+I'm inserting random text to make sure everything is working.
