@@ -356,4 +356,6 @@ penguins |>
   )
 ```
 
-##Personal Notes
+##Personal Notes 
+
+These are Elizabeth's notes. YADA YADA YADA :) <3 
