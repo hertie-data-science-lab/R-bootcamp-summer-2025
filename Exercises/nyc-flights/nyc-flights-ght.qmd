@@ -1,0 +1,214 @@
+# NYC Flights in 2013
+
+For these exercises, we will use the dataframe `flights` from the `nycflights13` package, which has one row per flight that departed from New York City in 2013 (336776 rows).
+
+```{r}
+library(tidyverse)
+
+if (!("nycflights13" %in% installed.packages())) {
+  install.packages("nycflights13")
+}
+library(nycflights13)
+flights <- flights
+
+flights
+```
+
+Exercises 1 through 4 come from (or were adapted from) [R for Data Science](https://r4ds.hadley.nz/data-transform.html#exercises). Hint: these exercises can be solved with `filter()`, `distinct()`, and `count()`.
+
+1.  Was there a flight on every day in 2013?
+
+```{r}
+ex_1 <- flights |>
+          filter(year == 2013) |>
+          distinct(month, day) |>
+          count()
+ex_1
+```
+
+Answer: Yes, there are 365 unique values for month-day combinations.
+
+2.  Find all flights that arrived more than two hours late but didn’t leave late.
+
+```{r}
+ex_2 <- flights |>
+          filter( dep_delay <= 0,
+                  arr_delay > 120)
+ex_2
+```
+
+Answer: 'ex_2' is a data frame with all flights than meet the specified conditions.
+
+3.  Find all destinations that had at least one flight with a flight time of 10 hours or more.
+
+```{r}
+ex_3 <- flights |>
+          filter(air_time >= 600) |>
+          distinct(dest)
+ex_3
+
+```
+
+Answer: only one destination (HNL) has at least one flight with a flight time of 10 hours or more (600 minutes).
+
+4.  Find all flights in the summer (June, July, August) that arrived on time. (Hint: you can combine filters or use `%in%` to see if a value is in a vector like `value %in% c(values)`).
+
+```{r}
+ex_4 <- flights |>
+          filter(month %in% c(6,7,8),
+                 arr_delay == 0)
+ex_4
+```
+
+Answer: 'ex_4' is a data frame with all flights that meet the required conditions.
+
+The remainder of the exercises were written by Jackson Luckey and will also use `group_by()`, `summarise()`, and `mutate()`.
+
+5.  How many destinations does each airport in NYC serve?
+
+```{r}
+ex_5 <- flights |>
+          group_by(origin) |>
+          summarise(dif_dest = n_distinct(dest))
+ex_5
+```
+
+Answer: EWR: 86, JFK: 70, LGA: 68.
+
+6.  How many flights departed each airport in 2013? Does this follow the same pattern as the number of destinations?
+
+```{r}
+ex_6 <- flights |>
+          filter(year == 2013) |>
+          group_by(origin) |>
+          summarise(departures = n())
+ex_6
+```
+
+Answer: EWR: 120.835 ; JFK: 111.279 ; LGA: 104.662. Yes, this follows the previous pattern (LGA \< JFK \< EWR).
+
+7.  How about carriers?
+
+```{r}
+ex_7 <- flights |>
+          filter(year == 2013) |>
+          group_by(origin) |>
+          summarise(d_carriers = n_distinct(carrier))
+ex_7
+```
+
+Answer: 12 carriers departed from EWR in 2013, 10 from JFK and 13 from LGA. This time, the pattern does not follow (JFK \< LGA \< EWR; previous two were LGA \< JFK \< EWR).
+
+For the rest of the exercises, imagine that you are an analyst at an organization tasked with assessing the performance of New York City's three airports and the carriers operating out of them as part of an effort to reduce departure delays.
+
+8.  Create a new variable, `delayed_departure`, that is `TRUE` when a flight has a delayed departure. What proportion of flights have delayed departures?
+
+Note: `dep_delay` is missing for \~2.5% of flights, which is the source of `NA`. Recall that `NA`s propagate in R. In other words, if any values in a group are `NA`, then functions like `min()`, `max()`, and `sum()` will return `NA` by default. We can disable this behavior by including `na.rm = TRUE` in the functions like `min(column, na.rm = TRUE)`. We'll ignore this for now and use `na.rm = TRUE` as needed.
+
+```{r}
+ex_8 <- flights |>
+          mutate( delayed_departure = (dep_delay > 0)) |>
+          group_by(origin) |>
+          mutate( tot_delay = sum(delayed_departure, na.rm=TRUE),
+                  tot_flights = n(),
+                  s_delay = tot_delay / tot_flights) |>
+          summarise( share_delay = mean(s_delay))
+ex_8
+```
+
+Answer: Percentage of delay flights: EWR: 43.62% ; JFK: 37.77% ; LGA: 32.18%.
+
+9.  Calculate the proportion of flights with delayed departures by origin airport and by carrier. You're producing two separate tables.
+
+```{r}
+ex_9 <- flights |>
+            mutate( delayed_departure = (dep_delay > 0)) |>
+            group_by(carrier) |>
+            mutate( tot_delay=sum(delayed_departure, na.rm=TRUE),
+                    tot_flights = n(),
+                    s_delay = tot_delay/tot_flights) |>
+            summarise( share_delay = mean(s_delay)) |>
+            arrange(share_delay)
+ex_9
+```
+
+You notice that the departure delay rate varies signficantly by origin, destination, and carrier. With just this information, however, it is hard to identify the route of the problem. NYC's three airports could have different departure delay rates through no fault of their own because the carriers operating out of them differ. Likewise, the departure delay rates of the carriers might differ because of differences between the airports they operate in. To address this, you decide to analyze the airports and carriers conjointly.
+
+10. Create a new dataframe with one row per origin airport per carrier that counts the number of flights and the departure delay rate. I named it `origin_carrier`, but feel free to use a different name.
+
+```{r}
+origin_carrier <- flights |>
+                     mutate(delayed_departure = (dep_delay > 0)) |>
+                     group_by(origin, carrier) |>
+                     mutate(
+                       tot_flights = n(),
+                       tot_delay = sum(delayed_departure,na.rm=TRUE),
+                       s_delay = tot_delay / tot_flights
+                     ) |>
+             select(origin, carrier, tot_flights, tot_delay, s_delay) |>
+             unique() |>
+             arrange(origin, desc(s_delay))
+origin_carrier
+```
+
+You want to compare the departure delay rate in `origin_carrier` to the airport departure delay rate and the carrier departure delay rate. While you'll learn another way to do this in the Intro to Data Science course (joins), this can be accomplished by combining `group_by()` and `mutate()`. When combined with `group_by()`, `mutate()` performs operations on groups rather than rows. In other words, it functions similarily to `summarise()` but does not reduce the number of rows. For example, we can add a column with the total number of flights per origin airport with
+
+```{r}
+#| eval: false
+origin_carrier |>
+  group_by(origin) |>
+  mutate(origin_flights = sum(n_flights))
+```
+
+A fundamental skill in data analysis is identifying the correct unit of analysis. In `flights`, each row is a flight departing from one of New York City's three airports. Therefore, `n_flights` in exercises 6 and 7 identifies the total number of flights that departed. Likewise, the `prop_delayed` calculations in exercises 9 and 10 use the number of flights that departed as the denominator. We want to calculate the airport and carrier departure delay rates the same way. In `origin_carrier`, each row is an airport-carrier pair. If we calculated it using `mean(prop_delayed)` on `origin_carrier` as is, we would be count origin-carrier pairs with tens of thousands of flights as equivalent to those with only a small number of flights. Compare
+
+```{r}
+#| eval: false
+origin_carrier |>
+  group_by(origin) |>
+  summarise(prop_delayed = mean(prop_delayed))
+```
+
+to
+
+```{r}
+#| eval: false
+flights |>
+  group_by(origin) |>
+  summarise(prop_delayed = mean(delayed_departure, na.rm = TRUE))
+```
+
+You can address this by either using `n_flights` as a weight (`sum(n_flights * prop_delayed) / sum(n_flights)`) or calculating the origin and airport departure delay rates before using `summarise()`.
+
+11. Modify `origin_carrier` to include the airport departure delay rates and the carrier departure delay rates.
+
+```{r}
+origin_carrier <- origin_carrier |>
+   group_by(origin) |>
+      mutate(
+        airport_delay = sum( (s_delay * tot_flights)/ sum(tot_flights) )
+      ) |>
+  ungroup() |>
+  group_by(carrier) |>
+  mutate( carrier_delay = mean(s_delay)) |>
+  arrange(origin, carrier)
+origin_carrier
+```
+
+12. What origin-carrier pairs outperform the baseline for both the origin and carrier (i.e. have a lower delay rate than the origin and carrier delay rates)? What origin-carrier pairs underperform?
+
+```{r}
+outcome <- origin_carrier |>
+  mutate(
+    performance = case_when(
+      s_delay < carrier_delay & s_delay < airport_delay ~ "Outperforms",
+      s_delay > carrier_delay & s_delay > airport_delay ~ "Underperforms",
+      s_delay < carrier_delay & s_delay > airport_delay ~ "Airport",
+      TRUE ~ "Carrier"
+    )
+  )
+outcome
+
+```
+
+Answer: I created a new variable to identify if a carrier either outperforms or underperforms.
