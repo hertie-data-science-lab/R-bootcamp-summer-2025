@@ -53,7 +53,9 @@ leaders |>
             n_attempts = n(),
             first_year = min(year),
             last_year = max(year)) |>
-  mutate(n_years_in_data = last_year - first_year) |>
+  # the additional one is to be inclusive of both the first and last year
+  # a student in the bootcamp caught this off by one error
+  mutate(n_years_in_data = (last_year - first_year) + 1) |>
   mutate(attempts_per_year = n_attempts / n_years_in_data) |>
   mutate(attempts_per_year_per_country = attempts_per_year / n_countries) |>
   select(attempts_per_year_per_country)

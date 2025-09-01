@@ -13,7 +13,16 @@ Before the first day, please install [R](01-overview/bootcamp-overview.html#inst
 5. [Working with Dataframes with `dplyr`](05-dplyr/working-with-dataframes-with-dplyr.html): Covers the main `dplyr` verbs (functions) such as `filter()`, `select()`, `mutate()`, `summarize()`, and `group_by()`.
 6. [Vectors and Matrices](06-vectors-matrices/vectors-and-matrices.html)
 7. [Working with Dataframes in Base R](07-dataframes-base-R/working-with-dataframes-in-base-R.html):
-8. [Pushing and Pulling with Git](08-git-push-pull/pushing-and-pulling-git.html)
+
+### Slides from Intro to Data Science
+
+On Saturday and Sunday I used some slides from [an older version of the Intro to Data Science course](https://github.com/intro-to-data-science-24/lectures).
+
+On Saturday I used part of the [Tidyverse slides](https://github.com/intro-to-data-science-24/lectures/blob/main/00-tidyverse/00-tidyverse.pdf).
+
+On Sunday I used the [version control / Git slides](https://github.com/intro-to-data-science-24/lectures/blob/main/02-version-control/02-version-control.pdf).
+
+You might also look through the [command line slides](https://raw.githack.com/intro-to-data-science-24/lectures/main/13-command-line/13-command-line.pdf).
 
 ## Exercises
 
@@ -33,13 +42,3 @@ I also took inspiration, examples, and exercises from:
 - [Quantiative Social Science: An Introduction](https://press.princeton.edu/books/paperback/9780691175461/quantitative-social-science)
 - [Quantiative Social Science: An Introduction with Tidyverse](https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science)
 - [Data Analysis for Social Science: A Friendly and Practical Introduction](https://press.princeton.edu/books/paperback/9780691199436/data-analysis-for-social-science)
-
-## Slides from Intro to Data Science
-
-On Saturday and Sunday I decided to use some slides from [an older version of the Intro to Data Science course](https://github.com/intro-to-data-science-24/lectures).
-
-On Saturday I used part of the [Tidyverse slides](https://github.com/intro-to-data-science-24/lectures/blob/main/00-tidyverse/00-tidyverse.pdf).
-
-On Sunday I used the [version control / Git slides](https://github.com/intro-to-data-science-24/lectures/blob/main/02-version-control/02-version-control.pdf).
-
-You might also look through the [command line slides](https://raw.githack.com/intro-to-data-science-24/lectures/main/13-command-line/13-command-line.pdf).

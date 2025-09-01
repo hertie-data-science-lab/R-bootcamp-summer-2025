@@ -258,15 +258,17 @@ dbl (8): year, age, politybefore, polityafter, interwarbefore, interwarafter...
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_attempts =</span> <span class="fu">n</span>(),</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">first_year =</span> <span class="fu">min</span>(year),</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">last_year =</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_years_in_data =</span> last_year <span class="sc">-</span> first_year) <span class="sc">|&gt;</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">attempts_per_year =</span> n_attempts <span class="sc">/</span> n_years_in_data) <span class="sc">|&gt;</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">attempts_per_year_per_country =</span> attempts_per_year <span class="sc">/</span> n_countries) <span class="sc">|&gt;</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(attempts_per_year_per_country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the additional one is to be inclusive of both the first and last year</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># a student in the bootcamp caught this off by one error</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_years_in_data =</span> (last_year <span class="sc">-</span> first_year) <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">attempts_per_year =</span> n_attempts <span class="sc">/</span> n_years_in_data) <span class="sc">|&gt;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">attempts_per_year_per_country =</span> attempts_per_year <span class="sc">/</span> n_countries) <span class="sc">|&gt;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(attempts_per_year_per_country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   attempts_per_year_per_country
                           &lt;dbl&gt;
-1                        0.0231</code></pre>
+1                        0.0229</code></pre>
 </div>
 </div>
 <ol start="4" type="1">

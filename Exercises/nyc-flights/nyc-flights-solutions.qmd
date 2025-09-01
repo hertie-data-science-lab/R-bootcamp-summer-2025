@@ -32,7 +32,7 @@ flights |>
   filter(arr_delay >= 120)
 ```
 
-3. Find all destinations that had at least one flight with a flight time of 12 hours or more.
+3. Find all destinations that had at least one flight with a flight time of 10 hours or more.
 
 ```{r}
 flights |>

@@ -36,8 +36,10 @@ un |>
 pct_agree_by_year <- un |>
     group_by(Year) |>
     summarise(
-        US = mean(PctAgreeUS),
-        Russia = mean(PctAgreeRUSSIA)
+        # I added `na.rm = TRUE` after the bootcamp because ignoring the missing countries
+        # makes more sense than excluding years with 1+ missing country responses
+        US = mean(PctAgreeUS, na.rm = TRUE),
+        Russia = mean(PctAgreeRUSSIA, na.rm = TRUE)
     )
 ```
 
