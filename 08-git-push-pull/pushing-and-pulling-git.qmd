@@ -1,4 +1,0 @@
----
-title: "Pushing and Pulling with Git"
-format: revealjs
----
